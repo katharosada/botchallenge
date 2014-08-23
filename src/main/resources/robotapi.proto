@@ -1,0 +1,57 @@
+
+package robominions;
+
+option java_package = "au.id.katharos.robominions.api";
+option java_outer_classname = "RobotApi";
+
+
+message RobotActionRequest {
+  optional string name = 1;
+  
+  enum Direction {
+    UP = 0;
+    DOWN = 1;
+    LEFT = 2;
+    RIGHT = 3;
+    FORWARD = 4;
+    BACKWARD = 5;
+    EAST = 6;
+    WEST = 7;
+    NORTH = 8;
+    SOUTH = 9;
+  }
+  
+  optional Direction move_direction = 2;
+  optional Direction turn_direction = 3;
+  optional Location mine_block = 4;
+}
+
+message Location {
+  optional int32 x = 1;
+  optional int32 y = 2;
+  optional int32 z = 3;
+}
+
+message RobotActionResponse {
+  optional bool success = 1;
+  optional ErrorMessage error_message = 2;
+}
+
+message ErrorMessage {
+  enum Reason {
+  	UNKNOWN = 0;
+  	SERVER_ERROR = 1;
+  	UNREADABLE_REQUEST = 2;
+  	INVALID_REQUEST = 3;
+  	BLOCK_COLLISION = 4;
+  	OUTSIDE_OF_WORLD = 5;
+  }
+  enum Action {
+  	FAIL_ACTION = 0;
+  	RETRY_ACTION = 1;
+  	EXIT_CLIENT = 2;
+  }
+  optional Reason reason = 1;
+  optional Action action = 2;
+  optional string message = 3;
+}
