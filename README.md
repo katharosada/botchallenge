@@ -42,10 +42,14 @@ wiki.bukkit.org/Setting_up_a_server
 Setting up an Eclipse development environment
 =============================================
 
-After following the build instructions above, run:
+After following the build instructions above, in the repo root dir run:
 mvn eclipse:eclipse 
 
 This generates Eclipse workspace files which you can import into Eclipse.
+
+You need the m2eclipse Maven plugin for Eclipse. Once that's installed, with
+Eclipse go File > Import... and select 'Existing Maven Projects' and point the
+project root directory to the root directory of you git repo.
 
 
 Building and running the Python client
