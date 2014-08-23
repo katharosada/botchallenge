@@ -1,3 +1,13 @@
+# Eclipse workspace files
+.classpath
+.project
+.settings
+
+# Any spurious class files
 *.class
+
+# Generated source and jar target output
 target
+
+# Maven generated pom file
 dependency-reduced-pom.xml
