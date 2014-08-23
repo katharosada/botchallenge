@@ -42,8 +42,8 @@
             <tasks>
               <exec executable="protoc">
                 <arg value="--java_out=${project.basedir}/src/main/java" />
-                <arg value="--proto_path=${project.basedir}/src/main/resources" />
-                <arg value="${project.basedir}/src/main/resources/robotapi.proto" />
+                <arg value="--proto_path=${project.basedir}/proto" />
+                <arg value="${project.basedir}/proto/robotapi.proto" />
               </exec>
             </tasks>
             <sourceRoot>target/generated-sources</sourceRoot>
