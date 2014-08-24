@@ -9,18 +9,18 @@ import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 public class ActionExecutor implements Runnable {
 
 	private final ActionQueue actionQueue;
-	private final HashMap<String, RobotChicken> chickenMap;
+	private final HashMap<String, AbstractRobot> robotMap;
 	private final Logger logger;
 	
-	public ActionExecutor(ActionQueue actionQueue, HashMap<String, RobotChicken> chickenMap, Logger logger) {
+	public ActionExecutor(ActionQueue actionQueue, HashMap<String, AbstractRobot> chickenMap, Logger logger) {
 		this.actionQueue = actionQueue;
-		this.chickenMap = chickenMap;
+		this.robotMap = chickenMap;
 		this.logger = logger;
 	}
 
-	private RobotChicken getChicken(String playerName) {
-		if (chickenMap.containsKey(playerName)) {
-			return chickenMap.get(playerName);
+	private AbstractRobot getChicken(String playerName) {
+		if (robotMap.containsKey(playerName)) {
+			return robotMap.get(playerName);
 		}
 		return null;
 	}
@@ -30,15 +30,15 @@ public class ActionExecutor implements Runnable {
 		ChickenEvent event = actionQueue.getNextEvent();
 		while (event != null) {
 			
-			RobotChicken chicken = getChicken(event.getPlayerName());
+			AbstractRobot robot = getChicken(event.getPlayerName());
 			RobotActionRequest actionRequest = event.getActionRequest();
-			if (chicken != null) {
+			if (robot != null) {
 				// Move chicken according to instruction.
 				boolean success = false;
 				if (actionRequest.hasMoveDirection()) {
-					success = chicken.move(event.getActionRequest().getMoveDirection());
+					success = robot.move(event.getActionRequest().getMoveDirection());
 				} else if (actionRequest.hasTurnDirection()) {
-					success = chicken.turn(event.getActionRequest().getTurnDirection());
+					success = robot.turn(event.getActionRequest().getTurnDirection());
 				}
 				event.getListener().call(new ActionQueue.EventResult(success));
 			} else {

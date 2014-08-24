@@ -1,8 +1,7 @@
 package au.id.katharos.robominions;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,61 +11,18 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobs;
 
-public class RobotChicken {
+public class RobotChicken extends AbstractRobot {
 
-	private final ControllableMob<Chicken> chicken;
-	private final String playerName;
-	private final HashMap<Material, Integer> inventory;
+	private final ControllableMob<Chicken> chicken;	
 	private final LinkedList<Location> locationTargets;
-	private Location location;
-	private Direction direction;
 	
-	
-	private static final HashMap<Direction, Vector> directionMap = Maps.newHashMap();
-	private static final HashMap<Direction, Float> directionYawMap = Maps.newHashMap();
-	private static final List<Direction> compass = Lists.newArrayList(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST);
-	private static final HashMap<Direction, Integer> rotationMap = Maps.newHashMap();
-	static {
-		directionMap.put(Direction.UP, new Vector(0, 1, 0));
-		directionMap.put(Direction.DOWN, new Vector(0, -1, 0));
-		directionMap.put(Direction.NORTH, new Vector(0, 0, -1)); 
-		directionMap.put(Direction.SOUTH, new Vector(0, 0, 1));
-		directionMap.put(Direction.EAST, new Vector(1, 0, 0));
-		directionMap.put(Direction.WEST, new Vector(-1, 0, 0));
-		
-		rotationMap.put(Direction.FORWARD, 0);
-		rotationMap.put(Direction.RIGHT, 1);
-		rotationMap.put(Direction.BACKWARD, 2);
-		rotationMap.put(Direction.LEFT, 3);
-		
-		directionYawMap.put(Direction.SOUTH, 0f);
-		directionYawMap.put(Direction.WEST, 90f);
-		directionYawMap.put(Direction.NORTH, 180f);
-		directionYawMap.put(Direction.EAST, 270f);
-		
-	}
-	
-	private Direction getRelativeDirection(Direction looking, Direction move) {
-		if (directionMap.containsKey(move)) {
-			return move;
-		}
-		// Find how many compass points right do we rotate to find the direction of movement
-		Integer rotation = rotationMap.get(move);
-		// Get the current direction we're looking, then move 'rotation' places around the compass
-		return compass.get((compass.indexOf(looking) + rotation) % compass.size());		
-	}
-	
-	public RobotChicken(Player player, Location loc) {
-		this.playerName = player.getName();
-		this.location = loc.getBlock().getLocation().add(0.5, 0.99, 0.5).clone();
-		this.inventory = new HashMap<Material, Integer>();
+	public RobotChicken(Player player, Location loc, Logger logger) {
+		super(player, loc, logger);
+
 		this.locationTargets = new LinkedList<Location>();
 
 		// Spawn facing north
@@ -85,15 +41,16 @@ public class RobotChicken {
 			if (locationTargets.size() > 3) {
 				chicken.getEntity().teleport(location);
 				locationTargets.clear();
+				return;
 			}
 		}
 		Location target = locationTargets.getFirst();
 		// By default we aim for the middle of the target block.
-		
 
 		// Check if we are already in the right block.
 		//if (chicken.getEntity().getLocation().getBlock().equals(target.getBlock())) {
-		if (chicken.getEntity().getLocation().clone().add(0, 0.5, 0).toVector().distance(target.toVector()) < 0.2) {
+		if (chicken.getEntity().getLocation().clone().add(0, 0.5, 0).toVector()
+				.distance(target.toVector()) < 0.4) {
 
 			// only pop the location if we're close enough to the middle of the block.
 			locationTargets.pop();
@@ -121,10 +78,9 @@ public class RobotChicken {
 			Bukkit.getLogger().info("Dropping Y");
 			v.setY(0);
 		} 
-		v.multiply(0.2);
+		v.multiply(0.4);
 		
 		// Set velocity to next target location
-		
 		chicken.getEntity().setVelocity(v);
 	}
 	
@@ -147,18 +103,27 @@ public class RobotChicken {
 		chicken.getEntity().setFallDistance(0);
 	}
 	
+	@Override
+	public void tick() {
+		super.tick();
+		setVelocityToTargetLocation();
+	}
+	
+	@Override
+	public void flyingTick() {
+		fly();
+	}
+	
+	@Override
 	public void die() {
 		chicken.getActions().die();
 	}
 	
+	@Override
 	public boolean turn(Direction direction) {
-		direction = getRelativeDirection(this.direction, direction);
-		if (directionYawMap.containsKey(direction)) {
-			this.direction = direction;
-			
-			location.setYaw(directionYawMap.get(direction));
+		boolean success = super.turn(direction);
+		if (success) {
 			chicken.getEntity().teleport(location);
-
 			Vector directionVector = directionMap.get(getRelativeDirection(this.direction, direction)).clone().multiply(0.1);
 			chicken.getEntity().setVelocity(directionVector);
 			return true;
@@ -166,17 +131,15 @@ public class RobotChicken {
 		return false;
 	}
 	
+	@Override
 	public boolean mine(Block block) {
 		return false;
 	}
 
+	@Override
 	public boolean move(Direction direction) {
-		Vector directionVector = directionMap.get(getRelativeDirection(this.direction, direction));
-		Location loc = this.location.clone().add(directionVector);
-		Block block = chicken.getEntity().getWorld().getBlockAt(loc);
-		boolean success = block.isEmpty();
+		boolean success = super.move(direction);
 		if (success) {
-			this.location.add(directionVector);
 			locationTargets.add(this.location.clone().subtract(0, 0.49, 0));
 			//setVelocityToTargetLocation();
 		}

@@ -2,6 +2,7 @@ package au.id.katharos.robominions;
 
 import java.util.HashMap;
 
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,25 +22,25 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	private static final int API_PORT = 26656;
 	
 	private HashMap<String, Boolean> actionMap;
-	private HashMap<String, RobotChicken> chickenMap;
+	private HashMap<String, AbstractRobot> robotMap;
 	private RobotApiServer apiServer;
 	private BukkitTask apiServerTask;
 	private ActionQueue actionQueue;
 	
-	private class AdjustChickenHeight implements Runnable {
+	private class FlyingTickRepeatingTask implements Runnable {
 
 		public void run() {
-			for (RobotChicken chicken : chickenMap.values()) {
-				chicken.fly();
+			for (AbstractRobot robot : robotMap.values()) {
+				robot.flyingTick();
 			}
 		}
 	}
 	
-	private class MoveChickenToLocation implements Runnable {
+	private class RobotTickRepeatingTask implements Runnable {
 
 		public void run() {
-			for (RobotChicken chicken : chickenMap.values()) {
-				chicken.setVelocityToTargetLocation();
+			for (AbstractRobot robot : robotMap.values()) {
+				robot.tick();
 			}
 		}
 	}
@@ -47,39 +48,51 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	
 	
 	private boolean hasChicken(String playerName) {
-		return chickenMap.containsKey(playerName);
+		return robotMap.containsKey(playerName);
 	}
 	
-	private RobotChicken getChicken(String playerName) {
-		if (chickenMap.containsKey(playerName)) {
-			return chickenMap.get(playerName);
+	private AbstractRobot getChicken(String playerName) {
+		if (robotMap.containsKey(playerName)) {
+			return robotMap.get(playerName);
 		}
 		return null;
 	}
 	
 	@Override
     public void onEnable() {
-		chickenMap = new HashMap<String, RobotChicken>();
+		robotMap = new HashMap<String, AbstractRobot>();
 		actionMap = new HashMap<String, Boolean>();
 		actionQueue = new ActionQueue(getLogger());
 
 		this.getServer().getPluginManager().registerEvents(this, this);
+
 		getServer().getScheduler().scheduleSyncRepeatingTask(
-				this, new AdjustChickenHeight(), 1, 10);
+				this, new FlyingTickRepeatingTask(), 1, 10);
 		getServer().getScheduler().scheduleSyncRepeatingTask(
-				this, new ActionExecutor(actionQueue, chickenMap, getLogger()), 0, 4);
+				this, new ActionExecutor(actionQueue, robotMap, getLogger()), 1, 4);
 		getServer().getScheduler().scheduleSyncRepeatingTask(
-				this, new MoveChickenToLocation(), 1, 2);
+				this, new RobotTickRepeatingTask(), 1, 2);
 
 		this.apiServer = new RobotApiServer(API_PORT, getLogger(), actionQueue);
 		apiServerTask = getServer().getScheduler().runTaskAsynchronously(this, apiServer);
+		
+		//CustomEntityType.registerEntity(CustomEntityType.CHICKEN);
+		CustomEntityType.registerEntity(CustomEntityType.BAT);
 	}
 	
 	private void removeChicken(String playerName) {
-		if (chickenMap.containsKey(playerName)) {
-			chickenMap.get(playerName).die();
-			chickenMap.remove(playerName);
+		if (robotMap.containsKey(playerName)) {
+			robotMap.get(playerName).die();
+			robotMap.remove(playerName);
 		}
+	}
+	
+	private AbstractRobot spawnRobot(Player player, Location location, String type) {
+		if (type == null) {
+			// Default spawn a Robot Chicken
+			return new RobotChicken(player, location, getLogger());
+		}
+		return new RobotChicken(player, location, getLogger());
 	}
 
 	@EventHandler
@@ -88,9 +101,11 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 				&& event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			removeChicken(event.getPlayer().getName());
 			// Spawn a chicken next to the block face that was clicked.
-			RobotChicken chicken = new RobotChicken(
-					event.getPlayer(), event.getClickedBlock().getRelative(event.getBlockFace()).getLocation());
-			chickenMap.put(event.getPlayer().getName(), chicken);
+			AbstractRobot chicken = spawnRobot(
+					event.getPlayer(), 
+					event.getClickedBlock().getRelative(event.getBlockFace()).getLocation(),
+					null);
+			robotMap.put(event.getPlayer().getName(), chicken);
 			actionMap.remove(event.getPlayer().getName());
 		}
 	}
@@ -99,10 +114,10 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     public void onDisable() {
     	apiServer.shutDown();
     	
-    	for (String playerName : chickenMap.keySet()) {
+    	for (String playerName : robotMap.keySet()) {
     		removeChicken(playerName);
     	}
-    	chickenMap.clear();
+    	robotMap.clear();
     	actionMap.clear();
     }
 
@@ -129,7 +144,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     		}
     		
     		if (sender instanceof Player && hasChicken(((Player) sender).getName())) {
-    			RobotChicken chicken = getChicken(((Player) sender).getName());
+    			AbstractRobot chicken = getChicken(((Player) sender).getName());
         		Direction direction = Direction.valueOf(args[0].toUpperCase());
         		if (direction == null) {
         			sender.sendMessage("Invalid direction");
