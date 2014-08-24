@@ -13,15 +13,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import au.id.katharos.robominions.ActionQueue.ChickenEvent;
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
 
 public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	
 	private static final int API_PORT = 26656;
 	
-	private HashMap<String, Boolean> actionMap;
+	private HashMap<String, String> actionMap;
 	private HashMap<String, AbstractRobot> robotMap;
 	private RobotApiServer apiServer;
 	private BukkitTask apiServerTask;
@@ -61,7 +59,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	@Override
     public void onEnable() {
 		robotMap = new HashMap<String, AbstractRobot>();
-		actionMap = new HashMap<String, Boolean>();
+		actionMap = new HashMap<String, String>();
 		actionQueue = new ActionQueue(getLogger());
 
 		this.getServer().getPluginManager().registerEvents(this, this);
@@ -92,6 +90,9 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 			// Default spawn a Robot Chicken
 			return new RobotChicken(player, location, getLogger());
 		}
+		if (type.toLowerCase().equals("pumpkin")) {
+			return new PumpkinRobot(player, location, getLogger());
+		}
 		return new RobotChicken(player, location, getLogger());
 	}
 
@@ -101,11 +102,11 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 				&& event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			removeChicken(event.getPlayer().getName());
 			// Spawn a chicken next to the block face that was clicked.
-			AbstractRobot chicken = spawnRobot(
-					event.getPlayer(), 
+			AbstractRobot robot = spawnRobot(
+					event.getPlayer(),
 					event.getClickedBlock().getRelative(event.getBlockFace()).getLocation(),
-					null);
-			robotMap.put(event.getPlayer().getName(), chicken);
+					actionMap.get(event.getPlayer().getName()));
+			robotMap.put(event.getPlayer().getName(), robot);
 			actionMap.remove(event.getPlayer().getName());
 		}
 	}
@@ -129,7 +130,11 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     	}
     	if (cmd.getName().equalsIgnoreCase("spawnrobot")) {
     		if (sender instanceof Player) {
-    			actionMap.put(((Player) sender).getName(), true);
+    			String type = "";
+    			if (args.length == 1) {
+    				type = args[0];
+    			}
+    			actionMap.put(((Player) sender).getName(), type);
     			sender.sendMessage("Your next rightclick will spawn a robot.");
     			return true;
     		} else {
