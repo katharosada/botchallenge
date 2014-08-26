@@ -5,6 +5,8 @@ option java_package = "au.id.katharos.robominions.api";
 option java_outer_classname = "RobotApi";
 
 
+import "materials.proto";
+
 message RobotActionRequest {
   optional string name = 1;
   
@@ -23,13 +25,10 @@ message RobotActionRequest {
   
   optional Direction move_direction = 2;
   optional Direction turn_direction = 3;
-  optional Location mine_block = 4;
-}
-
-message Location {
-  optional int32 x = 1;
-  optional int32 y = 2;
-  optional int32 z = 3;
+  optional Direction mine_direction = 4;
+  
+  optional Direction place_direction = 5;
+  optional Material place_material = 6;
 }
 
 message RobotActionResponse {

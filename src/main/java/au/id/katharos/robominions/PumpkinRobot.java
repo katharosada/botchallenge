@@ -33,12 +33,7 @@ public class PumpkinRobot extends AbstractRobot {
 	protected void tick() {
 		super.tick();
 	}
-	
-	@Override
-	public boolean mine(Block block) {
-		return super.mine(block);
-	}
-	
+		
 	@SuppressWarnings("deprecation")
 	private void setDirectionOnCurrentBlock() {
 		switch(direction) {

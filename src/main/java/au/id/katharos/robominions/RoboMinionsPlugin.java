@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -75,7 +76,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 		apiServerTask = getServer().getScheduler().runTaskAsynchronously(this, apiServer);
 		
 		//CustomEntityType.registerEntity(CustomEntityType.CHICKEN);
-		CustomEntityType.registerEntity(CustomEntityType.BAT);
+		//CustomEntityType.registerEntity(CustomEntityType.BAT);
 	}
 	
 	private void removeChicken(String playerName) {
@@ -108,6 +109,22 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 					actionMap.get(event.getPlayer().getName()));
 			robotMap.put(event.getPlayer().getName(), robot);
 			actionMap.remove(event.getPlayer().getName());
+		}
+	}
+	
+	@EventHandler
+	public void onItemSpawnEvent(ItemSpawnEvent spawnEvent) {
+		AbstractRobot winner = null;
+		double minDistance = 3.0;
+		for (AbstractRobot robot : robotMap.values()) {
+			double distance = spawnEvent.getLocation().distance(robot.getLocation());
+			if (distance < minDistance) {
+				minDistance = distance;
+				winner = robot;
+			}
+		}
+		if (winner != null) {
+			winner.pickUp(spawnEvent.getEntity());
 		}
 	}
  

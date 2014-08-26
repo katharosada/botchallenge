@@ -46,12 +46,6 @@ public class CustomEntityRobot extends AbstractRobot {
 		//TODO
 		return success;
 	}
-	
-	@Override
-	public boolean mine(Block block) {
-		//TODO
-		return false;
-	}
 
 	@Override
 	public boolean move(Direction direction) {

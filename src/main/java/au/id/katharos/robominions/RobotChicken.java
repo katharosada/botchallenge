@@ -27,10 +27,9 @@ public class RobotChicken extends AbstractRobot {
 
 		// Spawn facing north
 		this.location.setYaw(directionYawMap.get(Direction.NORTH));
-		this.direction = Direction.NORTH;
 		Chicken c = player.getWorld().spawn(this.location, Chicken.class);
 		chicken = ControllableMobs.getOrPutUnderControl(c, true);
-		turn(Direction.NORTH);
+		turn(direction);
 	}
 
 	public void setVelocityToTargetLocation() {
@@ -128,11 +127,6 @@ public class RobotChicken extends AbstractRobot {
 			chicken.getEntity().setVelocity(directionVector);
 			return true;
 		}
-		return false;
-	}
-	
-	@Override
-	public boolean mine(Block block) {
 		return false;
 	}
 

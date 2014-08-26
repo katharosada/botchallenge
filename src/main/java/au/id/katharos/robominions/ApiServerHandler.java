@@ -26,11 +26,9 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
         // Discard the received data silently.
-    	logger.info("New channel.");
         try {
         	//ByteBuf buf = (ByteBuf) msg;
         	RobotActionRequest request = (RobotActionRequest) msg;
-        	logger.info(request.getName());
         	ChickenEvent event = new ChickenEvent(request.getName(), request, new EventFinishedListener() {					
         		@Override
         		public void call(EventResult result) {
@@ -44,7 +42,6 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
         } finally {
         	ReferenceCountUtil.release(msg);
         }
-        logger.info("Channel closed.");
     }
 
     @Override

@@ -3,6 +3,8 @@ package au.id.katharos.robominions;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import org.bukkit.Material;
+
 import au.id.katharos.robominions.ActionQueue.ChickenEvent;
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 
@@ -36,9 +38,14 @@ public class ActionExecutor implements Runnable {
 				// Move chicken according to instruction.
 				boolean success = false;
 				if (actionRequest.hasMoveDirection()) {
-					success = robot.move(event.getActionRequest().getMoveDirection());
+					success = robot.move(actionRequest.getMoveDirection());
 				} else if (actionRequest.hasTurnDirection()) {
-					success = robot.turn(event.getActionRequest().getTurnDirection());
+					success = robot.turn(actionRequest.getTurnDirection());
+				} else if (actionRequest.hasMineDirection()) {
+					success = robot.mine(actionRequest.getMineDirection());
+				} else if (actionRequest.hasPlaceDirection() && actionRequest.hasPlaceMaterial()) {
+					success = robot.place(actionRequest.getPlaceDirection(),
+							Material.getMaterial(actionRequest.getPlaceMaterial().getType().getNumber()));
 				}
 				event.getListener().call(new ActionQueue.EventResult(success));
 			} else {
