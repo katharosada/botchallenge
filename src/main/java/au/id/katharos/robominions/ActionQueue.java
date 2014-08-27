@@ -13,9 +13,15 @@ import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
 public class ActionQueue {
 	
 	public static class EventResult {
+		private final int key;
 		private final boolean success;
-		public EventResult(boolean success) {
+		public EventResult(int key, boolean success) {
+			this.key = key;
 			this.success = success;
+		}
+		
+		public int getKey() {
+			return key;
 		}
 		
 		public boolean getSuccess() {

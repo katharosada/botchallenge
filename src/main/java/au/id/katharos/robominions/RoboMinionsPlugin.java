@@ -160,22 +160,36 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     		}
     	}
     	if (cmd.getName().equalsIgnoreCase("robot")) {
-    		if (args.length < 1) {
-    			sender.sendMessage("You must also provide a direction");
+    		if (args.length < 2) {
+    			sender.sendMessage("You must also provide a move and a direction");
     			return false;
     		}
     		
+    		
+    		
     		if (sender instanceof Player && hasChicken(((Player) sender).getName())) {
     			AbstractRobot chicken = getChicken(((Player) sender).getName());
-        		Direction direction = Direction.valueOf(args[0].toUpperCase());
+        		Direction direction = Direction.valueOf(args[1].toUpperCase());
         		if (direction == null) {
         			sender.sendMessage("Invalid direction");
         			return false;
         		}
-        		boolean moveSuccess = chicken.move(direction);
+        		boolean moveSuccess = false;
+        		if (args[0].equalsIgnoreCase("move")) {
+        			moveSuccess = chicken.move(direction);
+        			if (!moveSuccess) {
+            			sender.sendMessage("Can't move there, there's something in the way.");
+            			return true;
+            		}
+        		} else if (args[0].equalsIgnoreCase("turn")) {
+        			moveSuccess = chicken.turn(direction);
+        			if (!moveSuccess) {
+            			sender.sendMessage("Can't turn up/down.");
+            			return true;
+            		}
+        		}
         		if (!moveSuccess) {
-        			sender.sendMessage("Chicken can't move there, there's something in the way.");
-        			return true;
+        			sender.sendMessage("Unrecognised command");
         		}
         		return true;
     		} else {

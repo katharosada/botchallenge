@@ -9,6 +9,7 @@ import "materials.proto";
 
 message RobotActionRequest {
   optional string name = 1;
+  optional int32 key = 7;
   
   enum Direction {
     UP = 0;
@@ -32,6 +33,7 @@ message RobotActionRequest {
 }
 
 message RobotActionResponse {
+  optional int32 key = 3;
   optional bool success = 1;
   optional ErrorMessage error_message = 2;
 }

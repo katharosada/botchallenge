@@ -47,7 +47,7 @@ public class ActionExecutor implements Runnable {
 					success = robot.place(actionRequest.getPlaceDirection(),
 							Material.getMaterial(actionRequest.getPlaceMaterial().getType().getNumber()));
 				}
-				event.getListener().call(new ActionQueue.EventResult(success));
+				event.getListener().call(new ActionQueue.EventResult(actionRequest.getKey(), success));
 			} else {
 				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerName());
 			}

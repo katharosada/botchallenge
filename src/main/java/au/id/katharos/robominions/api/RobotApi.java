@@ -26,6 +26,16 @@ public final class RobotApi {
     com.google.protobuf.ByteString
         getNameBytes();
 
+    // optional int32 key = 7;
+    /**
+     * <code>optional int32 key = 7;</code>
+     */
+    boolean hasKey();
+    /**
+     * <code>optional int32 key = 7;</code>
+     */
+    int getKey();
+
     // optional .robominions.RobotActionRequest.Direction move_direction = 2;
     /**
      * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
@@ -142,7 +152,7 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
-                bitField0_ |= 0x00000002;
+                bitField0_ |= 0x00000004;
                 moveDirection_ = value;
               }
               break;
@@ -153,7 +163,7 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000008;
                 turnDirection_ = value;
               }
               break;
@@ -164,7 +174,7 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000010;
                 mineDirection_ = value;
               }
               break;
@@ -175,14 +185,14 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
-                bitField0_ |= 0x00000010;
+                bitField0_ |= 0x00000020;
                 placeDirection_ = value;
               }
               break;
             }
             case 50: {
               au.id.katharos.robominions.api.Materials.Material.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
                 subBuilder = placeMaterial_.toBuilder();
               }
               placeMaterial_ = input.readMessage(au.id.katharos.robominions.api.Materials.Material.PARSER, extensionRegistry);
@@ -190,7 +200,12 @@ public final class RobotApi {
                 subBuilder.mergeFrom(placeMaterial_);
                 placeMaterial_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000002;
+              key_ = input.readInt32();
               break;
             }
           }
@@ -430,6 +445,22 @@ public final class RobotApi {
       }
     }
 
+    // optional int32 key = 7;
+    public static final int KEY_FIELD_NUMBER = 7;
+    private int key_;
+    /**
+     * <code>optional int32 key = 7;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 key = 7;</code>
+     */
+    public int getKey() {
+      return key_;
+    }
+
     // optional .robominions.RobotActionRequest.Direction move_direction = 2;
     public static final int MOVE_DIRECTION_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction moveDirection_;
@@ -437,7 +468,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
      */
     public boolean hasMoveDirection() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
@@ -453,7 +484,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
      */
     public boolean hasTurnDirection() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
@@ -469,7 +500,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
      */
     public boolean hasMineDirection() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
@@ -485,7 +516,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
      */
     public boolean hasPlaceDirection() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
@@ -501,7 +532,7 @@ public final class RobotApi {
      * <code>optional .robominions.Material place_material = 6;</code>
      */
     public boolean hasPlaceMaterial() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional .robominions.Material place_material = 6;</code>
@@ -518,6 +549,7 @@ public final class RobotApi {
 
     private void initFields() {
       name_ = "";
+      key_ = 0;
       moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
       turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
       mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
@@ -539,20 +571,23 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getNameBytes());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(2, moveDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeEnum(3, turnDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(4, mineDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeEnum(5, placeDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeMessage(6, placeMaterial_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(7, key_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -567,25 +602,29 @@ public final class RobotApi {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getNameBytes());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, moveDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, turnDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, mineDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, placeDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, placeMaterial_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, key_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -706,20 +745,22 @@ public final class RobotApi {
         super.clear();
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
+        key_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
+        moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         bitField0_ = (bitField0_ & ~0x00000004);
-        mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
+        turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         bitField0_ = (bitField0_ & ~0x00000008);
-        placeDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
+        mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         bitField0_ = (bitField0_ & ~0x00000010);
+        placeDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
+        bitField0_ = (bitField0_ & ~0x00000020);
         if (placeMaterialBuilder_ == null) {
           placeMaterial_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
         } else {
           placeMaterialBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -755,21 +796,25 @@ public final class RobotApi {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.moveDirection_ = moveDirection_;
+        result.key_ = key_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.turnDirection_ = turnDirection_;
+        result.moveDirection_ = moveDirection_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.mineDirection_ = mineDirection_;
+        result.turnDirection_ = turnDirection_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.placeDirection_ = placeDirection_;
+        result.mineDirection_ = mineDirection_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
+        }
+        result.placeDirection_ = placeDirection_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
         }
         if (placeMaterialBuilder_ == null) {
           result.placeMaterial_ = placeMaterial_;
@@ -796,6 +841,9 @@ public final class RobotApi {
           bitField0_ |= 0x00000001;
           name_ = other.name_;
           onChanged();
+        }
+        if (other.hasKey()) {
+          setKey(other.getKey());
         }
         if (other.hasMoveDirection()) {
           setMoveDirection(other.getMoveDirection());
@@ -913,13 +961,46 @@ public final class RobotApi {
         return this;
       }
 
+      // optional int32 key = 7;
+      private int key_ ;
+      /**
+       * <code>optional int32 key = 7;</code>
+       */
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 key = 7;</code>
+       */
+      public int getKey() {
+        return key_;
+      }
+      /**
+       * <code>optional int32 key = 7;</code>
+       */
+      public Builder setKey(int value) {
+        bitField0_ |= 0x00000002;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 key = 7;</code>
+       */
+      public Builder clearKey() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        key_ = 0;
+        onChanged();
+        return this;
+      }
+
       // optional .robominions.RobotActionRequest.Direction move_direction = 2;
       private au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
       /**
        * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
        */
       public boolean hasMoveDirection() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
@@ -934,7 +1015,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         moveDirection_ = value;
         onChanged();
         return this;
@@ -943,7 +1024,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
        */
       public Builder clearMoveDirection() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -955,7 +1036,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
        */
       public boolean hasTurnDirection() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
@@ -970,7 +1051,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         turnDirection_ = value;
         onChanged();
         return this;
@@ -979,7 +1060,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
        */
       public Builder clearTurnDirection() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -991,7 +1072,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
        */
       public boolean hasMineDirection() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
@@ -1006,7 +1087,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         mineDirection_ = value;
         onChanged();
         return this;
@@ -1015,7 +1096,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
        */
       public Builder clearMineDirection() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -1027,7 +1108,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
        */
       public boolean hasPlaceDirection() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
@@ -1042,7 +1123,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         placeDirection_ = value;
         onChanged();
         return this;
@@ -1051,7 +1132,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
        */
       public Builder clearPlaceDirection() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         placeDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -1065,7 +1146,7 @@ public final class RobotApi {
        * <code>optional .robominions.Material place_material = 6;</code>
        */
       public boolean hasPlaceMaterial() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional .robominions.Material place_material = 6;</code>
@@ -1090,7 +1171,7 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
@@ -1104,7 +1185,7 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
@@ -1112,7 +1193,7 @@ public final class RobotApi {
        */
       public Builder mergePlaceMaterial(au.id.katharos.robominions.api.Materials.Material value) {
         if (placeMaterialBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
               placeMaterial_ != au.id.katharos.robominions.api.Materials.Material.getDefaultInstance()) {
             placeMaterial_ =
               au.id.katharos.robominions.api.Materials.Material.newBuilder(placeMaterial_).mergeFrom(value).buildPartial();
@@ -1123,7 +1204,7 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
@@ -1136,14 +1217,14 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
        * <code>optional .robominions.Material place_material = 6;</code>
        */
       public au.id.katharos.robominions.api.Materials.Material.Builder getPlaceMaterialBuilder() {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         onChanged();
         return getPlaceMaterialFieldBuilder().getBuilder();
       }
@@ -1187,6 +1268,16 @@ public final class RobotApi {
 
   public interface RobotActionResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 key = 3;
+    /**
+     * <code>optional int32 key = 3;</code>
+     */
+    boolean hasKey();
+    /**
+     * <code>optional int32 key = 3;</code>
+     */
+    int getKey();
 
     // optional bool success = 1;
     /**
@@ -1264,13 +1355,13 @@ public final class RobotApi {
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000002;
               success_ = input.readBool();
               break;
             }
             case 18: {
               au.id.katharos.robominions.api.RobotApi.ErrorMessage.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = errorMessage_.toBuilder();
               }
               errorMessage_ = input.readMessage(au.id.katharos.robominions.api.RobotApi.ErrorMessage.PARSER, extensionRegistry);
@@ -1278,7 +1369,12 @@ public final class RobotApi {
                 subBuilder.mergeFrom(errorMessage_);
                 errorMessage_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000001;
+              key_ = input.readInt32();
               break;
             }
           }
@@ -1321,6 +1417,22 @@ public final class RobotApi {
     }
 
     private int bitField0_;
+    // optional int32 key = 3;
+    public static final int KEY_FIELD_NUMBER = 3;
+    private int key_;
+    /**
+     * <code>optional int32 key = 3;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 key = 3;</code>
+     */
+    public int getKey() {
+      return key_;
+    }
+
     // optional bool success = 1;
     public static final int SUCCESS_FIELD_NUMBER = 1;
     private boolean success_;
@@ -1328,7 +1440,7 @@ public final class RobotApi {
      * <code>optional bool success = 1;</code>
      */
     public boolean hasSuccess() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional bool success = 1;</code>
@@ -1344,7 +1456,7 @@ public final class RobotApi {
      * <code>optional .robominions.ErrorMessage error_message = 2;</code>
      */
     public boolean hasErrorMessage() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional .robominions.ErrorMessage error_message = 2;</code>
@@ -1360,6 +1472,7 @@ public final class RobotApi {
     }
 
     private void initFields() {
+      key_ = 0;
       success_ = false;
       errorMessage_ = au.id.katharos.robominions.api.RobotApi.ErrorMessage.getDefaultInstance();
     }
@@ -1375,11 +1488,14 @@ public final class RobotApi {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBool(1, success_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(2, errorMessage_);
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(3, key_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1390,13 +1506,17 @@ public final class RobotApi {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(1, success_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, errorMessage_);
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, key_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1515,14 +1635,16 @@ public final class RobotApi {
 
       public Builder clear() {
         super.clear();
-        success_ = false;
+        key_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        success_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
         if (errorMessageBuilder_ == null) {
           errorMessage_ = au.id.katharos.robominions.api.RobotApi.ErrorMessage.getDefaultInstance();
         } else {
           errorMessageBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -1554,9 +1676,13 @@ public final class RobotApi {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.success_ = success_;
+        result.key_ = key_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
+        }
+        result.success_ = success_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
         if (errorMessageBuilder_ == null) {
           result.errorMessage_ = errorMessage_;
@@ -1579,6 +1705,9 @@ public final class RobotApi {
 
       public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.RobotActionResponse other) {
         if (other == au.id.katharos.robominions.api.RobotApi.RobotActionResponse.getDefaultInstance()) return this;
+        if (other.hasKey()) {
+          setKey(other.getKey());
+        }
         if (other.hasSuccess()) {
           setSuccess(other.getSuccess());
         }
@@ -1612,13 +1741,46 @@ public final class RobotApi {
       }
       private int bitField0_;
 
+      // optional int32 key = 3;
+      private int key_ ;
+      /**
+       * <code>optional int32 key = 3;</code>
+       */
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 key = 3;</code>
+       */
+      public int getKey() {
+        return key_;
+      }
+      /**
+       * <code>optional int32 key = 3;</code>
+       */
+      public Builder setKey(int value) {
+        bitField0_ |= 0x00000001;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 key = 3;</code>
+       */
+      public Builder clearKey() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        key_ = 0;
+        onChanged();
+        return this;
+      }
+
       // optional bool success = 1;
       private boolean success_ ;
       /**
        * <code>optional bool success = 1;</code>
        */
       public boolean hasSuccess() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional bool success = 1;</code>
@@ -1630,7 +1792,7 @@ public final class RobotApi {
        * <code>optional bool success = 1;</code>
        */
       public Builder setSuccess(boolean value) {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         success_ = value;
         onChanged();
         return this;
@@ -1639,7 +1801,7 @@ public final class RobotApi {
        * <code>optional bool success = 1;</code>
        */
       public Builder clearSuccess() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         success_ = false;
         onChanged();
         return this;
@@ -1653,7 +1815,7 @@ public final class RobotApi {
        * <code>optional .robominions.ErrorMessage error_message = 2;</code>
        */
       public boolean hasErrorMessage() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional .robominions.ErrorMessage error_message = 2;</code>
@@ -1678,7 +1840,7 @@ public final class RobotApi {
         } else {
           errorMessageBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
@@ -1692,7 +1854,7 @@ public final class RobotApi {
         } else {
           errorMessageBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
@@ -1700,7 +1862,7 @@ public final class RobotApi {
        */
       public Builder mergeErrorMessage(au.id.katharos.robominions.api.RobotApi.ErrorMessage value) {
         if (errorMessageBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
               errorMessage_ != au.id.katharos.robominions.api.RobotApi.ErrorMessage.getDefaultInstance()) {
             errorMessage_ =
               au.id.katharos.robominions.api.RobotApi.ErrorMessage.newBuilder(errorMessage_).mergeFrom(value).buildPartial();
@@ -1711,7 +1873,7 @@ public final class RobotApi {
         } else {
           errorMessageBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
@@ -1724,14 +1886,14 @@ public final class RobotApi {
         } else {
           errorMessageBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       /**
        * <code>optional .robominions.ErrorMessage error_message = 2;</code>
        */
       public au.id.katharos.robominions.api.RobotApi.ErrorMessage.Builder getErrorMessageBuilder() {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
         return getErrorMessageFieldBuilder().getBuilder();
       }
@@ -2658,30 +2820,31 @@ public final class RobotApi {
   static {
     java.lang.String[] descriptorData = {
       "\n\016robotapi.proto\022\013robominions\032\017materials" +
-      ".proto\"\327\003\n\022RobotActionRequest\022\014\n\004name\030\001 " +
-      "\001(\t\022A\n\016move_direction\030\002 \001(\0162).robominion" +
-      "s.RobotActionRequest.Direction\022A\n\016turn_d" +
-      "irection\030\003 \001(\0162).robominions.RobotAction" +
-      "Request.Direction\022A\n\016mine_direction\030\004 \001(" +
-      "\0162).robominions.RobotActionRequest.Direc" +
-      "tion\022B\n\017place_direction\030\005 \001(\0162).robomini" +
-      "ons.RobotActionRequest.Direction\022-\n\016plac" +
-      "e_material\030\006 \001(\0132\025.robominions.Material\"",
-      "w\n\tDirection\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001\022\010\n\004LEFT\020\002" +
-      "\022\t\n\005RIGHT\020\003\022\013\n\007FORWARD\020\004\022\014\n\010BACKWARD\020\005\022\010" +
-      "\n\004EAST\020\006\022\010\n\004WEST\020\007\022\t\n\005NORTH\020\010\022\t\n\005SOUTH\020\t" +
-      "\"X\n\023RobotActionResponse\022\017\n\007success\030\001 \001(\010" +
-      "\0220\n\rerror_message\030\002 \001(\0132\031.robominions.Er" +
-      "rorMessage\"\302\002\n\014ErrorMessage\0220\n\006reason\030\001 " +
-      "\001(\0162 .robominions.ErrorMessage.Reason\0220\n" +
-      "\006action\030\002 \001(\0162 .robominions.ErrorMessage" +
-      ".Action\022\017\n\007message\030\003 \001(\t\"\177\n\006Reason\022\013\n\007UN" +
-      "KNOWN\020\000\022\020\n\014SERVER_ERROR\020\001\022\026\n\022UNREADABLE_",
-      "REQUEST\020\002\022\023\n\017INVALID_REQUEST\020\003\022\023\n\017BLOCK_" +
-      "COLLISION\020\004\022\024\n\020OUTSIDE_OF_WORLD\020\005\"<\n\006Act" +
-      "ion\022\017\n\013FAIL_ACTION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017" +
-      "\n\013EXIT_CLIENT\020\002B*\n\036au.id.katharos.robomi" +
-      "nions.apiB\010RobotApi"
+      ".proto\"\344\003\n\022RobotActionRequest\022\014\n\004name\030\001 " +
+      "\001(\t\022\013\n\003key\030\007 \001(\005\022A\n\016move_direction\030\002 \001(\016" +
+      "2).robominions.RobotActionRequest.Direct" +
+      "ion\022A\n\016turn_direction\030\003 \001(\0162).robominion" +
+      "s.RobotActionRequest.Direction\022A\n\016mine_d" +
+      "irection\030\004 \001(\0162).robominions.RobotAction" +
+      "Request.Direction\022B\n\017place_direction\030\005 \001" +
+      "(\0162).robominions.RobotActionRequest.Dire" +
+      "ction\022-\n\016place_material\030\006 \001(\0132\025.robomini",
+      "ons.Material\"w\n\tDirection\022\006\n\002UP\020\000\022\010\n\004DOW" +
+      "N\020\001\022\010\n\004LEFT\020\002\022\t\n\005RIGHT\020\003\022\013\n\007FORWARD\020\004\022\014\n" +
+      "\010BACKWARD\020\005\022\010\n\004EAST\020\006\022\010\n\004WEST\020\007\022\t\n\005NORTH" +
+      "\020\010\022\t\n\005SOUTH\020\t\"e\n\023RobotActionResponse\022\013\n\003" +
+      "key\030\003 \001(\005\022\017\n\007success\030\001 \001(\010\0220\n\rerror_mess" +
+      "age\030\002 \001(\0132\031.robominions.ErrorMessage\"\302\002\n" +
+      "\014ErrorMessage\0220\n\006reason\030\001 \001(\0162 .robomini" +
+      "ons.ErrorMessage.Reason\0220\n\006action\030\002 \001(\0162" +
+      " .robominions.ErrorMessage.Action\022\017\n\007mes" +
+      "sage\030\003 \001(\t\"\177\n\006Reason\022\013\n\007UNKNOWN\020\000\022\020\n\014SER",
+      "VER_ERROR\020\001\022\026\n\022UNREADABLE_REQUEST\020\002\022\023\n\017I" +
+      "NVALID_REQUEST\020\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n" +
+      "\020OUTSIDE_OF_WORLD\020\005\"<\n\006Action\022\017\n\013FAIL_AC" +
+      "TION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT\020" +
+      "\002B*\n\036au.id.katharos.robominions.apiB\010Rob" +
+      "otApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2693,13 +2856,13 @@ public final class RobotApi {
           internal_static_robominions_RobotActionRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_RobotActionRequest_descriptor,
-              new java.lang.String[] { "Name", "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
+              new java.lang.String[] { "Name", "Key", "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
           internal_static_robominions_RobotActionResponse_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_robominions_RobotActionResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_RobotActionResponse_descriptor,
-              new java.lang.String[] { "Success", "ErrorMessage", });
+              new java.lang.String[] { "Key", "Success", "ErrorMessage", });
           internal_static_robominions_ErrorMessage_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_robominions_ErrorMessage_fieldAccessorTable = new

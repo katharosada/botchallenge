@@ -33,7 +33,9 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
         		@Override
         		public void call(EventResult result) {
         			boolean success = result.getSuccess();
-        			RobotActionResponse response = RobotActionResponse.newBuilder().setSuccess(success).build();
+        			RobotActionResponse response = RobotActionResponse.newBuilder()
+        					.setKey(result.getKey())
+        					.setSuccess(success).build();
         			ctx.write(response);
         			ctx.flush();
         		}
