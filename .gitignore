@@ -3,8 +3,14 @@
 .project
 .settings
 
-# Any spurious class files
+# Any spurious temp files
 *.class
+*.pyc
+*.swp
+
+# Client proto generated files
+client/api/.*
+
 
 # Generated source and jar target output
 target
