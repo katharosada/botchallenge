@@ -9,7 +9,7 @@
 *.swp
 
 # Client proto generated files
-client/api/.*
+client/api
 
 
 # Generated source and jar target output
