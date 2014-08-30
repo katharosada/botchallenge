@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Material;
 
-import au.id.katharos.robominions.ActionQueue.ChickenEvent;
+import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 
 public class ActionExecutor implements Runnable {
@@ -29,7 +29,7 @@ public class ActionExecutor implements Runnable {
 	
 	@Override
 	public void run() {
-		ChickenEvent event = actionQueue.getNextEvent();
+		ActionEvent event = actionQueue.getNextEvent();
 		while (event != null) {
 			
 			AbstractRobot robot = getChicken(event.getPlayerName());

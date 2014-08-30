@@ -4,11 +4,13 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
 
+/**
+ * Experimental and incomplete robot using a Custom Entity. (not currently in use anywhere).
+ */
 public class CustomEntityRobot extends AbstractRobot {
 
 	private final CustomChickenEntity customBat;	
@@ -18,7 +20,7 @@ public class CustomEntityRobot extends AbstractRobot {
 
 		// Spawn facing north
 		this.location.setYaw(directionYawMap.get(Direction.NORTH));
-		this.direction = Direction.NORTH;
+		this.facingDirection = Direction.NORTH;
 
 		// EXPERIMENTAL: Spawn a true custom entity.
 		Bukkit.getLogger().info("Spawning custom chicken");

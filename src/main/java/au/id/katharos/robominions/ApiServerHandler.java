@@ -6,12 +6,14 @@ import io.netty.util.ReferenceCountUtil;
 
 import java.util.logging.Logger;
 
-import au.id.katharos.robominions.ActionQueue.ChickenEvent;
+import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.ActionQueue.EventResult;
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
 import au.id.katharos.robominions.api.RobotApi.RobotActionResponse;
 
+/**
+ * Handler for any incoming client requests.
+ */
 public class ApiServerHandler extends ChannelInboundHandlerAdapter {
 
 	private final Logger logger;
@@ -25,11 +27,13 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
 	
     @Override
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
-        // Discard the received data silently.
         try {
-        	//ByteBuf buf = (ByteBuf) msg;
         	RobotActionRequest request = (RobotActionRequest) msg;
-        	ChickenEvent event = new ChickenEvent(request.getName(), request, new EventFinishedListener() {					
+        	ActionEvent event = new ActionEvent(request.getName(), request, new EventFinishedListener() {
+        		
+        		/**
+        		 * The action has to wait for next Bukkit tick, so answer the request when it happens.
+        		 */
         		@Override
         		public void call(EventResult result) {
         			boolean success = result.getSuccess();

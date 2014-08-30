@@ -29,12 +29,12 @@ public class ActionQueue {
 		}
 	}
 	
-	public static class ChickenEvent {
+	public static class ActionEvent {
 		private final String playerName;
 		private final RobotActionRequest actionRequest;
 		private final EventFinishedListener listener;
 		
-		public ChickenEvent(
+		public ActionEvent(
 				String playerName, 
 				RobotActionRequest direction,
 				EventFinishedListener finishedListener) {
@@ -56,15 +56,15 @@ public class ActionQueue {
 		}
 	}
 	
-	private final ConcurrentLinkedQueue<ChickenEvent> actionQueue;
+	private final ConcurrentLinkedQueue<ActionEvent> actionQueue;
 	private final Logger logger;
 	
 	public ActionQueue(Logger logger) {
-		actionQueue = new ConcurrentLinkedQueue<ChickenEvent>();
+		actionQueue = new ConcurrentLinkedQueue<ActionEvent>();
 		this.logger = logger;
 	}
 	
-	public void addAction(ChickenEvent action) {
+	public void addAction(ActionEvent action) {
 		actionQueue.add(action);
 	}
 
@@ -74,7 +74,7 @@ public class ActionQueue {
 	 * 
 	 * @return The next event in the queue or null.
 	 */
-	public ChickenEvent getNextEvent() {
+	public ActionEvent getNextEvent() {
 		return actionQueue.poll();
 	}
 

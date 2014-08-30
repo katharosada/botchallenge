@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.server.v1_7_R3.EntityBat;
-import net.minecraft.server.v1_7_R3.EntityChicken;
 import net.minecraft.server.v1_7_R3.EntityInsentient;
 import net.minecraft.server.v1_7_R3.EntityTypes;
 

@@ -10,8 +10,8 @@ commands:
       permission: roboadmin
       permission-message: You don't have <permission>
    robot:
-      description: Give the robot a command
-      usage: /<command> {up|down|east|west|forward|backward}
+      description: Give the robot a command (only supports move and turn)
+      usage: /<command> {turn|move} {up|down|east|west|forward|backward}
       permission: roboadmin
 
 permissions:

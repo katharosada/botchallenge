@@ -15,6 +15,12 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
 
 
+/**
+ * A robot type which uses a custom chicken entity (looks like a chicken, acts like a bat).
+ * 
+ * WARNING: Incomplete and experimental. Also it depends on internal obfuscated NMS code which
+ *  	is likely to change with the next version.
+ */
 public class CustomChickenEntity extends EntityBat {
 
 	private Logger logger;

@@ -29,7 +29,7 @@ public class RobotChicken extends AbstractRobot {
 		this.location.setYaw(directionYawMap.get(Direction.NORTH));
 		Chicken c = player.getWorld().spawn(this.location, Chicken.class);
 		chicken = ControllableMobs.getOrPutUnderControl(c, true);
-		turn(direction);
+		turn(facingDirection);
 	}
 
 	public void setVelocityToTargetLocation() {
@@ -123,7 +123,7 @@ public class RobotChicken extends AbstractRobot {
 		boolean success = super.turn(direction);
 		if (success) {
 			chicken.getEntity().teleport(location);
-			Vector directionVector = directionMap.get(getRelativeDirection(this.direction, direction)).clone().multiply(0.1);
+			Vector directionVector = directionMap.get(getAbsoluteDirection(this.facingDirection, direction)).clone().multiply(0.1);
 			chicken.getEntity().setVelocity(directionVector);
 			return true;
 		}
