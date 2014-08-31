@@ -9,7 +9,7 @@
 *.swp
 
 # Client proto generated files
-client/api
+*_pb2.py
 
 
 # Generated source and jar target output
