@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.ActionQueue.ActionResult;
-import au.id.katharos.robominions.ReadExecutor.ReadException;
 import au.id.katharos.robominions.api.RobotApi.RobotRequest;
 import au.id.katharos.robominions.api.RobotApi.RobotResponse;
 
@@ -56,7 +55,7 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
         		RobotResponse response;
 				try {
 					response = readExecutor.execute(request.getName(), request.getKey(), request.getReadRequest());
-				} catch (ReadException e) {
+				} catch (RobotRequestException e) {
 					logger.warning(e.getMessage());
 					response = e.getResponse();
 				}

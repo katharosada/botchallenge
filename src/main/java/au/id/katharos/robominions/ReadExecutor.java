@@ -10,7 +10,6 @@ import org.bukkit.block.Block;
 import au.id.katharos.robominions.api.Materials;
 import au.id.katharos.robominions.api.Materials.Material.Type;
 import au.id.katharos.robominions.api.RobotApi.Coordinate;
-import au.id.katharos.robominions.api.RobotApi.ErrorMessage;
 import au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action;
 import au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason;
 import au.id.katharos.robominions.api.RobotApi.MaterialResponse;
@@ -41,13 +40,13 @@ public class ReadExecutor {
 	}
 	
 	public RobotResponse execute(String playerName, int key, RobotReadRequest readRequest) 
-		throws ReadException {
+		throws RobotRequestException {
 		RobotResponse.Builder response = RobotResponse.newBuilder();
 		response.setKey(key);
 		
 		AbstractRobot robot = robotMap.get(playerName);
 		if (robot == null) {
-			throw new ReadException(
+			throw new RobotRequestException(
 					Reason.ROBOT_DOES_NOT_EXIST, 
 					"The robot does not exist.",
 					Action.EXIT_CLIENT);
@@ -55,7 +54,7 @@ public class ReadExecutor {
 		
 		if (readRequest.hasLocateEntity()) {
 			// TODO:
-			throw new ReadException(Reason.NOT_IMPLEMENTED, "Locating entities is not yet implemented.");	
+			throw new RobotRequestException(Reason.NOT_IMPLEMENTED, "Locating entities is not yet implemented.");	
 		} else if (readRequest.hasIdentifyMaterial()) {
 			WorldLocation loc = readRequest.getIdentifyMaterial();
 			Block block = null;
@@ -69,10 +68,10 @@ public class ReadExecutor {
 				if (canSee) {
 					block = location.getBlock();
 				} else {
-					throw new ReadException(Reason.BLOCK_IS_NOT_VISIBLE, "The robot can't see that block.");
+					throw new RobotRequestException(Reason.BLOCK_IS_NOT_VISIBLE, "The robot can't see that block.");
 				}
 			} else {
-				throw new ReadException(Reason.INVALID_REQUEST, "Location not recognised.");
+				throw new RobotRequestException(Reason.INVALID_REQUEST, "Location not recognised.");
 			}
 			// TODO: Put this enum conversion logic in a util somewhere
 			Materials.Material material = Materials.Material.newBuilder()
@@ -80,44 +79,11 @@ public class ReadExecutor {
 			response.setSuccess(true);
 			response.setMaterialResponse(MaterialResponse.newBuilder().addMaterials(material).build());
 		} else if (readRequest.hasLocateMaterialNearby()) {
-			// TODO:
-			throw new ReadException(Reason.NOT_IMPLEMENTED, "Searching nearby locations is not implemented yet.")
+			// TODO: 
+			throw new RobotRequestException(Reason.NOT_IMPLEMENTED, "Searching nearby locations is not implemented yet.");
 		} else {
-			throw new ReadException(Reason.INVALID_REQUEST, "The read request has no recognised request in it.");
+			throw new RobotRequestException(Reason.INVALID_REQUEST, "The read request has no recognised request in it.");
 		}
 		return response.build();
 	}
-	
-	public static class ReadException extends Exception {
-		private static final long serialVersionUID = 1L;
-		private Reason reason = Reason.UNKNOWN;
-		private Action action = Action.FAIL_ACTION;
-		private String message = "The request failed on the server.";
-		
-		public ReadException(Reason reason, String message) {
-			super(message);
-			this.message = message;
-			this.reason = reason;
-		}
-		
-		public ReadException(Reason reason, String message, Action action) {
-			super(message);
-			this.message = message;
-			this.reason = reason;
-			this.action = action;
-		}
-		
-		public RobotResponse getResponse() {
-			RobotResponse.Builder response = RobotResponse.newBuilder();
-			response.setSuccess(false);
-			ErrorMessage errMessage = ErrorMessage.newBuilder()
-				.setMessage(message)
-				.setReason(reason)
-				.setAction(action)
-				.build();
-			response.setErrorMessage(errMessage);
-			return response.build();
-		}
-	}
-
 }
