@@ -4,23 +4,19 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
-import au.id.katharos.robominions.api.Materials;
-import au.id.katharos.robominions.api.Materials.Material.Type;
 import au.id.katharos.robominions.api.RobotApi.Coordinate;
 import au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action;
 import au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason;
 import au.id.katharos.robominions.api.RobotApi.LocationResponse;
 import au.id.katharos.robominions.api.RobotApi.MaterialResponse;
-import au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity;
-import au.id.katharos.robominions.api.RobotApi.WorldLocation;
 import au.id.katharos.robominions.api.RobotApi.RobotReadRequest;
+import au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity;
 import au.id.katharos.robominions.api.RobotApi.RobotResponse;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation;
 
 /**
  * The executor of read requests. These read requests happen asynchronously so that read-only
@@ -40,12 +36,12 @@ public class ReadExecutor {
 		this.robotMap = robotMap;
 	}
 	
-	public RobotResponse execute(String playerName, int key, RobotReadRequest readRequest) 
+	public RobotResponse execute(UUID playerId, int key, RobotReadRequest readRequest) 
 		throws RobotRequestException {
 		RobotResponse.Builder response = RobotResponse.newBuilder();
 		response.setKey(key);
 		
-		AbstractRobot robot = robotMap.get(playerName);
+		AbstractRobot robot = robotMap.get(playerId);
 		if (robot == null) {
 			throw new RobotRequestException(
 					Reason.ROBOT_DOES_NOT_EXIST, 

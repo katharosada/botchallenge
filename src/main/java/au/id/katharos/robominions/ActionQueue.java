@@ -1,5 +1,6 @@
 package au.id.katharos.robominions;
 
+import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Logger;
 
@@ -29,24 +30,24 @@ public class ActionQueue {
 	}
 	
 	public static class ActionEvent {
-		private final String playerName;
+		private final UUID playerId;
 		private final int key;
 		private final RobotActionRequest actionRequest;
 		private final EventFinishedListener listener;
 		
 		public ActionEvent(
-				String playerName,
+				UUID playerName,
 				int key,
 				RobotActionRequest direction,
 				EventFinishedListener finishedListener) {
-			this.playerName = playerName;
+			this.playerId = playerName;
 			this.key = key;
 			this.actionRequest = direction;
 			this.listener = finishedListener;
 		}
 		
-		public String getPlayerName() {
-			return playerName;
+		public UUID getPlayerId() {
+			return playerId;
 		}
 		
 		public int getKey() {

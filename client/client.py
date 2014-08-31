@@ -157,6 +157,18 @@ class Robot(object):
     request.read_request.identify_material.direction = direction
     return self._action(request).material_response.materials[0]
 
+  def _locate(self, entity):
+    request = self._newAction()
+    request.read_request.locate_entity = entity
+    return self._action(request).location_response.locations[0]
+
+  def getLocation(self):
+    return self._locate(robotapi_pb2.RobotReadRequest.SELF)
+
+  def getOwnerLocation(self):
+    return self._locate(robotapi_pb2.RobotReadRequest.OWNER)
+    
+
 
 class Dir:
   UP = robotapi_pb2.WorldLocation.UP

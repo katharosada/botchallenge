@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.bukkit.Material;
-
 import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 
@@ -21,9 +19,9 @@ public class ActionExecutor implements Runnable {
 		this.logger = logger;
 	}
 
-	private AbstractRobot getRobot(String playerName) {
-		if (robotMap.containsKey(playerName)) {
-			return robotMap.get(playerName);
+	private AbstractRobot getRobot(UUID playerId) {
+		if (robotMap.containsKey(playerId)) {
+			return robotMap.get(playerId);
 		}
 		return null;
 	}
@@ -33,7 +31,7 @@ public class ActionExecutor implements Runnable {
 		ActionEvent event = actionQueue.getNextEvent();
 		while (event != null) {
 			
-			AbstractRobot robot = getRobot(event.getPlayerName());
+			AbstractRobot robot = getRobot(event.getPlayerId());
 			RobotActionRequest actionRequest = event.getActionRequest();
 			if (robot != null) {
 				// Move chicken according to instruction.
@@ -50,7 +48,7 @@ public class ActionExecutor implements Runnable {
 				}
 				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
-				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerName());
+				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerId());
 			}
 			// Get next event from queue (null if there is none);
 			event = actionQueue.getNextEvent();

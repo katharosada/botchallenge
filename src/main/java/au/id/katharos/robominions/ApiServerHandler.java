@@ -4,7 +4,11 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
+import java.util.UUID;
 import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.ActionQueue.ActionResult;
@@ -31,8 +35,10 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
         try {
         	RobotRequest request = (RobotRequest) msg;
+        	// TODO FIX THIS
+        	UUID playerId = Bukkit.getPlayer(request.getName()).getUniqueId(); 
         	if (request.hasActionRequest()) {
-	        	ActionEvent event = new ActionEvent(request.getName(), request.getKey(), request.getActionRequest(),
+	        	ActionEvent event = new ActionEvent(playerId, request.getKey(), request.getActionRequest(),
 	        			new EventFinishedListener() {
 	        		
 	        		/*
@@ -54,7 +60,7 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
         		// might be in an inconsistent state but we'll see if it brings up any problems.
         		RobotResponse response;
 				try {
-					response = readExecutor.execute(request.getName(), request.getKey(), request.getReadRequest());
+					response = readExecutor.execute(playerId, request.getKey(), request.getReadRequest());
 				} catch (RobotRequestException e) {
 					logger.warning(e.getMessage());
 					response = e.getResponse();
