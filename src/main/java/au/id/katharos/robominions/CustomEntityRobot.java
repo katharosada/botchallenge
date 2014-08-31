@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 /**
  * Experimental and incomplete robot using a Custom Entity. (not currently in use anywhere).

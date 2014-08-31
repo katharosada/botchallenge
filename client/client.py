@@ -152,17 +152,21 @@ class Robot(object):
     request.action_request.place_material.type = material
     return self._action(request)
 
+  def getType(self, direction):
+    request = self._newAction()
+    request.read_request.identify_material.direction = direction
+    return self._action(request).material_response.materials[0]
 
 
 class Dir:
-  UP = robotapi_pb2.RobotActionRequest.UP
-  DOWN = robotapi_pb2.RobotActionRequest.DOWN
-  LEFT = robotapi_pb2.RobotActionRequest.LEFT
-  RIGHT = robotapi_pb2.RobotActionRequest.RIGHT
-  FORWARD = robotapi_pb2.RobotActionRequest.FORWARD
-  BACKWARD = robotapi_pb2.RobotActionRequest.BACKWARD
-  NORTH = robotapi_pb2.RobotActionRequest.NORTH
-  SOUTH = robotapi_pb2.RobotActionRequest.SOUTH
-  EAST = robotapi_pb2.RobotActionRequest.EAST
-  WEST = robotapi_pb2.RobotActionRequest.WEST
+  UP = robotapi_pb2.WorldLocation.UP
+  DOWN = robotapi_pb2.WorldLocation.DOWN
+  LEFT = robotapi_pb2.WorldLocation.LEFT
+  RIGHT = robotapi_pb2.WorldLocation.RIGHT
+  FORWARD = robotapi_pb2.WorldLocation.FORWARD
+  BACKWARD = robotapi_pb2.WorldLocation.BACKWARD
+  NORTH = robotapi_pb2.WorldLocation.NORTH
+  SOUTH = robotapi_pb2.WorldLocation.SOUTH
+  EAST = robotapi_pb2.WorldLocation.EAST
+  WEST = robotapi_pb2.WorldLocation.WEST
 

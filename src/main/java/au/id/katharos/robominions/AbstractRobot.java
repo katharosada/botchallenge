@@ -13,7 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -102,6 +103,29 @@ public abstract class AbstractRobot {
 	 */
 	public Location getLocation() {
 		return location;
+	}
+	
+	/**
+	 * Get the world which the robot is in.
+	 */
+	public World getWorld() {
+		return world;
+	}
+	
+	/**
+	 * Checks if a location is 'visible' to the robot, if it's close enough.
+	 * 
+	 * TODO: Make this logic more sensible (e.g. not seeing through walls)
+	 */
+	public boolean isLocationVisible(Location loc) {
+		if (loc.getWorld() != world) {
+			return false;
+		}
+		// Any block less than 10 blocks away is visible.
+		if (loc.distance(location.getBlock().getLocation()) > 10) {
+			return false;
+		}
+		return true;
 	}
 
 	/**

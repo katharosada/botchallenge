@@ -27,11 +27,13 @@ public class RobotApiServer implements Runnable {
     private EventLoopGroup workerGroup;
     boolean running;
     private final ActionQueue actionQueue;
+    private final ReadExecutor readExecutor;
 
-    public RobotApiServer(int port, Logger logger, ActionQueue actionQueue) {
+    public RobotApiServer(int port, Logger logger, ActionQueue actionQueue, ReadExecutor readExecutor) {
         this.port = port;
         this.logger = logger;
         this.actionQueue = actionQueue;
+        this.readExecutor = readExecutor;
     }
 
     public void run() {
@@ -51,7 +53,7 @@ public class RobotApiServer implements Runnable {
 
                      pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
                      pipeline.addLast("protobufEncoder", new ProtobufEncoder());
-                	 ch.pipeline().addLast(new ApiServerHandler(logger, actionQueue));
+                	 ch.pipeline().addLast(new ApiServerHandler(logger, actionQueue, readExecutor));
                  }
              })
              .option(ChannelOption.SO_BACKLOG, 128)

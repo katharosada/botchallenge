@@ -18,34 +18,44 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
 
 	private final Logger logger;
 	private final ActionQueue actionQueue;
+	private final ReadExecutor readExecutor;
 	
-	public ApiServerHandler(Logger logger, ActionQueue actionQueue) {
+	public ApiServerHandler(Logger logger, ActionQueue actionQueue, ReadExecutor readExecutor) {
 		super();
 		this.logger = logger;
 		this.actionQueue = actionQueue;
+		this.readExecutor = readExecutor;
 	}
 	
     @Override
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
         try {
         	RobotRequest request = (RobotRequest) msg;
-        	ActionEvent event = new ActionEvent(request.getName(), request.getKey(), request.getActionRequest(),
-        			new EventFinishedListener() {
-        		
-        		/**
-        		 * The action has to wait for next Bukkit tick, so answer the request when it happens.
-        		 */
-        		@Override
-        		public void call(ActionResult result) {
-        			boolean success = result.getSuccess();
-        			RobotResponse response = RobotResponse.newBuilder()
-        					.setKey(result.getKey())
-        					.setSuccess(success).build();
-        			ctx.write(response);
-        			ctx.flush();
-        		}
-        	});
-        	actionQueue.addAction(event);
+        	if (request.hasActionRequest()) {
+	        	ActionEvent event = new ActionEvent(request.getName(), request.getKey(), request.getActionRequest(),
+	        			new EventFinishedListener() {
+	        		
+	        		/*
+	        		 * The action has to wait for next Bukkit tick, so answer the request when it happens.
+	        		 */
+	        		@Override
+	        		public void call(ActionResult result) {
+	        			boolean success = result.getSuccess();
+	        			RobotResponse response = RobotResponse.newBuilder()
+	        					.setKey(result.getKey())
+	        					.setSuccess(success).build();
+	        			ctx.write(response);
+	        			ctx.flush();
+	        		}
+	        	});
+	        	actionQueue.addAction(event);
+        	} else if (request.hasReadRequest()) {
+        		// We do reads asynchronously for speed. This is risky since the world data
+        		// might be in an inconsistent state but we'll see if it brings up any problems.
+        		RobotResponse response = readExecutor.execute(request.getName(), request.getKey(), request.getReadRequest());
+        		ctx.write(response);
+        		ctx.flush();
+        	}        	
         } finally {
         	ReferenceCountUtil.release(msg);
         }

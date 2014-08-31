@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 /**
  * Main Plugin class which sets everything up and handles normal plugin interaction.
@@ -110,8 +110,9 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 		getServer().getScheduler().scheduleSyncRepeatingTask(
 				this, new RobotTickRepeatingTask(), 1, 1);
 
-		this.apiServer = new RobotApiServer(API_PORT, getLogger(), actionQueue);
-		apiServerTask = getServer().getScheduler().runTaskAsynchronously(this, apiServer);		
+		ReadExecutor readExecutor = new ReadExecutor(getLogger(), robotMap);
+		this.apiServer = new RobotApiServer(API_PORT, getLogger(), actionQueue, readExecutor);
+		apiServerTask = getServer().getScheduler().runTaskAsynchronously(this, apiServer);
 	}
 	
 	/**

@@ -4,7 +4,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Logger;
 
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
 
 /**
  * Thread safe action queue to be the communicator between the async Api Server

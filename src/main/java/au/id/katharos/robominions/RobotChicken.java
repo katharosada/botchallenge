@@ -11,7 +11,7 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobs;
 

@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 /**
  * A simple robot type which uses a Pumpkin block to represent the robots location and

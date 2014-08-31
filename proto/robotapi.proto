@@ -17,14 +17,13 @@ message RobotRequest {
   optional RobotActionRequest action_request = 4;
 }
 
-message RobotReadRequest {
-	// Query the solidness of a block
-	// Query the Material type of a block
-	// Find location of Entity
+message Coordinate {
+  required int32 x = 1;
+  required int32 y = 2;
+  required int32 z = 3;
 }
 
-message RobotActionRequest {
-  
+message WorldLocation {
   enum Direction {
     UP = 0;
     DOWN = 1;
@@ -37,19 +36,53 @@ message RobotActionRequest {
     NORTH = 8;
     SOUTH = 9;
   }
+ 
+  optional Coordinate absolute_location = 1;
+  optional Direction direction = 2;
+  // TODO: Consider adding relative location
+  // e.g. (0, 3, 2) for 3 blocks up, 2 across 
+}
+
+message RobotReadRequest {
+  enum Entity {
+  	SELF = 0;
+    OWNER = 1;
+  }
+
+  // These return zero or more materials
+  optional WorldLocation identify_material = 1;
   
-  optional Direction move_direction = 2;
-  optional Direction turn_direction = 3;
-  optional Direction mine_direction = 4;
+  // These return zero or more locations
+  optional Material locate_material_nearby = 2;
+  optional Entity locate_entity = 3;
   
-  optional Direction place_direction = 5;
+  // TODO: Query the solidness of a block
+}
+
+message RobotActionRequest {
+  optional WorldLocation.Direction move_direction = 2;
+  optional WorldLocation.Direction turn_direction = 3;
+  optional WorldLocation.Direction mine_direction = 4;
+  
+  optional WorldLocation.Direction place_direction = 5;
   optional Material place_material = 6;
+}
+
+message LocationResponse {
+  repeated WorldLocation locations = 1;
+}
+
+message MaterialResponse {
+  repeated Material materials = 1;
 }
 
 message RobotResponse {
   optional int32 key = 3;
   optional bool success = 1;
   optional ErrorMessage error_message = 2;
+  
+  optional LocationResponse location_response = 4;
+  optional MaterialResponse material_response = 5;
 }
 
 message ErrorMessage {
@@ -60,6 +93,9 @@ message ErrorMessage {
   	INVALID_REQUEST = 3;
   	BLOCK_COLLISION = 4;
   	OUTSIDE_OF_WORLD = 5;
+  	ROBOT_DOES_NOT_EXIST = 6;
+  	BLOCK_IS_NOT_REACHABLE = 7;
+  	BLOCK_IS_NOT_VISIBLE = 8;
   }
   enum Action {
   	FAIL_ACTION = 0;
