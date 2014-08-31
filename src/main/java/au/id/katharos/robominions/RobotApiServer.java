@@ -13,13 +13,11 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.util.concurrent.Future;
 
 import java.util.logging.Logger;
 
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
+import au.id.katharos.robominions.api.RobotApi.RobotRequest;
 
 public class RobotApiServer implements Runnable {
 
@@ -49,7 +47,7 @@ public class RobotApiServer implements Runnable {
                  public void initChannel(SocketChannel ch) throws Exception {
                 	 ChannelPipeline pipeline = ch.pipeline();
                 	 pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(1024 * 1024, 0, 4, 0, 4));
-                     pipeline.addLast("protobufDecoder", new ProtobufDecoder(RobotActionRequest.getDefaultInstance()));
+                     pipeline.addLast("protobufDecoder", new ProtobufDecoder(RobotRequest.getDefaultInstance()));
 
                      pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
                      pipeline.addLast("protobufEncoder", new ProtobufEncoder());
