@@ -6892,6 +6892,10 @@ public final class RobotApi {
        * <code>BLOCK_IS_NOT_VISIBLE = 8;</code>
        */
       BLOCK_IS_NOT_VISIBLE(8, 8),
+      /**
+       * <code>NOT_IMPLEMENTED = 9;</code>
+       */
+      NOT_IMPLEMENTED(9, 9),
       ;
 
       /**
@@ -6930,6 +6934,10 @@ public final class RobotApi {
        * <code>BLOCK_IS_NOT_VISIBLE = 8;</code>
        */
       public static final int BLOCK_IS_NOT_VISIBLE_VALUE = 8;
+      /**
+       * <code>NOT_IMPLEMENTED = 9;</code>
+       */
+      public static final int NOT_IMPLEMENTED_VALUE = 9;
 
 
       public final int getNumber() { return value; }
@@ -6945,6 +6953,7 @@ public final class RobotApi {
           case 6: return ROBOT_DOES_NOT_EXIST;
           case 7: return BLOCK_IS_NOT_REACHABLE;
           case 8: return BLOCK_IS_NOT_VISIBLE;
+          case 9: return NOT_IMPLEMENTED;
           default: return null;
         }
       }
@@ -7671,18 +7680,19 @@ public final class RobotApi {
       "robominions.ErrorMessage\0228\n\021location_res" +
       "ponse\030\004 \001(\0132\035.robominions.LocationRespon" +
       "se\0228\n\021material_response\030\005 \001(\0132\035.robomini" +
-      "ons.MaterialResponse\"\223\003\n\014ErrorMessage\0220\n" +
+      "ons.MaterialResponse\"\250\003\n\014ErrorMessage\0220\n" +
       "\006reason\030\001 \001(\0162 .robominions.ErrorMessage" +
       ".Reason\0220\n\006action\030\002 \001(\0162 .robominions.Er" +
-      "rorMessage.Action\022\017\n\007message\030\003 \001(\t\"\317\001\n\006R" +
+      "rorMessage.Action\022\017\n\007message\030\003 \001(\t\"\344\001\n\006R" +
       "eason\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ERROR\020\001\022\026\n\022" +
       "UNREADABLE_REQUEST\020\002\022\023\n\017INVALID_REQUEST\020",
       "\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n\020OUTSIDE_OF_WOR" +
       "LD\020\005\022\030\n\024ROBOT_DOES_NOT_EXIST\020\006\022\032\n\026BLOCK_" +
       "IS_NOT_REACHABLE\020\007\022\030\n\024BLOCK_IS_NOT_VISIB" +
-      "LE\020\010\"<\n\006Action\022\017\n\013FAIL_ACTION\020\000\022\020\n\014RETRY" +
-      "_ACTION\020\001\022\017\n\013EXIT_CLIENT\020\002B*\n\036au.id.kath" +
-      "aros.robominions.apiB\010RobotApi"
+      "LE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\"<\n\006Action\022\017\n\013F" +
+      "AIL_ACTION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_C" +
+      "LIENT\020\002B*\n\036au.id.katharos.robominions.ap" +
+      "iB\010RobotApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

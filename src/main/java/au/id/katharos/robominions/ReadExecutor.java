@@ -40,23 +40,22 @@ public class ReadExecutor {
 		return new Location(world, coord.getX(), coord.getY(), coord.getZ());
 	}
 	
-	public RobotResponse execute(String playerName, int key, RobotReadRequest readRequest) {
+	public RobotResponse execute(String playerName, int key, RobotReadRequest readRequest) 
+		throws ReadException {
 		RobotResponse.Builder response = RobotResponse.newBuilder();
 		response.setKey(key);
 		
 		AbstractRobot robot = robotMap.get(playerName);
 		if (robot == null) {
-			response.setSuccess(false);
-			ErrorMessage.Builder message = ErrorMessage.newBuilder();
-			message.setMessage("The robot does not exist.");
-			message.setReason(Reason.ROBOT_DOES_NOT_EXIST);
-			message.setAction(Action.EXIT_CLIENT);
-			response.setErrorMessage(message.build());
-			return response.build();
+			throw new ReadException(
+					Reason.ROBOT_DOES_NOT_EXIST, 
+					"The robot does not exist.",
+					Action.EXIT_CLIENT);
 		}
 		
 		if (readRequest.hasLocateEntity()) {
-			// Not yet implemented			
+			// TODO:
+			throw new ReadException(Reason.NOT_IMPLEMENTED, "Locating entities is not yet implemented.");	
 		} else if (readRequest.hasIdentifyMaterial()) {
 			WorldLocation loc = readRequest.getIdentifyMaterial();
 			Block block = null;
@@ -70,17 +69,10 @@ public class ReadExecutor {
 				if (canSee) {
 					block = location.getBlock();
 				} else {
-					// TODO: Throw an exception which generates the response
-					response.setSuccess(false);
-					ErrorMessage.Builder message = ErrorMessage.newBuilder();
-					message.setMessage("That block is not visible to the robot.");
-					message.setReason(Reason.BLOCK_IS_NOT_VISIBLE);
-					message.setAction(Action.FAIL_ACTION);
-					response.setErrorMessage(message.build());
-					return response.build();
+					throw new ReadException(Reason.BLOCK_IS_NOT_VISIBLE, "The robot can't see that block.");
 				}
 			} else {
-				// Invalid request
+				throw new ReadException(Reason.INVALID_REQUEST, "Location not recognised.");
 			}
 			// TODO: Put this enum conversion logic in a util somewhere
 			Materials.Material material = Materials.Material.newBuilder()
@@ -88,19 +80,44 @@ public class ReadExecutor {
 			response.setSuccess(true);
 			response.setMaterialResponse(MaterialResponse.newBuilder().addMaterials(material).build());
 		} else if (readRequest.hasLocateMaterialNearby()) {
-			// Not yet implemented
+			// TODO:
+			throw new ReadException(Reason.NOT_IMPLEMENTED, "Searching nearby locations is not implemented yet.")
 		} else {
-			// this is an invalid request. Fail.
-			response.setSuccess(false);
-			ErrorMessage.Builder message = ErrorMessage.newBuilder();
-			message.setMessage("The read request has no recognised request in it.");
-			message.setReason(Reason.INVALID_REQUEST);
-			message.setAction(Action.FAIL_ACTION);
-			response.setErrorMessage(message.build());
+			throw new ReadException(Reason.INVALID_REQUEST, "The read request has no recognised request in it.");
 		}
-		
 		return response.build();
 	}
 	
+	public static class ReadException extends Exception {
+		private static final long serialVersionUID = 1L;
+		private Reason reason = Reason.UNKNOWN;
+		private Action action = Action.FAIL_ACTION;
+		private String message = "The request failed on the server.";
+		
+		public ReadException(Reason reason, String message) {
+			super(message);
+			this.message = message;
+			this.reason = reason;
+		}
+		
+		public ReadException(Reason reason, String message, Action action) {
+			super(message);
+			this.message = message;
+			this.reason = reason;
+			this.action = action;
+		}
+		
+		public RobotResponse getResponse() {
+			RobotResponse.Builder response = RobotResponse.newBuilder();
+			response.setSuccess(false);
+			ErrorMessage errMessage = ErrorMessage.newBuilder()
+				.setMessage(message)
+				.setReason(reason)
+				.setAction(action)
+				.build();
+			response.setErrorMessage(errMessage);
+			return response.build();
+		}
+	}
 
 }

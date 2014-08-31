@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.ActionQueue.ActionResult;
+import au.id.katharos.robominions.ReadExecutor.ReadException;
 import au.id.katharos.robominions.api.RobotApi.RobotRequest;
 import au.id.katharos.robominions.api.RobotApi.RobotResponse;
 
@@ -52,7 +53,13 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
         	} else if (request.hasReadRequest()) {
         		// We do reads asynchronously for speed. This is risky since the world data
         		// might be in an inconsistent state but we'll see if it brings up any problems.
-        		RobotResponse response = readExecutor.execute(request.getName(), request.getKey(), request.getReadRequest());
+        		RobotResponse response;
+				try {
+					response = readExecutor.execute(request.getName(), request.getKey(), request.getReadRequest());
+				} catch (ReadException e) {
+					logger.warning(e.getMessage());
+					response = e.getResponse();
+				}
         		ctx.write(response);
         		ctx.flush();
         	}        	

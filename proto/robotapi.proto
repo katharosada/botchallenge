@@ -96,6 +96,7 @@ message ErrorMessage {
   	ROBOT_DOES_NOT_EXIST = 6;
   	BLOCK_IS_NOT_REACHABLE = 7;
   	BLOCK_IS_NOT_VISIBLE = 8;
+  	NOT_IMPLEMENTED = 9;
   }
   enum Action {
   	FAIL_ACTION = 0;
