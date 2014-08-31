@@ -12,10 +12,10 @@ import au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction;
  */
 public class ActionQueue {
 	
-	public static class EventResult {
+	public static class ActionResult {
 		private final int key;
 		private final boolean success;
-		public EventResult(int key, boolean success) {
+		public ActionResult(int key, boolean success) {
 			this.key = key;
 			this.success = success;
 		}
@@ -31,20 +31,27 @@ public class ActionQueue {
 	
 	public static class ActionEvent {
 		private final String playerName;
+		private final int key;
 		private final RobotActionRequest actionRequest;
 		private final EventFinishedListener listener;
 		
 		public ActionEvent(
-				String playerName, 
+				String playerName,
+				int key,
 				RobotActionRequest direction,
 				EventFinishedListener finishedListener) {
 			this.playerName = playerName;
+			this.key = key;
 			this.actionRequest = direction;
 			this.listener = finishedListener;
 		}
 		
 		public String getPlayerName() {
 			return playerName;
+		}
+		
+		public int getKey() {
+			return key;
 		}
 		
 		public RobotActionRequest getActionRequest() {

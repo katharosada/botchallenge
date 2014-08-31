@@ -8,7 +8,7 @@ public final class RobotApi {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface RobotActionRequestOrBuilder
+  public interface RobotRequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional string name = 1;
@@ -26,15 +26,1307 @@ public final class RobotApi {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 key = 7;
+    // optional int32 key = 2;
     /**
-     * <code>optional int32 key = 7;</code>
+     * <code>optional int32 key = 2;</code>
      */
     boolean hasKey();
     /**
-     * <code>optional int32 key = 7;</code>
+     * <code>optional int32 key = 2;</code>
      */
     int getKey();
+
+    // optional .robominions.RobotReadRequest read_request = 3;
+    /**
+     * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+     *
+     * <pre>
+     * Pick one, cannot be both an action and a read.
+     * </pre>
+     */
+    boolean hasReadRequest();
+    /**
+     * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+     *
+     * <pre>
+     * Pick one, cannot be both an action and a read.
+     * </pre>
+     */
+    au.id.katharos.robominions.api.RobotApi.RobotReadRequest getReadRequest();
+    /**
+     * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+     *
+     * <pre>
+     * Pick one, cannot be both an action and a read.
+     * </pre>
+     */
+    au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder getReadRequestOrBuilder();
+
+    // optional .robominions.RobotActionRequest action_request = 4;
+    /**
+     * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+     */
+    boolean hasActionRequest();
+    /**
+     * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+     */
+    au.id.katharos.robominions.api.RobotApi.RobotActionRequest getActionRequest();
+    /**
+     * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+     */
+    au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder getActionRequestOrBuilder();
+  }
+  /**
+   * Protobuf type {@code robominions.RobotRequest}
+   */
+  public static final class RobotRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements RobotRequestOrBuilder {
+    // Use RobotRequest.newBuilder() to construct.
+    private RobotRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RobotRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RobotRequest defaultInstance;
+    public static RobotRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RobotRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RobotRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              name_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              key_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = readRequest_.toBuilder();
+              }
+              readRequest_ = input.readMessage(au.id.katharos.robominions.api.RobotApi.RobotReadRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(readRequest_);
+                readRequest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 34: {
+              au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = actionRequest_.toBuilder();
+              }
+              actionRequest_ = input.readMessage(au.id.katharos.robominions.api.RobotApi.RobotActionRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(actionRequest_);
+                actionRequest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              au.id.katharos.robominions.api.RobotApi.RobotRequest.class, au.id.katharos.robominions.api.RobotApi.RobotRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RobotRequest> PARSER =
+        new com.google.protobuf.AbstractParser<RobotRequest>() {
+      public RobotRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RobotRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RobotRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 key = 2;
+    public static final int KEY_FIELD_NUMBER = 2;
+    private int key_;
+    /**
+     * <code>optional int32 key = 2;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 key = 2;</code>
+     */
+    public int getKey() {
+      return key_;
+    }
+
+    // optional .robominions.RobotReadRequest read_request = 3;
+    public static final int READ_REQUEST_FIELD_NUMBER = 3;
+    private au.id.katharos.robominions.api.RobotApi.RobotReadRequest readRequest_;
+    /**
+     * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+     *
+     * <pre>
+     * Pick one, cannot be both an action and a read.
+     * </pre>
+     */
+    public boolean hasReadRequest() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+     *
+     * <pre>
+     * Pick one, cannot be both an action and a read.
+     * </pre>
+     */
+    public au.id.katharos.robominions.api.RobotApi.RobotReadRequest getReadRequest() {
+      return readRequest_;
+    }
+    /**
+     * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+     *
+     * <pre>
+     * Pick one, cannot be both an action and a read.
+     * </pre>
+     */
+    public au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder getReadRequestOrBuilder() {
+      return readRequest_;
+    }
+
+    // optional .robominions.RobotActionRequest action_request = 4;
+    public static final int ACTION_REQUEST_FIELD_NUMBER = 4;
+    private au.id.katharos.robominions.api.RobotApi.RobotActionRequest actionRequest_;
+    /**
+     * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+     */
+    public boolean hasActionRequest() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+     */
+    public au.id.katharos.robominions.api.RobotApi.RobotActionRequest getActionRequest() {
+      return actionRequest_;
+    }
+    /**
+     * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+     */
+    public au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder getActionRequestOrBuilder() {
+      return actionRequest_;
+    }
+
+    private void initFields() {
+      name_ = "";
+      key_ = 0;
+      readRequest_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance();
+      actionRequest_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, key_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, readRequest_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, actionRequest_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, key_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, readRequest_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, actionRequest_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(au.id.katharos.robominions.api.RobotApi.RobotRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code robominions.RobotRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements au.id.katharos.robominions.api.RobotApi.RobotRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                au.id.katharos.robominions.api.RobotApi.RobotRequest.class, au.id.katharos.robominions.api.RobotApi.RobotRequest.Builder.class);
+      }
+
+      // Construct using au.id.katharos.robominions.api.RobotApi.RobotRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getReadRequestFieldBuilder();
+          getActionRequestFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        key_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (readRequestBuilder_ == null) {
+          readRequest_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance();
+        } else {
+          readRequestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (actionRequestBuilder_ == null) {
+          actionRequest_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance();
+        } else {
+          actionRequestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotRequest_descriptor;
+      }
+
+      public au.id.katharos.robominions.api.RobotApi.RobotRequest getDefaultInstanceForType() {
+        return au.id.katharos.robominions.api.RobotApi.RobotRequest.getDefaultInstance();
+      }
+
+      public au.id.katharos.robominions.api.RobotApi.RobotRequest build() {
+        au.id.katharos.robominions.api.RobotApi.RobotRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public au.id.katharos.robominions.api.RobotApi.RobotRequest buildPartial() {
+        au.id.katharos.robominions.api.RobotApi.RobotRequest result = new au.id.katharos.robominions.api.RobotApi.RobotRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.key_ = key_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (readRequestBuilder_ == null) {
+          result.readRequest_ = readRequest_;
+        } else {
+          result.readRequest_ = readRequestBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (actionRequestBuilder_ == null) {
+          result.actionRequest_ = actionRequest_;
+        } else {
+          result.actionRequest_ = actionRequestBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof au.id.katharos.robominions.api.RobotApi.RobotRequest) {
+          return mergeFrom((au.id.katharos.robominions.api.RobotApi.RobotRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.RobotRequest other) {
+        if (other == au.id.katharos.robominions.api.RobotApi.RobotRequest.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          bitField0_ |= 0x00000001;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasKey()) {
+          setKey(other.getKey());
+        }
+        if (other.hasReadRequest()) {
+          mergeReadRequest(other.getReadRequest());
+        }
+        if (other.hasActionRequest()) {
+          mergeActionRequest(other.getActionRequest());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        au.id.katharos.robominions.api.RobotApi.RobotRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (au.id.katharos.robominions.api.RobotApi.RobotRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string name = 1;
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 key = 2;
+      private int key_ ;
+      /**
+       * <code>optional int32 key = 2;</code>
+       */
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 key = 2;</code>
+       */
+      public int getKey() {
+        return key_;
+      }
+      /**
+       * <code>optional int32 key = 2;</code>
+       */
+      public Builder setKey(int value) {
+        bitField0_ |= 0x00000002;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 key = 2;</code>
+       */
+      public Builder clearKey() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        key_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional .robominions.RobotReadRequest read_request = 3;
+      private au.id.katharos.robominions.api.RobotApi.RobotReadRequest readRequest_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          au.id.katharos.robominions.api.RobotApi.RobotReadRequest, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder> readRequestBuilder_;
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public boolean hasReadRequest() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public au.id.katharos.robominions.api.RobotApi.RobotReadRequest getReadRequest() {
+        if (readRequestBuilder_ == null) {
+          return readRequest_;
+        } else {
+          return readRequestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public Builder setReadRequest(au.id.katharos.robominions.api.RobotApi.RobotReadRequest value) {
+        if (readRequestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          readRequest_ = value;
+          onChanged();
+        } else {
+          readRequestBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public Builder setReadRequest(
+          au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder builderForValue) {
+        if (readRequestBuilder_ == null) {
+          readRequest_ = builderForValue.build();
+          onChanged();
+        } else {
+          readRequestBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public Builder mergeReadRequest(au.id.katharos.robominions.api.RobotApi.RobotReadRequest value) {
+        if (readRequestBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              readRequest_ != au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance()) {
+            readRequest_ =
+              au.id.katharos.robominions.api.RobotApi.RobotReadRequest.newBuilder(readRequest_).mergeFrom(value).buildPartial();
+          } else {
+            readRequest_ = value;
+          }
+          onChanged();
+        } else {
+          readRequestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public Builder clearReadRequest() {
+        if (readRequestBuilder_ == null) {
+          readRequest_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          readRequestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder getReadRequestBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getReadRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      public au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder getReadRequestOrBuilder() {
+        if (readRequestBuilder_ != null) {
+          return readRequestBuilder_.getMessageOrBuilder();
+        } else {
+          return readRequest_;
+        }
+      }
+      /**
+       * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
+       *
+       * <pre>
+       * Pick one, cannot be both an action and a read.
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          au.id.katharos.robominions.api.RobotApi.RobotReadRequest, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder> 
+          getReadRequestFieldBuilder() {
+        if (readRequestBuilder_ == null) {
+          readRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              au.id.katharos.robominions.api.RobotApi.RobotReadRequest, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder>(
+                  readRequest_,
+                  getParentForChildren(),
+                  isClean());
+          readRequest_ = null;
+        }
+        return readRequestBuilder_;
+      }
+
+      // optional .robominions.RobotActionRequest action_request = 4;
+      private au.id.katharos.robominions.api.RobotApi.RobotActionRequest actionRequest_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          au.id.katharos.robominions.api.RobotApi.RobotActionRequest, au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder> actionRequestBuilder_;
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public boolean hasActionRequest() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public au.id.katharos.robominions.api.RobotApi.RobotActionRequest getActionRequest() {
+        if (actionRequestBuilder_ == null) {
+          return actionRequest_;
+        } else {
+          return actionRequestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public Builder setActionRequest(au.id.katharos.robominions.api.RobotApi.RobotActionRequest value) {
+        if (actionRequestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          actionRequest_ = value;
+          onChanged();
+        } else {
+          actionRequestBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public Builder setActionRequest(
+          au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder builderForValue) {
+        if (actionRequestBuilder_ == null) {
+          actionRequest_ = builderForValue.build();
+          onChanged();
+        } else {
+          actionRequestBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public Builder mergeActionRequest(au.id.katharos.robominions.api.RobotApi.RobotActionRequest value) {
+        if (actionRequestBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              actionRequest_ != au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance()) {
+            actionRequest_ =
+              au.id.katharos.robominions.api.RobotApi.RobotActionRequest.newBuilder(actionRequest_).mergeFrom(value).buildPartial();
+          } else {
+            actionRequest_ = value;
+          }
+          onChanged();
+        } else {
+          actionRequestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public Builder clearActionRequest() {
+        if (actionRequestBuilder_ == null) {
+          actionRequest_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          actionRequestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder getActionRequestBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getActionRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      public au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder getActionRequestOrBuilder() {
+        if (actionRequestBuilder_ != null) {
+          return actionRequestBuilder_.getMessageOrBuilder();
+        } else {
+          return actionRequest_;
+        }
+      }
+      /**
+       * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          au.id.katharos.robominions.api.RobotApi.RobotActionRequest, au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder> 
+          getActionRequestFieldBuilder() {
+        if (actionRequestBuilder_ == null) {
+          actionRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              au.id.katharos.robominions.api.RobotApi.RobotActionRequest, au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder>(
+                  actionRequest_,
+                  getParentForChildren(),
+                  isClean());
+          actionRequest_ = null;
+        }
+        return actionRequestBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:robominions.RobotRequest)
+    }
+
+    static {
+      defaultInstance = new RobotRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:robominions.RobotRequest)
+  }
+
+  public interface RobotReadRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code robominions.RobotReadRequest}
+   *
+   * <pre>
+   * Query the solidness of a block
+   * Query the Material type of a block
+   * Find location of Entity
+   * </pre>
+   */
+  public static final class RobotReadRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements RobotReadRequestOrBuilder {
+    // Use RobotReadRequest.newBuilder() to construct.
+    private RobotReadRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RobotReadRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RobotReadRequest defaultInstance;
+    public static RobotReadRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RobotReadRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RobotReadRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotReadRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotReadRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              au.id.katharos.robominions.api.RobotApi.RobotReadRequest.class, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RobotReadRequest> PARSER =
+        new com.google.protobuf.AbstractParser<RobotReadRequest>() {
+      public RobotReadRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RobotReadRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RobotReadRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static au.id.katharos.robominions.api.RobotApi.RobotReadRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(au.id.katharos.robominions.api.RobotApi.RobotReadRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code robominions.RobotReadRequest}
+     *
+     * <pre>
+     * Query the solidness of a block
+     * Query the Material type of a block
+     * Find location of Entity
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotReadRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotReadRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                au.id.katharos.robominions.api.RobotApi.RobotReadRequest.class, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder.class);
+      }
+
+      // Construct using au.id.katharos.robominions.api.RobotApi.RobotReadRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotReadRequest_descriptor;
+      }
+
+      public au.id.katharos.robominions.api.RobotApi.RobotReadRequest getDefaultInstanceForType() {
+        return au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance();
+      }
+
+      public au.id.katharos.robominions.api.RobotApi.RobotReadRequest build() {
+        au.id.katharos.robominions.api.RobotApi.RobotReadRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public au.id.katharos.robominions.api.RobotApi.RobotReadRequest buildPartial() {
+        au.id.katharos.robominions.api.RobotApi.RobotReadRequest result = new au.id.katharos.robominions.api.RobotApi.RobotReadRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof au.id.katharos.robominions.api.RobotApi.RobotReadRequest) {
+          return mergeFrom((au.id.katharos.robominions.api.RobotApi.RobotReadRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.RobotReadRequest other) {
+        if (other == au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        au.id.katharos.robominions.api.RobotApi.RobotReadRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (au.id.katharos.robominions.api.RobotApi.RobotReadRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:robominions.RobotReadRequest)
+    }
+
+    static {
+      defaultInstance = new RobotReadRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:robominions.RobotReadRequest)
+  }
+
+  public interface RobotActionRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
     // optional .robominions.RobotActionRequest.Direction move_direction = 2;
     /**
@@ -141,18 +1433,13 @@ public final class RobotApi {
               }
               break;
             }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              name_ = input.readBytes();
-              break;
-            }
             case 16: {
               int rawValue = input.readEnum();
               au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction value = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000001;
                 moveDirection_ = value;
               }
               break;
@@ -163,7 +1450,7 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000002;
                 turnDirection_ = value;
               }
               break;
@@ -174,7 +1461,7 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000010;
+                bitField0_ |= 0x00000004;
                 mineDirection_ = value;
               }
               break;
@@ -185,14 +1472,14 @@ public final class RobotApi {
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
-                bitField0_ |= 0x00000020;
+                bitField0_ |= 0x00000008;
                 placeDirection_ = value;
               }
               break;
             }
             case 50: {
               au.id.katharos.robominions.api.Materials.Material.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
                 subBuilder = placeMaterial_.toBuilder();
               }
               placeMaterial_ = input.readMessage(au.id.katharos.robominions.api.Materials.Material.PARSER, extensionRegistry);
@@ -200,12 +1487,7 @@ public final class RobotApi {
                 subBuilder.mergeFrom(placeMaterial_);
                 placeMaterial_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000040;
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000002;
-              key_ = input.readInt32();
+              bitField0_ |= 0x00000010;
               break;
             }
           }
@@ -402,65 +1684,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional string name = 1;
-    public static final int NAME_FIELD_NUMBER = 1;
-    private java.lang.Object name_;
-    /**
-     * <code>optional string name = 1;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional string name = 1;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string name = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int32 key = 7;
-    public static final int KEY_FIELD_NUMBER = 7;
-    private int key_;
-    /**
-     * <code>optional int32 key = 7;</code>
-     */
-    public boolean hasKey() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 key = 7;</code>
-     */
-    public int getKey() {
-      return key_;
-    }
-
     // optional .robominions.RobotActionRequest.Direction move_direction = 2;
     public static final int MOVE_DIRECTION_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction moveDirection_;
@@ -468,7 +1691,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
      */
     public boolean hasMoveDirection() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
@@ -484,7 +1707,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
      */
     public boolean hasTurnDirection() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
@@ -500,7 +1723,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
      */
     public boolean hasMineDirection() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
@@ -516,7 +1739,7 @@ public final class RobotApi {
      * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
      */
     public boolean hasPlaceDirection() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
@@ -532,7 +1755,7 @@ public final class RobotApi {
      * <code>optional .robominions.Material place_material = 6;</code>
      */
     public boolean hasPlaceMaterial() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional .robominions.Material place_material = 6;</code>
@@ -548,8 +1771,6 @@ public final class RobotApi {
     }
 
     private void initFields() {
-      name_ = "";
-      key_ = 0;
       moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
       turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
       mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
@@ -569,25 +1790,19 @@ public final class RobotApi {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(2, moveDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(3, turnDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(4, mineDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeEnum(5, placeDirection_.getNumber());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeMessage(6, placeMaterial_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(7, key_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -600,31 +1815,23 @@ public final class RobotApi {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getNameBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, moveDirection_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, turnDirection_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, mineDirection_.getNumber());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, placeDirection_.getNumber());
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, placeMaterial_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, key_);
+          .computeEnumSize(3, turnDirection_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, mineDirection_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, placeDirection_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, placeMaterial_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -743,24 +1950,20 @@ public final class RobotApi {
 
       public Builder clear() {
         super.clear();
-        name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        key_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
         turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000002);
         mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000004);
         placeDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (placeMaterialBuilder_ == null) {
           placeMaterial_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
         } else {
           placeMaterialBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -792,29 +1995,21 @@ public final class RobotApi {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.name_ = name_;
+        result.moveDirection_ = moveDirection_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.key_ = key_;
+        result.turnDirection_ = turnDirection_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.moveDirection_ = moveDirection_;
+        result.mineDirection_ = mineDirection_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.turnDirection_ = turnDirection_;
+        result.placeDirection_ = placeDirection_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
-        }
-        result.mineDirection_ = mineDirection_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.placeDirection_ = placeDirection_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
         }
         if (placeMaterialBuilder_ == null) {
           result.placeMaterial_ = placeMaterial_;
@@ -837,14 +2032,6 @@ public final class RobotApi {
 
       public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.RobotActionRequest other) {
         if (other == au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance()) return this;
-        if (other.hasName()) {
-          bitField0_ |= 0x00000001;
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.hasKey()) {
-          setKey(other.getKey());
-        }
         if (other.hasMoveDirection()) {
           setMoveDirection(other.getMoveDirection());
         }
@@ -887,120 +2074,13 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional string name = 1;
-      private java.lang.Object name_ = "";
-      /**
-       * <code>optional string name = 1;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional string name = 1;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string name = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string name = 1;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string name = 1;</code>
-       */
-      public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string name = 1;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 key = 7;
-      private int key_ ;
-      /**
-       * <code>optional int32 key = 7;</code>
-       */
-      public boolean hasKey() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 key = 7;</code>
-       */
-      public int getKey() {
-        return key_;
-      }
-      /**
-       * <code>optional int32 key = 7;</code>
-       */
-      public Builder setKey(int value) {
-        bitField0_ |= 0x00000002;
-        key_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 key = 7;</code>
-       */
-      public Builder clearKey() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        key_ = 0;
-        onChanged();
-        return this;
-      }
-
       // optional .robominions.RobotActionRequest.Direction move_direction = 2;
       private au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
       /**
        * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
        */
       public boolean hasMoveDirection() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
@@ -1015,7 +2095,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000001;
         moveDirection_ = value;
         onChanged();
         return this;
@@ -1024,7 +2104,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction move_direction = 2;</code>
        */
       public Builder clearMoveDirection() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
         moveDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -1036,7 +2116,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
        */
       public boolean hasTurnDirection() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
@@ -1051,7 +2131,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000002;
         turnDirection_ = value;
         onChanged();
         return this;
@@ -1060,7 +2140,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction turn_direction = 3;</code>
        */
       public Builder clearTurnDirection() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000002);
         turnDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -1072,7 +2152,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
        */
       public boolean hasMineDirection() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
@@ -1087,7 +2167,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000004;
         mineDirection_ = value;
         onChanged();
         return this;
@@ -1096,7 +2176,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction mine_direction = 4;</code>
        */
       public Builder clearMineDirection() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000004);
         mineDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -1108,7 +2188,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
        */
       public boolean hasPlaceDirection() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
@@ -1123,7 +2203,7 @@ public final class RobotApi {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000008;
         placeDirection_ = value;
         onChanged();
         return this;
@@ -1132,7 +2212,7 @@ public final class RobotApi {
        * <code>optional .robominions.RobotActionRequest.Direction place_direction = 5;</code>
        */
       public Builder clearPlaceDirection() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000008);
         placeDirection_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Direction.UP;
         onChanged();
         return this;
@@ -1146,7 +2226,7 @@ public final class RobotApi {
        * <code>optional .robominions.Material place_material = 6;</code>
        */
       public boolean hasPlaceMaterial() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional .robominions.Material place_material = 6;</code>
@@ -1171,7 +2251,7 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
@@ -1185,7 +2265,7 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
@@ -1193,7 +2273,7 @@ public final class RobotApi {
        */
       public Builder mergePlaceMaterial(au.id.katharos.robominions.api.Materials.Material value) {
         if (placeMaterialBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
               placeMaterial_ != au.id.katharos.robominions.api.Materials.Material.getDefaultInstance()) {
             placeMaterial_ =
               au.id.katharos.robominions.api.Materials.Material.newBuilder(placeMaterial_).mergeFrom(value).buildPartial();
@@ -1204,7 +2284,7 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
@@ -1217,14 +2297,14 @@ public final class RobotApi {
         } else {
           placeMaterialBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       /**
        * <code>optional .robominions.Material place_material = 6;</code>
        */
       public au.id.katharos.robominions.api.Materials.Material.Builder getPlaceMaterialBuilder() {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getPlaceMaterialFieldBuilder().getBuilder();
       }
@@ -1266,7 +2346,7 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.RobotActionRequest)
   }
 
-  public interface RobotActionResponseOrBuilder
+  public interface RobotResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional int32 key = 3;
@@ -1304,24 +2384,24 @@ public final class RobotApi {
     au.id.katharos.robominions.api.RobotApi.ErrorMessageOrBuilder getErrorMessageOrBuilder();
   }
   /**
-   * Protobuf type {@code robominions.RobotActionResponse}
+   * Protobuf type {@code robominions.RobotResponse}
    */
-  public static final class RobotActionResponse extends
+  public static final class RobotResponse extends
       com.google.protobuf.GeneratedMessage
-      implements RobotActionResponseOrBuilder {
-    // Use RobotActionResponse.newBuilder() to construct.
-    private RobotActionResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements RobotResponseOrBuilder {
+    // Use RobotResponse.newBuilder() to construct.
+    private RobotResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private RobotActionResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private RobotResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final RobotActionResponse defaultInstance;
-    public static RobotActionResponse getDefaultInstance() {
+    private static final RobotResponse defaultInstance;
+    public static RobotResponse getDefaultInstance() {
       return defaultInstance;
     }
 
-    public RobotActionResponse getDefaultInstanceForType() {
+    public RobotResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -1331,7 +2411,7 @@ public final class RobotApi {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private RobotActionResponse(
+    private RobotResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1391,28 +2471,28 @@ public final class RobotApi {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotActionResponse_descriptor;
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotActionResponse_fieldAccessorTable
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              au.id.katharos.robominions.api.RobotApi.RobotActionResponse.class, au.id.katharos.robominions.api.RobotApi.RobotActionResponse.Builder.class);
+              au.id.katharos.robominions.api.RobotApi.RobotResponse.class, au.id.katharos.robominions.api.RobotApi.RobotResponse.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<RobotActionResponse> PARSER =
-        new com.google.protobuf.AbstractParser<RobotActionResponse>() {
-      public RobotActionResponse parsePartialFrom(
+    public static com.google.protobuf.Parser<RobotResponse> PARSER =
+        new com.google.protobuf.AbstractParser<RobotResponse>() {
+      public RobotResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RobotActionResponse(input, extensionRegistry);
+        return new RobotResponse(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<RobotActionResponse> getParserForType() {
+    public com.google.protobuf.Parser<RobotResponse> getParserForType() {
       return PARSER;
     }
 
@@ -1530,53 +2610,53 @@ public final class RobotApi {
       return super.writeReplace();
     }
 
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(byte[] data)
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(java.io.InputStream input)
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseDelimitedFrom(java.io.InputStream input)
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseDelimitedFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static au.id.katharos.robominions.api.RobotApi.RobotActionResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.RobotResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1585,7 +2665,7 @@ public final class RobotApi {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(au.id.katharos.robominions.api.RobotApi.RobotActionResponse prototype) {
+    public static Builder newBuilder(au.id.katharos.robominions.api.RobotApi.RobotResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -1597,24 +2677,24 @@ public final class RobotApi {
       return builder;
     }
     /**
-     * Protobuf type {@code robominions.RobotActionResponse}
+     * Protobuf type {@code robominions.RobotResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.RobotActionResponseOrBuilder {
+       implements au.id.katharos.robominions.api.RobotApi.RobotResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotActionResponse_descriptor;
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotActionResponse_fieldAccessorTable
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                au.id.katharos.robominions.api.RobotApi.RobotActionResponse.class, au.id.katharos.robominions.api.RobotApi.RobotActionResponse.Builder.class);
+                au.id.katharos.robominions.api.RobotApi.RobotResponse.class, au.id.katharos.robominions.api.RobotApi.RobotResponse.Builder.class);
       }
 
-      // Construct using au.id.katharos.robominions.api.RobotApi.RobotActionResponse.newBuilder()
+      // Construct using au.id.katharos.robominions.api.RobotApi.RobotResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1654,23 +2734,23 @@ public final class RobotApi {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotActionResponse_descriptor;
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotResponse_descriptor;
       }
 
-      public au.id.katharos.robominions.api.RobotApi.RobotActionResponse getDefaultInstanceForType() {
-        return au.id.katharos.robominions.api.RobotApi.RobotActionResponse.getDefaultInstance();
+      public au.id.katharos.robominions.api.RobotApi.RobotResponse getDefaultInstanceForType() {
+        return au.id.katharos.robominions.api.RobotApi.RobotResponse.getDefaultInstance();
       }
 
-      public au.id.katharos.robominions.api.RobotApi.RobotActionResponse build() {
-        au.id.katharos.robominions.api.RobotApi.RobotActionResponse result = buildPartial();
+      public au.id.katharos.robominions.api.RobotApi.RobotResponse build() {
+        au.id.katharos.robominions.api.RobotApi.RobotResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public au.id.katharos.robominions.api.RobotApi.RobotActionResponse buildPartial() {
-        au.id.katharos.robominions.api.RobotApi.RobotActionResponse result = new au.id.katharos.robominions.api.RobotApi.RobotActionResponse(this);
+      public au.id.katharos.robominions.api.RobotApi.RobotResponse buildPartial() {
+        au.id.katharos.robominions.api.RobotApi.RobotResponse result = new au.id.katharos.robominions.api.RobotApi.RobotResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1695,16 +2775,16 @@ public final class RobotApi {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof au.id.katharos.robominions.api.RobotApi.RobotActionResponse) {
-          return mergeFrom((au.id.katharos.robominions.api.RobotApi.RobotActionResponse)other);
+        if (other instanceof au.id.katharos.robominions.api.RobotApi.RobotResponse) {
+          return mergeFrom((au.id.katharos.robominions.api.RobotApi.RobotResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.RobotActionResponse other) {
-        if (other == au.id.katharos.robominions.api.RobotApi.RobotActionResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.RobotResponse other) {
+        if (other == au.id.katharos.robominions.api.RobotApi.RobotResponse.getDefaultInstance()) return this;
         if (other.hasKey()) {
           setKey(other.getKey());
         }
@@ -1726,11 +2806,11 @@ public final class RobotApi {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        au.id.katharos.robominions.api.RobotApi.RobotActionResponse parsedMessage = null;
+        au.id.katharos.robominions.api.RobotApi.RobotResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (au.id.katharos.robominions.api.RobotApi.RobotActionResponse) e.getUnfinishedMessage();
+          parsedMessage = (au.id.katharos.robominions.api.RobotApi.RobotResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1924,15 +3004,15 @@ public final class RobotApi {
         return errorMessageBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:robominions.RobotActionResponse)
+      // @@protoc_insertion_point(builder_scope:robominions.RobotResponse)
     }
 
     static {
-      defaultInstance = new RobotActionResponse(true);
+      defaultInstance = new RobotResponse(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:robominions.RobotActionResponse)
+    // @@protoc_insertion_point(class_scope:robominions.RobotResponse)
   }
 
   public interface ErrorMessageOrBuilder
@@ -2796,15 +3876,25 @@ public final class RobotApi {
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_robominions_RobotRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_robominions_RobotRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_robominions_RobotReadRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_robominions_RobotReadRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_RobotActionRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_RobotActionRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_robominions_RobotActionResponse_descriptor;
+    internal_static_robominions_RobotResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_robominions_RobotActionResponse_fieldAccessorTable;
+      internal_static_robominions_RobotResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_ErrorMessage_descriptor;
   private static
@@ -2820,51 +3910,66 @@ public final class RobotApi {
   static {
     java.lang.String[] descriptorData = {
       "\n\016robotapi.proto\022\013robominions\032\017materials" +
-      ".proto\"\344\003\n\022RobotActionRequest\022\014\n\004name\030\001 " +
-      "\001(\t\022\013\n\003key\030\007 \001(\005\022A\n\016move_direction\030\002 \001(\016" +
-      "2).robominions.RobotActionRequest.Direct" +
-      "ion\022A\n\016turn_direction\030\003 \001(\0162).robominion" +
-      "s.RobotActionRequest.Direction\022A\n\016mine_d" +
-      "irection\030\004 \001(\0162).robominions.RobotAction" +
-      "Request.Direction\022B\n\017place_direction\030\005 \001" +
-      "(\0162).robominions.RobotActionRequest.Dire" +
-      "ction\022-\n\016place_material\030\006 \001(\0132\025.robomini",
-      "ons.Material\"w\n\tDirection\022\006\n\002UP\020\000\022\010\n\004DOW" +
-      "N\020\001\022\010\n\004LEFT\020\002\022\t\n\005RIGHT\020\003\022\013\n\007FORWARD\020\004\022\014\n" +
-      "\010BACKWARD\020\005\022\010\n\004EAST\020\006\022\010\n\004WEST\020\007\022\t\n\005NORTH" +
-      "\020\010\022\t\n\005SOUTH\020\t\"e\n\023RobotActionResponse\022\013\n\003" +
-      "key\030\003 \001(\005\022\017\n\007success\030\001 \001(\010\0220\n\rerror_mess" +
-      "age\030\002 \001(\0132\031.robominions.ErrorMessage\"\302\002\n" +
-      "\014ErrorMessage\0220\n\006reason\030\001 \001(\0162 .robomini" +
-      "ons.ErrorMessage.Reason\0220\n\006action\030\002 \001(\0162" +
-      " .robominions.ErrorMessage.Action\022\017\n\007mes" +
-      "sage\030\003 \001(\t\"\177\n\006Reason\022\013\n\007UNKNOWN\020\000\022\020\n\014SER",
-      "VER_ERROR\020\001\022\026\n\022UNREADABLE_REQUEST\020\002\022\023\n\017I" +
-      "NVALID_REQUEST\020\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n" +
-      "\020OUTSIDE_OF_WORLD\020\005\"<\n\006Action\022\017\n\013FAIL_AC" +
-      "TION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT\020" +
-      "\002B*\n\036au.id.katharos.robominions.apiB\010Rob" +
-      "otApi"
+      ".proto\"\227\001\n\014RobotRequest\022\014\n\004name\030\001 \001(\t\022\013\n" +
+      "\003key\030\002 \001(\005\0223\n\014read_request\030\003 \001(\0132\035.robom" +
+      "inions.RobotReadRequest\0227\n\016action_reques" +
+      "t\030\004 \001(\0132\037.robominions.RobotActionRequest" +
+      "\"\022\n\020RobotReadRequest\"\311\003\n\022RobotActionRequ" +
+      "est\022A\n\016move_direction\030\002 \001(\0162).robominion" +
+      "s.RobotActionRequest.Direction\022A\n\016turn_d" +
+      "irection\030\003 \001(\0162).robominions.RobotAction" +
+      "Request.Direction\022A\n\016mine_direction\030\004 \001(",
+      "\0162).robominions.RobotActionRequest.Direc" +
+      "tion\022B\n\017place_direction\030\005 \001(\0162).robomini" +
+      "ons.RobotActionRequest.Direction\022-\n\016plac" +
+      "e_material\030\006 \001(\0132\025.robominions.Material\"" +
+      "w\n\tDirection\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001\022\010\n\004LEFT\020\002" +
+      "\022\t\n\005RIGHT\020\003\022\013\n\007FORWARD\020\004\022\014\n\010BACKWARD\020\005\022\010" +
+      "\n\004EAST\020\006\022\010\n\004WEST\020\007\022\t\n\005NORTH\020\010\022\t\n\005SOUTH\020\t" +
+      "\"_\n\rRobotResponse\022\013\n\003key\030\003 \001(\005\022\017\n\007succes" +
+      "s\030\001 \001(\010\0220\n\rerror_message\030\002 \001(\0132\031.robomin" +
+      "ions.ErrorMessage\"\302\002\n\014ErrorMessage\0220\n\006re",
+      "ason\030\001 \001(\0162 .robominions.ErrorMessage.Re" +
+      "ason\0220\n\006action\030\002 \001(\0162 .robominions.Error" +
+      "Message.Action\022\017\n\007message\030\003 \001(\t\"\177\n\006Reaso" +
+      "n\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ERROR\020\001\022\026\n\022UNRE" +
+      "ADABLE_REQUEST\020\002\022\023\n\017INVALID_REQUEST\020\003\022\023\n" +
+      "\017BLOCK_COLLISION\020\004\022\024\n\020OUTSIDE_OF_WORLD\020\005" +
+      "\"<\n\006Action\022\017\n\013FAIL_ACTION\020\000\022\020\n\014RETRY_ACT" +
+      "ION\020\001\022\017\n\013EXIT_CLIENT\020\002B*\n\036au.id.katharos" +
+      ".robominions.apiB\010RobotApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_robominions_RobotActionRequest_descriptor =
+          internal_static_robominions_RobotRequest_descriptor =
             getDescriptor().getMessageTypes().get(0);
+          internal_static_robominions_RobotRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_robominions_RobotRequest_descriptor,
+              new java.lang.String[] { "Name", "Key", "ReadRequest", "ActionRequest", });
+          internal_static_robominions_RobotReadRequest_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_robominions_RobotReadRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_robominions_RobotReadRequest_descriptor,
+              new java.lang.String[] { });
+          internal_static_robominions_RobotActionRequest_descriptor =
+            getDescriptor().getMessageTypes().get(2);
           internal_static_robominions_RobotActionRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_RobotActionRequest_descriptor,
-              new java.lang.String[] { "Name", "Key", "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
-          internal_static_robominions_RobotActionResponse_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_robominions_RobotActionResponse_fieldAccessorTable = new
+              new java.lang.String[] { "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
+          internal_static_robominions_RobotResponse_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_robominions_RobotResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_RobotActionResponse_descriptor,
+              internal_static_robominions_RobotResponse_descriptor,
               new java.lang.String[] { "Key", "Success", "ErrorMessage", });
           internal_static_robominions_ErrorMessage_descriptor =
-            getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(4);
           internal_static_robominions_ErrorMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_ErrorMessage_descriptor,

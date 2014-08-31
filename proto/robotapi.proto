@@ -7,9 +7,23 @@ option java_outer_classname = "RobotApi";
 
 import "materials.proto";
 
-message RobotActionRequest {
+
+message RobotRequest {
   optional string name = 1;
-  optional int32 key = 7;
+  optional int32 key = 2;
+
+  // Pick one, cannot be both an action and a read.
+  optional RobotReadRequest read_request = 3;
+  optional RobotActionRequest action_request = 4;
+}
+
+message RobotReadRequest {
+	// Query the solidness of a block
+	// Query the Material type of a block
+	// Find location of Entity
+}
+
+message RobotActionRequest {
   
   enum Direction {
     UP = 0;
@@ -32,7 +46,7 @@ message RobotActionRequest {
   optional Material place_material = 6;
 }
 
-message RobotActionResponse {
+message RobotResponse {
   optional int32 key = 3;
   optional bool success = 1;
   optional ErrorMessage error_message = 2;

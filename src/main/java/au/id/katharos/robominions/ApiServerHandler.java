@@ -7,9 +7,9 @@ import io.netty.util.ReferenceCountUtil;
 import java.util.logging.Logger;
 
 import au.id.katharos.robominions.ActionQueue.ActionEvent;
-import au.id.katharos.robominions.ActionQueue.EventResult;
-import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
-import au.id.katharos.robominions.api.RobotApi.RobotActionResponse;
+import au.id.katharos.robominions.ActionQueue.ActionResult;
+import au.id.katharos.robominions.api.RobotApi.RobotRequest;
+import au.id.katharos.robominions.api.RobotApi.RobotResponse;
 
 /**
  * Handler for any incoming client requests.
@@ -28,16 +28,17 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
         try {
-        	RobotActionRequest request = (RobotActionRequest) msg;
-        	ActionEvent event = new ActionEvent(request.getName(), request, new EventFinishedListener() {
+        	RobotRequest request = (RobotRequest) msg;
+        	ActionEvent event = new ActionEvent(request.getName(), request.getKey(), request.getActionRequest(),
+        			new EventFinishedListener() {
         		
         		/**
         		 * The action has to wait for next Bukkit tick, so answer the request when it happens.
         		 */
         		@Override
-        		public void call(EventResult result) {
+        		public void call(ActionResult result) {
         			boolean success = result.getSuccess();
-        			RobotActionResponse response = RobotActionResponse.newBuilder()
+        			RobotResponse response = RobotResponse.newBuilder()
         					.setKey(result.getKey())
         					.setSuccess(success).build();
         			ctx.write(response);

@@ -20,7 +20,7 @@ public class ActionExecutor implements Runnable {
 		this.logger = logger;
 	}
 
-	private AbstractRobot getChicken(String playerName) {
+	private AbstractRobot getRobot(String playerName) {
 		if (robotMap.containsKey(playerName)) {
 			return robotMap.get(playerName);
 		}
@@ -32,7 +32,7 @@ public class ActionExecutor implements Runnable {
 		ActionEvent event = actionQueue.getNextEvent();
 		while (event != null) {
 			
-			AbstractRobot robot = getChicken(event.getPlayerName());
+			AbstractRobot robot = getRobot(event.getPlayerName());
 			RobotActionRequest actionRequest = event.getActionRequest();
 			if (robot != null) {
 				// Move chicken according to instruction.
@@ -47,7 +47,7 @@ public class ActionExecutor implements Runnable {
 					success = robot.place(actionRequest.getPlaceDirection(),
 							Material.getMaterial(actionRequest.getPlaceMaterial().getType().getNumber()));
 				}
-				event.getListener().call(new ActionQueue.EventResult(actionRequest.getKey(), success));
+				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
 				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerName());
 			}
