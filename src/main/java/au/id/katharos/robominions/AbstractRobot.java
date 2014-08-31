@@ -2,8 +2,10 @@ package au.id.katharos.robominions;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -13,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import au.id.katharos.robominions.api.RobotApi.WorldLocation;
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 import com.google.common.collect.Lists;
@@ -39,7 +40,7 @@ public abstract class AbstractRobot {
 	protected World world;
 	
 	// Name of the player which owns this bot.
-	protected final String playerName;
+	protected final UUID playerId;
 	
 	// All the items this robot is holding
 	protected final HashMap<Material, Integer> inventory;
@@ -87,7 +88,7 @@ public abstract class AbstractRobot {
 	 * @param logger A logger to log any info/etc. messages to.
 	 */
 	protected AbstractRobot(Player player, Location location, Logger logger) {
-		this.playerName = player.getName();
+		this.playerId = player.getUniqueId();
 		this.world = player.getWorld();
 		this.inventory = new HashMap<Material, Integer>();
 		// Start off with 100 dirt blocks
@@ -112,6 +113,9 @@ public abstract class AbstractRobot {
 		return world;
 	}
 	
+	public Player getPlayer() {
+		return Bukkit.getPlayer(this.playerId);
+	}
 	/**
 	 * Checks if a location is 'visible' to the robot, if it's close enough.
 	 * 

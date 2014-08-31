@@ -1,6 +1,7 @@
 package au.id.katharos.robominions;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -32,7 +33,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	
 
 	// The complete set of all bots in the game, maped by the name of the player that owns them. 
-	private HashMap<String, AbstractRobot> robotMap;
+	private HashMap<UUID, AbstractRobot> robotMap;
 	
 	// The Robot API server
 	private RobotApiServer apiServer;
@@ -72,16 +73,16 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	/**
 	 * Checks if this Player already has a robot.
 	 */
-	private boolean hasRobot(String playerName) {
-		return robotMap.containsKey(playerName);
+	private boolean hasRobot(UUID playerId) {
+		return robotMap.containsKey(playerId);
 	}
 	
 	/**
 	 * Get the bot that belongs to this player
 	 */
-	private AbstractRobot getRobot(String playerName) {
-		if (robotMap.containsKey(playerName)) {
-			return robotMap.get(playerName);
+	private AbstractRobot getRobot(UUID playerId) {
+		if (robotMap.containsKey(playerId)) {
+			return robotMap.get(playerId);
 		}
 		return null;
 	}
@@ -97,7 +98,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	 */
 	@Override
     public void onEnable() {
-		robotMap = new HashMap<String, AbstractRobot>();
+		robotMap = new HashMap<UUID, AbstractRobot>();
 		actionMap = new HashMap<String, String>();
 		actionQueue = new ActionQueue(getLogger());
 
@@ -118,10 +119,10 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	/**
 	 * Kill the robot that belongs to the given player and remove it from the map.
 	 */
-	private void removeChicken(String playerName) {
-		if (robotMap.containsKey(playerName)) {
-			robotMap.get(playerName).die();
-			robotMap.remove(playerName);
+	private void removeChicken(UUID playerId) {
+		if (robotMap.containsKey(playerId)) {
+			robotMap.get(playerId).die();
+			robotMap.remove(playerId);
 		}
 	}
 	
@@ -154,13 +155,13 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	public void onBlockRightClick(PlayerInteractEvent event) {
 		if(actionMap.containsKey(event.getPlayer().getName()) 
 				&& event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			removeChicken(event.getPlayer().getName());
+			removeChicken(event.getPlayer().getUniqueId());
 			// Spawn a chicken next to the block face that was clicked.
 			AbstractRobot robot = spawnRobot(
 					event.getPlayer(),
 					event.getClickedBlock().getRelative(event.getBlockFace()).getLocation(),
 					actionMap.get(event.getPlayer().getName()));
-			robotMap.put(event.getPlayer().getName(), robot);
+			robotMap.put(event.getPlayer().getUniqueId(), robot);
 			actionMap.remove(event.getPlayer().getName());
 		}
 	}
@@ -192,8 +193,8 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     public void onDisable() {
     	apiServer.shutDown();
     	
-    	for (String playerName : robotMap.keySet()) {
-    		removeChicken(playerName);
+    	for (UUID playerId : robotMap.keySet()) {
+    		removeChicken(playerId);
     	}
     	robotMap.clear();
     	actionMap.clear();
@@ -224,8 +225,8 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     			sender.sendMessage("You must also provide a move and a direction");
     			return false;
     		}
-    		if (sender instanceof Player && hasRobot(((Player) sender).getName())) {
-    			AbstractRobot chicken = getRobot(((Player) sender).getName());
+    		if (sender instanceof Player && hasRobot(((Player) sender).getUniqueId())) {
+    			AbstractRobot chicken = getRobot(((Player) sender).getUniqueId());
         		Direction direction = Direction.valueOf(args[1].toUpperCase());
         		if (direction == null) {
         			sender.sendMessage("Invalid direction");

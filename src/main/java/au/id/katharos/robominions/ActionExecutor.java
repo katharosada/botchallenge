@@ -1,6 +1,7 @@
 package au.id.katharos.robominions;
 
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Material;
@@ -11,10 +12,10 @@ import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 public class ActionExecutor implements Runnable {
 
 	private final ActionQueue actionQueue;
-	private final HashMap<String, AbstractRobot> robotMap;
+	private final HashMap<UUID, AbstractRobot> robotMap;
 	private final Logger logger;
 	
-	public ActionExecutor(ActionQueue actionQueue, HashMap<String, AbstractRobot> chickenMap, Logger logger) {
+	public ActionExecutor(ActionQueue actionQueue, HashMap<UUID, AbstractRobot> chickenMap, Logger logger) {
 		this.actionQueue = actionQueue;
 		this.robotMap = chickenMap;
 		this.logger = logger;
@@ -45,7 +46,7 @@ public class ActionExecutor implements Runnable {
 					success = robot.mine(actionRequest.getMineDirection());
 				} else if (actionRequest.hasPlaceDirection() && actionRequest.hasPlaceMaterial()) {
 					success = robot.place(actionRequest.getPlaceDirection(),
-							Material.getMaterial(actionRequest.getPlaceMaterial().getType().getNumber()));
+							Util.toBukkitMaterial(actionRequest.getPlaceMaterial()));
 				}
 				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
