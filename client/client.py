@@ -16,6 +16,7 @@ import sys
 import threading 
 import logging
 import random
+import math
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -160,14 +161,56 @@ class Robot(object):
   def _locate(self, entity):
     request = self._newAction()
     request.read_request.locate_entity = entity
-    return self._action(request).location_response.locations[0]
+    loc_proto = self._action(request).location_response.locations[0]
+    return Location.fromProto(loc_proto.absolute_location)
 
   def getLocation(self):
     return self._locate(robotapi_pb2.RobotReadRequest.SELF)
 
   def getOwnerLocation(self):
     return self._locate(robotapi_pb2.RobotReadRequest.OWNER)
-    
+  
+  
+class Location(object):
+
+  @classmethod
+  def fromProto(cls, location_proto):
+    return Location(location_proto.x, location_proto.y, location_proto.z)
+  
+  def __init__(self, x, y, z):
+    self.x = x
+    self.y = y
+    self.z = z
+
+  def distance(self, other):
+    return math.sqrt(
+      (self.x - other.x) ** 2 +
+      (self.y - other.y) ** 2 +
+      (self.z - other.z) ** 2) 
+
+  def direction(self, other):
+    loc = [0, 0, 0]
+    loc[0] = other.x - self.x
+    loc[1] = other.y - self.y
+    loc[2] = other.z - self.z
+    m = max(map(abs, loc))
+    maxDir = 0
+    if m in loc:
+      maxDir = loc.index(m)
+    else:
+      maxDir = loc.index(-1 * m)
+    # check up/down first
+    if maxDir == 1:
+      if loc[1] > 0:
+        return Dir.UP
+      return Dir.DOWN
+    if maxDir == 0:
+      if loc[0] > 0:
+        return Dir.EAST
+      return Dir.WEST
+    if loc[2] > 0:
+      return Dir.SOUTH
+    return Dir.NORTH
 
 
 class Dir:
