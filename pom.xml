@@ -101,15 +101,8 @@
    <dependencies>
        <dependency>
            <groupId>org.bukkit</groupId>
-           <artifactId>craftbukkit</artifactId>
+           <artifactId>bukkit</artifactId>
            <version>1.7.9-R0.2</version>
-           <type>jar</type>
-           <scope>provided</scope>
-       </dependency>
-       <dependency>
-           <groupId>de.ntcomputer</groupId>
-           <artifactId>controllable-mobs-api</artifactId>
-           <version>1.7.9</version>
            <type>jar</type>
            <scope>provided</scope>
        </dependency>

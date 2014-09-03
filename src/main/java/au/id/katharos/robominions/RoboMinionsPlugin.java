@@ -142,9 +142,6 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 		if (type.toLowerCase().equals("pumpkin")) {
 			return new PumpkinRobot(player, location, getLogger());
 		}
-		if (type.toLowerCase().equals("chicken")) {
-			return new RobotChicken(player, location, getLogger());
-		}
 		return new PumpkinRobot(player, location, getLogger());
 	}
 
