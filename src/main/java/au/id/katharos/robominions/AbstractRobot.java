@@ -227,6 +227,23 @@ public abstract class AbstractRobot {
 		return world.getBlockAt(loc);
 	}
 	
+	public List<Location> scanForNonSolid() {
+		// Scans cube area 1 block in every direction and returns the locations of all blocks
+		// which are non-solid in that space.
+		List<Location> locations = Lists.newLinkedList();
+		int dist = 1; // One block in each direction (including diagonal)
+		for (int x = location.getBlockX() - dist; x <= location.getBlockX() + dist; x++) {
+			for (int y = location.getBlockY() - dist; y <= location.getBlockY() + dist; y++) {
+				for (int z = location.getBlockZ() - dist; z <= location.getBlockZ() + dist; z++) {
+					if (!world.getBlockAt(x, y, z).getType().isSolid()) {
+						locations.add(new Location(world, x, y, z));
+					}
+				}
+			}
+		}
+		return locations;
+	}
+	
 	/**
 	 * Turn the facing direction of the robot to the given direction.
 	 * 

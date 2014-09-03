@@ -85,7 +85,7 @@ public class RobotChicken extends AbstractRobot {
 	
 	public void fly() {
 		// Enforce that chicken location is free
-		chicken.getEntity().setHealth(chicken.getEntity().getMaxHealth());
+		// chicken.getEntity().setHealth(chicken.getEntity().getMaxHealth());
 		
 		Block block = chicken.getEntity().getWorld().getBlockAt(location);
 		if (!block.isEmpty() && !block.isLiquid()) {

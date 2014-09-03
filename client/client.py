@@ -169,6 +169,26 @@ class Robot(object):
 
   def getOwnerLocation(self):
     return self._locate(robotapi_pb2.RobotReadRequest.OWNER)
+
+  def findPath(self, target_location):
+    my_loc = self.getLocation()
+    request = self._newAction()
+    request.read_request.locate_nonsolid_nearby = True
+    loc_proto_list = self._action(request).location_response.locations
+    loc_list = [Location.fromProto(l.absolute_location) for l in loc_proto_list]
+    
+    # Find point which is furthest from our current point and closest to the target
+    best = None
+    targetdist = target_location.distance(loc_list[0]) + 20
+    for loc in loc_list:
+      newdist = target_location.distance(loc)
+      if newdist < targetdist and my_loc.distance(loc) == 1:
+        best = loc
+        targetdist = newdist
+    if best == None:
+      log.error("Follow bot can't move no free blocks!")
+      best = loc_list[0]
+    return my_loc.direction(best)
   
   
 class Location(object):

@@ -9,6 +9,7 @@ while True:
 
   print me.distance(owner)
   if me.distance(owner) > 4:
-    robot.turn(me.direction(owner))
-    robot.move(me.direction(owner))
+    d = robot.findPath(owner)
+    robot.turn(d)
+    robot.move(d)
 

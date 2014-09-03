@@ -54,6 +54,7 @@ message RobotReadRequest {
   
   // These return zero or more locations
   optional Material locate_material_nearby = 2;
+  optional bool locate_nonsolid_nearby = 4;
   optional Entity locate_entity = 3;
   
   // TODO: Query the solidness of a block

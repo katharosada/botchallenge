@@ -1,6 +1,7 @@
 package au.id.katharos.robominions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -44,12 +45,21 @@ public class ReadExecutor {
 		AbstractRobot robot = robotMap.get(playerId);
 		if (robot == null) {
 			throw new RobotRequestException(
-					Reason.ROBOT_DOES_NOT_EXIST, 
-					"The robot does not exist.",
-					Action.EXIT_CLIENT);
+				Reason.ROBOT_DOES_NOT_EXIST, 
+				"The robot does not exist.",
+				Action.EXIT_CLIENT);
 		}
 		
-		if (readRequest.hasLocateEntity()) {
+		if (readRequest.hasLocateNonsolidNearby()) {
+			List<Location> locations = robot.scanForNonSolid();
+			LocationResponse.Builder locResponse = LocationResponse.newBuilder(); 
+			for (Location loc : locations) {
+				WorldLocation worldLocation = WorldLocation.newBuilder().setAbsoluteLocation(
+						Util.coordsFromLocation(loc)).build();
+				locResponse.addLocations(worldLocation);
+			}
+			response.setLocationResponse(locResponse);
+		} else if (readRequest.hasLocateEntity()) {
 			Location location = null;
 			if (readRequest.getLocateEntity() == Entity.SELF) {
 				location = robot.getLocation();
