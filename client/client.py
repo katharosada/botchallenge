@@ -189,7 +189,12 @@ class Robot(object):
       log.error("Follow bot can't move no free blocks!")
       best = loc_list[0]
     return my_loc.direction(best)
-  
+
+  def getInventory(self):
+    request = self._newAction()
+    request.read_request.get_inventory = True
+    inv = self._action(request).inventory_response
+    return [(mat.type, count) for mat, count in zip(inv.materials, inv.counts)]
   
 class Location(object):
 

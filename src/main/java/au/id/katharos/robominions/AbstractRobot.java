@@ -10,9 +10,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Chest;
 import org.bukkit.util.Vector;
 
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
@@ -25,7 +30,7 @@ import com.google.common.collect.Maps;
  * 
  * This defines the common logic and interaction, subclasses should only define the visual appearance.
  */
-public abstract class AbstractRobot {
+public abstract class AbstractRobot implements InventoryHolder {
 	
 	protected final Logger logger;
 	
@@ -43,7 +48,7 @@ public abstract class AbstractRobot {
 	protected final UUID playerId;
 	
 	// All the items this robot is holding
-	protected final HashMap<Material, Integer> inventory;
+	protected final Inventory inventory;
 	
 	// The type of pickaxe this bot has (used only for deciding what item are spawned when mining)
 	protected final ItemStack pickAxe;
@@ -90,9 +95,10 @@ public abstract class AbstractRobot {
 	protected AbstractRobot(Player player, Location location, Logger logger) {
 		this.playerId = player.getUniqueId();
 		this.world = player.getWorld();
-		this.inventory = new HashMap<Material, Integer>();
+		//this.inventory = new HashMap<Material, Integer>();
+		this.inventory = Bukkit.createInventory(this, 54, "Bot Inventory");
 		// Start off with 100 dirt blocks
-		this.inventory.put(Material.DIRT, 100);
+		// this.inventory.put(Material.DIRT, 100);
 		this.location = location.getBlock().getLocation().add(0.5, 0.99, 0.5).clone();
 		this.logger = logger;
 		this.facingDirection = Direction.SOUTH;
@@ -193,8 +199,9 @@ public abstract class AbstractRobot {
 	public boolean place(Direction dir, Material material) {
 		Block block = getBlockFromDirection(dir);
 		boolean success = !block.getType().isSolid();
-		if (success && inventory.containsKey(material) && inventory.get(material) > 0) {
-			inventory.put(material, inventory.get(material) - 1);
+		if (success && inventory.contains(material)) {
+			ItemStack i = inventory.getItem(inventory.first(material));
+			i.setAmount(i.getAmount() - 1);
 		} else {
 			// don't have that in your inventory
 			return false;
@@ -210,14 +217,31 @@ public abstract class AbstractRobot {
 	 * check the distance first.
 	 */
 	public void pickUp(Item item) {
+		ensureCorrectInventory();
 		Material mat = item.getItemStack().getType();
-		logger.info("Picked up item: " + mat);
-		Integer cur = 0;
-		if (inventory.containsKey(mat)) {
-			cur = inventory.get(mat);
+		if (mat != Material.DIRT && mat != Material.COBBLESTONE) {
+			logger.info("Picked up item: " + mat);
+			inventory.addItem(item.getItemStack());
 		}
-		inventory.put(mat, cur + 1);
 		item.remove();
+	}
+	
+	public void ensureCorrectInventory() {
+		if (!inventory.contains(Material.DIRT)) {
+			inventory.addItem(new ItemStack(Material.DIRT, 64));
+		} else {
+			inventory.getItem(inventory.first(Material.DIRT)).setAmount(64);
+		}
+		if (!inventory.contains(Material.COBBLESTONE)) {
+			inventory.addItem(new ItemStack(Material.COBBLESTONE, 64));
+		} else {
+			inventory.getItem(inventory.first(Material.COBBLESTONE)).setAmount(64);
+		}
+	}
+	
+	public Inventory getInventory() {
+		ensureCorrectInventory();
+		return inventory;
 	}
 	
 	/**

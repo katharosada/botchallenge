@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -150,19 +151,25 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	 */
 	@EventHandler
 	public void onBlockRightClick(PlayerInteractEvent event) {
-		if(actionMap.containsKey(event.getPlayer().getName()) 
-				&& event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			removeChicken(event.getPlayer().getUniqueId());
-			// Spawn a chicken next to the block face that was clicked.
-			AbstractRobot robot = spawnRobot(
-					event.getPlayer(),
-					event.getClickedBlock().getRelative(event.getBlockFace()).getLocation(),
-					actionMap.get(event.getPlayer().getName()));
-			robotMap.put(event.getPlayer().getUniqueId(), robot);
-			actionMap.remove(event.getPlayer().getName());
+		if (event.hasBlock() && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if(actionMap.containsKey(event.getPlayer().getName())) {
+				removeChicken(event.getPlayer().getUniqueId());
+				// Spawn a chicken next to the block face that was clicked.
+				AbstractRobot robot = spawnRobot(
+						event.getPlayer(),
+						event.getClickedBlock().getRelative(event.getBlockFace()).getLocation(),
+						actionMap.get(event.getPlayer().getName()));
+				robotMap.put(event.getPlayer().getUniqueId(), robot);
+				actionMap.remove(event.getPlayer().getName());
+			} else if (event.hasBlock() &&
+					event.getClickedBlock().getType() == Material.PUMPKIN) {
+				for (AbstractRobot robot : robotMap.values()) {
+					event.getPlayer().openInventory(robot.getInventory());
+				}
+			}
 		}
 	}
-	
+
 	/**
 	 * Listens for everytime an item spawns, if a robot is nearby the nearest
 	 * robot captures the item (adds to the robot's inventory) 

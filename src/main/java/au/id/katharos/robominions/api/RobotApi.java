@@ -2409,7 +2409,7 @@ public final class RobotApi {
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
      * <pre>
-     * These return zero or more materials
+     * These return a single Material
      * </pre>
      */
     boolean hasIdentifyMaterial();
@@ -2417,7 +2417,7 @@ public final class RobotApi {
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
      * <pre>
-     * These return zero or more materials
+     * These return a single Material
      * </pre>
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocation getIdentifyMaterial();
@@ -2425,7 +2425,7 @@ public final class RobotApi {
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
      * <pre>
-     * These return zero or more materials
+     * These return a single Material
      * </pre>
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder getIdentifyMaterialOrBuilder();
@@ -2475,6 +2475,24 @@ public final class RobotApi {
      * <code>optional .robominions.RobotReadRequest.Entity locate_entity = 3;</code>
      */
     au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity getLocateEntity();
+
+    // optional bool get_inventory = 5;
+    /**
+     * <code>optional bool get_inventory = 5;</code>
+     *
+     * <pre>
+     * This returns an inventory
+     * </pre>
+     */
+    boolean hasGetInventory();
+    /**
+     * <code>optional bool get_inventory = 5;</code>
+     *
+     * <pre>
+     * This returns an inventory
+     * </pre>
+     */
+    boolean getGetInventory();
   }
   /**
    * Protobuf type {@code robominions.RobotReadRequest}
@@ -2567,6 +2585,11 @@ public final class RobotApi {
             case 32: {
               bitField0_ |= 0x00000004;
               locateNonsolidNearby_ = input.readBool();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              getInventory_ = input.readBool();
               break;
             }
           }
@@ -2698,7 +2721,7 @@ public final class RobotApi {
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
      * <pre>
-     * These return zero or more materials
+     * These return a single Material
      * </pre>
      */
     public boolean hasIdentifyMaterial() {
@@ -2708,7 +2731,7 @@ public final class RobotApi {
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
      * <pre>
-     * These return zero or more materials
+     * These return a single Material
      * </pre>
      */
     public au.id.katharos.robominions.api.RobotApi.WorldLocation getIdentifyMaterial() {
@@ -2718,7 +2741,7 @@ public final class RobotApi {
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
      * <pre>
-     * These return zero or more materials
+     * These return a single Material
      * </pre>
      */
     public au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder getIdentifyMaterialOrBuilder() {
@@ -2791,11 +2814,36 @@ public final class RobotApi {
       return locateEntity_;
     }
 
+    // optional bool get_inventory = 5;
+    public static final int GET_INVENTORY_FIELD_NUMBER = 5;
+    private boolean getInventory_;
+    /**
+     * <code>optional bool get_inventory = 5;</code>
+     *
+     * <pre>
+     * This returns an inventory
+     * </pre>
+     */
+    public boolean hasGetInventory() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bool get_inventory = 5;</code>
+     *
+     * <pre>
+     * This returns an inventory
+     * </pre>
+     */
+    public boolean getGetInventory() {
+      return getInventory_;
+    }
+
     private void initFields() {
       identifyMaterial_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.getDefaultInstance();
       locateMaterialNearby_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       locateNonsolidNearby_ = false;
       locateEntity_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity.SELF;
+      getInventory_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2827,6 +2875,9 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(4, locateNonsolidNearby_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, getInventory_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2851,6 +2902,10 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, locateNonsolidNearby_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, getInventory_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2986,6 +3041,8 @@ public final class RobotApi {
         bitField0_ = (bitField0_ & ~0x00000004);
         locateEntity_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity.SELF;
         bitField0_ = (bitField0_ & ~0x00000008);
+        getInventory_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -3038,6 +3095,10 @@ public final class RobotApi {
           to_bitField0_ |= 0x00000008;
         }
         result.locateEntity_ = locateEntity_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.getInventory_ = getInventory_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3065,6 +3126,9 @@ public final class RobotApi {
         }
         if (other.hasLocateEntity()) {
           setLocateEntity(other.getLocateEntity());
+        }
+        if (other.hasGetInventory()) {
+          setGetInventory(other.getGetInventory());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3107,7 +3171,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public boolean hasIdentifyMaterial() {
@@ -3117,7 +3181,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public au.id.katharos.robominions.api.RobotApi.WorldLocation getIdentifyMaterial() {
@@ -3131,7 +3195,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public Builder setIdentifyMaterial(au.id.katharos.robominions.api.RobotApi.WorldLocation value) {
@@ -3151,7 +3215,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public Builder setIdentifyMaterial(
@@ -3169,7 +3233,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public Builder mergeIdentifyMaterial(au.id.katharos.robominions.api.RobotApi.WorldLocation value) {
@@ -3192,7 +3256,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public Builder clearIdentifyMaterial() {
@@ -3209,7 +3273,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public au.id.katharos.robominions.api.RobotApi.WorldLocation.Builder getIdentifyMaterialBuilder() {
@@ -3221,7 +3285,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       public au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder getIdentifyMaterialOrBuilder() {
@@ -3235,7 +3299,7 @@ public final class RobotApi {
        * <code>optional .robominions.WorldLocation identify_material = 1;</code>
        *
        * <pre>
-       * These return zero or more materials
+       * These return a single Material
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -3470,6 +3534,55 @@ public final class RobotApi {
       public Builder clearLocateEntity() {
         bitField0_ = (bitField0_ & ~0x00000008);
         locateEntity_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity.SELF;
+        onChanged();
+        return this;
+      }
+
+      // optional bool get_inventory = 5;
+      private boolean getInventory_ ;
+      /**
+       * <code>optional bool get_inventory = 5;</code>
+       *
+       * <pre>
+       * This returns an inventory
+       * </pre>
+       */
+      public boolean hasGetInventory() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional bool get_inventory = 5;</code>
+       *
+       * <pre>
+       * This returns an inventory
+       * </pre>
+       */
+      public boolean getGetInventory() {
+        return getInventory_;
+      }
+      /**
+       * <code>optional bool get_inventory = 5;</code>
+       *
+       * <pre>
+       * This returns an inventory
+       * </pre>
+       */
+      public Builder setGetInventory(boolean value) {
+        bitField0_ |= 0x00000010;
+        getInventory_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool get_inventory = 5;</code>
+       *
+       * <pre>
+       * This returns an inventory
+       * </pre>
+       */
+      public Builder clearGetInventory() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        getInventory_ = false;
         onChanged();
         return this;
       }
@@ -5038,7 +5151,7 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.LocationResponse)
   }
 
-  public interface MaterialResponseOrBuilder
+  public interface InventoryResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // repeated .robominions.Material materials = 1;
@@ -5065,26 +5178,40 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialsOrBuilder(
         int index);
+
+    // repeated int32 counts = 2 [packed = true];
+    /**
+     * <code>repeated int32 counts = 2 [packed = true];</code>
+     */
+    java.util.List<java.lang.Integer> getCountsList();
+    /**
+     * <code>repeated int32 counts = 2 [packed = true];</code>
+     */
+    int getCountsCount();
+    /**
+     * <code>repeated int32 counts = 2 [packed = true];</code>
+     */
+    int getCounts(int index);
   }
   /**
-   * Protobuf type {@code robominions.MaterialResponse}
+   * Protobuf type {@code robominions.InventoryResponse}
    */
-  public static final class MaterialResponse extends
+  public static final class InventoryResponse extends
       com.google.protobuf.GeneratedMessage
-      implements MaterialResponseOrBuilder {
-    // Use MaterialResponse.newBuilder() to construct.
-    private MaterialResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements InventoryResponseOrBuilder {
+    // Use InventoryResponse.newBuilder() to construct.
+    private InventoryResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private MaterialResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private InventoryResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final MaterialResponse defaultInstance;
-    public static MaterialResponse getDefaultInstance() {
+    private static final InventoryResponse defaultInstance;
+    public static InventoryResponse getDefaultInstance() {
       return defaultInstance;
     }
 
-    public MaterialResponse getDefaultInstanceForType() {
+    public InventoryResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -5094,7 +5221,7 @@ public final class RobotApi {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private MaterialResponse(
+    private InventoryResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5125,6 +5252,27 @@ public final class RobotApi {
               materials_.add(input.readMessage(au.id.katharos.robominions.api.Materials.Material.PARSER, extensionRegistry));
               break;
             }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                counts_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              counts_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                counts_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                counts_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5136,34 +5284,37 @@ public final class RobotApi {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           materials_ = java.util.Collections.unmodifiableList(materials_);
         }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          counts_ = java.util.Collections.unmodifiableList(counts_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_MaterialResponse_descriptor;
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_InventoryResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_MaterialResponse_fieldAccessorTable
+      return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_InventoryResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              au.id.katharos.robominions.api.RobotApi.MaterialResponse.class, au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder.class);
+              au.id.katharos.robominions.api.RobotApi.InventoryResponse.class, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<MaterialResponse> PARSER =
-        new com.google.protobuf.AbstractParser<MaterialResponse>() {
-      public MaterialResponse parsePartialFrom(
+    public static com.google.protobuf.Parser<InventoryResponse> PARSER =
+        new com.google.protobuf.AbstractParser<InventoryResponse>() {
+      public InventoryResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MaterialResponse(input, extensionRegistry);
+        return new InventoryResponse(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<MaterialResponse> getParserForType() {
+    public com.google.protobuf.Parser<InventoryResponse> getParserForType() {
       return PARSER;
     }
 
@@ -5203,8 +5354,33 @@ public final class RobotApi {
       return materials_.get(index);
     }
 
+    // repeated int32 counts = 2 [packed = true];
+    public static final int COUNTS_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> counts_;
+    /**
+     * <code>repeated int32 counts = 2 [packed = true];</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getCountsList() {
+      return counts_;
+    }
+    /**
+     * <code>repeated int32 counts = 2 [packed = true];</code>
+     */
+    public int getCountsCount() {
+      return counts_.size();
+    }
+    /**
+     * <code>repeated int32 counts = 2 [packed = true];</code>
+     */
+    public int getCounts(int index) {
+      return counts_.get(index);
+    }
+    private int countsMemoizedSerializedSize = -1;
+
     private void initFields() {
       materials_ = java.util.Collections.emptyList();
+      counts_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5221,6 +5397,13 @@ public final class RobotApi {
       for (int i = 0; i < materials_.size(); i++) {
         output.writeMessage(1, materials_.get(i));
       }
+      if (getCountsList().size() > 0) {
+        output.writeRawVarint32(18);
+        output.writeRawVarint32(countsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < counts_.size(); i++) {
+        output.writeInt32NoTag(counts_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5234,6 +5417,20 @@ public final class RobotApi {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, materials_.get(i));
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < counts_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(counts_.get(i));
+        }
+        size += dataSize;
+        if (!getCountsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        countsMemoizedSerializedSize = dataSize;
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -5246,53 +5443,53 @@ public final class RobotApi {
       return super.writeReplace();
     }
 
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(byte[] data)
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(java.io.InputStream input)
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseDelimitedFrom(java.io.InputStream input)
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseDelimitedFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static au.id.katharos.robominions.api.RobotApi.MaterialResponse parseFrom(
+    public static au.id.katharos.robominions.api.RobotApi.InventoryResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5301,7 +5498,7 @@ public final class RobotApi {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(au.id.katharos.robominions.api.RobotApi.MaterialResponse prototype) {
+    public static Builder newBuilder(au.id.katharos.robominions.api.RobotApi.InventoryResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -5313,24 +5510,24 @@ public final class RobotApi {
       return builder;
     }
     /**
-     * Protobuf type {@code robominions.MaterialResponse}
+     * Protobuf type {@code robominions.InventoryResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder {
+       implements au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_MaterialResponse_descriptor;
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_InventoryResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_MaterialResponse_fieldAccessorTable
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_InventoryResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                au.id.katharos.robominions.api.RobotApi.MaterialResponse.class, au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder.class);
+                au.id.katharos.robominions.api.RobotApi.InventoryResponse.class, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder.class);
       }
 
-      // Construct using au.id.katharos.robominions.api.RobotApi.MaterialResponse.newBuilder()
+      // Construct using au.id.katharos.robominions.api.RobotApi.InventoryResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -5357,6 +5554,8 @@ public final class RobotApi {
         } else {
           materialsBuilder_.clear();
         }
+        counts_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -5366,23 +5565,23 @@ public final class RobotApi {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_MaterialResponse_descriptor;
+        return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_InventoryResponse_descriptor;
       }
 
-      public au.id.katharos.robominions.api.RobotApi.MaterialResponse getDefaultInstanceForType() {
-        return au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance();
+      public au.id.katharos.robominions.api.RobotApi.InventoryResponse getDefaultInstanceForType() {
+        return au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance();
       }
 
-      public au.id.katharos.robominions.api.RobotApi.MaterialResponse build() {
-        au.id.katharos.robominions.api.RobotApi.MaterialResponse result = buildPartial();
+      public au.id.katharos.robominions.api.RobotApi.InventoryResponse build() {
+        au.id.katharos.robominions.api.RobotApi.InventoryResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public au.id.katharos.robominions.api.RobotApi.MaterialResponse buildPartial() {
-        au.id.katharos.robominions.api.RobotApi.MaterialResponse result = new au.id.katharos.robominions.api.RobotApi.MaterialResponse(this);
+      public au.id.katharos.robominions.api.RobotApi.InventoryResponse buildPartial() {
+        au.id.katharos.robominions.api.RobotApi.InventoryResponse result = new au.id.katharos.robominions.api.RobotApi.InventoryResponse(this);
         int from_bitField0_ = bitField0_;
         if (materialsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -5393,21 +5592,26 @@ public final class RobotApi {
         } else {
           result.materials_ = materialsBuilder_.build();
         }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          counts_ = java.util.Collections.unmodifiableList(counts_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.counts_ = counts_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof au.id.katharos.robominions.api.RobotApi.MaterialResponse) {
-          return mergeFrom((au.id.katharos.robominions.api.RobotApi.MaterialResponse)other);
+        if (other instanceof au.id.katharos.robominions.api.RobotApi.InventoryResponse) {
+          return mergeFrom((au.id.katharos.robominions.api.RobotApi.InventoryResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.MaterialResponse other) {
-        if (other == au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(au.id.katharos.robominions.api.RobotApi.InventoryResponse other) {
+        if (other == au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance()) return this;
         if (materialsBuilder_ == null) {
           if (!other.materials_.isEmpty()) {
             if (materials_.isEmpty()) {
@@ -5434,6 +5638,16 @@ public final class RobotApi {
             }
           }
         }
+        if (!other.counts_.isEmpty()) {
+          if (counts_.isEmpty()) {
+            counts_ = other.counts_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureCountsIsMutable();
+            counts_.addAll(other.counts_);
+          }
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -5446,11 +5660,11 @@ public final class RobotApi {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        au.id.katharos.robominions.api.RobotApi.MaterialResponse parsedMessage = null;
+        au.id.katharos.robominions.api.RobotApi.InventoryResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (au.id.katharos.robominions.api.RobotApi.MaterialResponse) e.getUnfinishedMessage();
+          parsedMessage = (au.id.katharos.robominions.api.RobotApi.InventoryResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -5701,15 +5915,81 @@ public final class RobotApi {
         return materialsBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:robominions.MaterialResponse)
+      // repeated int32 counts = 2 [packed = true];
+      private java.util.List<java.lang.Integer> counts_ = java.util.Collections.emptyList();
+      private void ensureCountsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          counts_ = new java.util.ArrayList<java.lang.Integer>(counts_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getCountsList() {
+        return java.util.Collections.unmodifiableList(counts_);
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public int getCountsCount() {
+        return counts_.size();
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public int getCounts(int index) {
+        return counts_.get(index);
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public Builder setCounts(
+          int index, int value) {
+        ensureCountsIsMutable();
+        counts_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public Builder addCounts(int value) {
+        ensureCountsIsMutable();
+        counts_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public Builder addAllCounts(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureCountsIsMutable();
+        super.addAll(values, counts_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 counts = 2 [packed = true];</code>
+       */
+      public Builder clearCounts() {
+        counts_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:robominions.InventoryResponse)
     }
 
     static {
-      defaultInstance = new MaterialResponse(true);
+      defaultInstance = new InventoryResponse(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:robominions.MaterialResponse)
+    // @@protoc_insertion_point(class_scope:robominions.InventoryResponse)
   }
 
   public interface RobotResponseOrBuilder
@@ -5763,19 +6043,33 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.LocationResponseOrBuilder getLocationResponseOrBuilder();
 
-    // optional .robominions.MaterialResponse material_response = 5;
+    // optional .robominions.Material material_response = 5;
     /**
-     * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+     * <code>optional .robominions.Material material_response = 5;</code>
      */
     boolean hasMaterialResponse();
     /**
-     * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+     * <code>optional .robominions.Material material_response = 5;</code>
      */
-    au.id.katharos.robominions.api.RobotApi.MaterialResponse getMaterialResponse();
+    au.id.katharos.robominions.api.Materials.Material getMaterialResponse();
     /**
-     * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+     * <code>optional .robominions.Material material_response = 5;</code>
      */
-    au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder getMaterialResponseOrBuilder();
+    au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialResponseOrBuilder();
+
+    // optional .robominions.InventoryResponse inventory_response = 6;
+    /**
+     * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+     */
+    boolean hasInventoryResponse();
+    /**
+     * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+     */
+    au.id.katharos.robominions.api.RobotApi.InventoryResponse getInventoryResponse();
+    /**
+     * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+     */
+    au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder getInventoryResponseOrBuilder();
   }
   /**
    * Protobuf type {@code robominions.RobotResponse}
@@ -5865,16 +6159,29 @@ public final class RobotApi {
               break;
             }
             case 42: {
-              au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder subBuilder = null;
+              au.id.katharos.robominions.api.Materials.Material.Builder subBuilder = null;
               if (((bitField0_ & 0x00000010) == 0x00000010)) {
                 subBuilder = materialResponse_.toBuilder();
               }
-              materialResponse_ = input.readMessage(au.id.katharos.robominions.api.RobotApi.MaterialResponse.PARSER, extensionRegistry);
+              materialResponse_ = input.readMessage(au.id.katharos.robominions.api.Materials.Material.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(materialResponse_);
                 materialResponse_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000010;
+              break;
+            }
+            case 50: {
+              au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = inventoryResponse_.toBuilder();
+              }
+              inventoryResponse_ = input.readMessage(au.id.katharos.robominions.api.RobotApi.InventoryResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(inventoryResponse_);
+                inventoryResponse_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -5993,26 +6300,48 @@ public final class RobotApi {
       return locationResponse_;
     }
 
-    // optional .robominions.MaterialResponse material_response = 5;
+    // optional .robominions.Material material_response = 5;
     public static final int MATERIAL_RESPONSE_FIELD_NUMBER = 5;
-    private au.id.katharos.robominions.api.RobotApi.MaterialResponse materialResponse_;
+    private au.id.katharos.robominions.api.Materials.Material materialResponse_;
     /**
-     * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+     * <code>optional .robominions.Material material_response = 5;</code>
      */
     public boolean hasMaterialResponse() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+     * <code>optional .robominions.Material material_response = 5;</code>
      */
-    public au.id.katharos.robominions.api.RobotApi.MaterialResponse getMaterialResponse() {
+    public au.id.katharos.robominions.api.Materials.Material getMaterialResponse() {
       return materialResponse_;
     }
     /**
-     * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+     * <code>optional .robominions.Material material_response = 5;</code>
      */
-    public au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder getMaterialResponseOrBuilder() {
+    public au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialResponseOrBuilder() {
       return materialResponse_;
+    }
+
+    // optional .robominions.InventoryResponse inventory_response = 6;
+    public static final int INVENTORY_RESPONSE_FIELD_NUMBER = 6;
+    private au.id.katharos.robominions.api.RobotApi.InventoryResponse inventoryResponse_;
+    /**
+     * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+     */
+    public boolean hasInventoryResponse() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+     */
+    public au.id.katharos.robominions.api.RobotApi.InventoryResponse getInventoryResponse() {
+      return inventoryResponse_;
+    }
+    /**
+     * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+     */
+    public au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder getInventoryResponseOrBuilder() {
+      return inventoryResponse_;
     }
 
     private void initFields() {
@@ -6020,7 +6349,8 @@ public final class RobotApi {
       success_ = false;
       errorMessage_ = au.id.katharos.robominions.api.RobotApi.ErrorMessage.getDefaultInstance();
       locationResponse_ = au.id.katharos.robominions.api.RobotApi.LocationResponse.getDefaultInstance();
-      materialResponse_ = au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance();
+      materialResponse_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
+      inventoryResponse_ = au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6055,6 +6385,9 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeMessage(5, materialResponse_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(6, inventoryResponse_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -6083,6 +6416,10 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, materialResponse_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, inventoryResponse_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6195,6 +6532,7 @@ public final class RobotApi {
           getErrorMessageFieldBuilder();
           getLocationResponseFieldBuilder();
           getMaterialResponseFieldBuilder();
+          getInventoryResponseFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6220,11 +6558,17 @@ public final class RobotApi {
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         if (materialResponseBuilder_ == null) {
-          materialResponse_ = au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance();
+          materialResponse_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
         } else {
           materialResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
+        if (inventoryResponseBuilder_ == null) {
+          inventoryResponse_ = au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance();
+        } else {
+          inventoryResponseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -6285,6 +6629,14 @@ public final class RobotApi {
         } else {
           result.materialResponse_ = materialResponseBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        if (inventoryResponseBuilder_ == null) {
+          result.inventoryResponse_ = inventoryResponse_;
+        } else {
+          result.inventoryResponse_ = inventoryResponseBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6315,6 +6667,9 @@ public final class RobotApi {
         }
         if (other.hasMaterialResponse()) {
           mergeMaterialResponse(other.getMaterialResponse());
+        }
+        if (other.hasInventoryResponse()) {
+          mergeInventoryResponse(other.getInventoryResponse());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6649,20 +7004,20 @@ public final class RobotApi {
         return locationResponseBuilder_;
       }
 
-      // optional .robominions.MaterialResponse material_response = 5;
-      private au.id.katharos.robominions.api.RobotApi.MaterialResponse materialResponse_ = au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance();
+      // optional .robominions.Material material_response = 5;
+      private au.id.katharos.robominions.api.Materials.Material materialResponse_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          au.id.katharos.robominions.api.RobotApi.MaterialResponse, au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder, au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder> materialResponseBuilder_;
+          au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> materialResponseBuilder_;
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
       public boolean hasMaterialResponse() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
-      public au.id.katharos.robominions.api.RobotApi.MaterialResponse getMaterialResponse() {
+      public au.id.katharos.robominions.api.Materials.Material getMaterialResponse() {
         if (materialResponseBuilder_ == null) {
           return materialResponse_;
         } else {
@@ -6670,9 +7025,9 @@ public final class RobotApi {
         }
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
-      public Builder setMaterialResponse(au.id.katharos.robominions.api.RobotApi.MaterialResponse value) {
+      public Builder setMaterialResponse(au.id.katharos.robominions.api.Materials.Material value) {
         if (materialResponseBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6686,10 +7041,10 @@ public final class RobotApi {
         return this;
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
       public Builder setMaterialResponse(
-          au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder builderForValue) {
+          au.id.katharos.robominions.api.Materials.Material.Builder builderForValue) {
         if (materialResponseBuilder_ == null) {
           materialResponse_ = builderForValue.build();
           onChanged();
@@ -6700,14 +7055,14 @@ public final class RobotApi {
         return this;
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
-      public Builder mergeMaterialResponse(au.id.katharos.robominions.api.RobotApi.MaterialResponse value) {
+      public Builder mergeMaterialResponse(au.id.katharos.robominions.api.Materials.Material value) {
         if (materialResponseBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
-              materialResponse_ != au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance()) {
+              materialResponse_ != au.id.katharos.robominions.api.Materials.Material.getDefaultInstance()) {
             materialResponse_ =
-              au.id.katharos.robominions.api.RobotApi.MaterialResponse.newBuilder(materialResponse_).mergeFrom(value).buildPartial();
+              au.id.katharos.robominions.api.Materials.Material.newBuilder(materialResponse_).mergeFrom(value).buildPartial();
           } else {
             materialResponse_ = value;
           }
@@ -6719,11 +7074,11 @@ public final class RobotApi {
         return this;
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
       public Builder clearMaterialResponse() {
         if (materialResponseBuilder_ == null) {
-          materialResponse_ = au.id.katharos.robominions.api.RobotApi.MaterialResponse.getDefaultInstance();
+          materialResponse_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
           onChanged();
         } else {
           materialResponseBuilder_.clear();
@@ -6732,17 +7087,17 @@ public final class RobotApi {
         return this;
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
-      public au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder getMaterialResponseBuilder() {
+      public au.id.katharos.robominions.api.Materials.Material.Builder getMaterialResponseBuilder() {
         bitField0_ |= 0x00000010;
         onChanged();
         return getMaterialResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
-      public au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder getMaterialResponseOrBuilder() {
+      public au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialResponseOrBuilder() {
         if (materialResponseBuilder_ != null) {
           return materialResponseBuilder_.getMessageOrBuilder();
         } else {
@@ -6750,20 +7105,137 @@ public final class RobotApi {
         }
       }
       /**
-       * <code>optional .robominions.MaterialResponse material_response = 5;</code>
+       * <code>optional .robominions.Material material_response = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          au.id.katharos.robominions.api.RobotApi.MaterialResponse, au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder, au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder> 
+          au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> 
           getMaterialResponseFieldBuilder() {
         if (materialResponseBuilder_ == null) {
           materialResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              au.id.katharos.robominions.api.RobotApi.MaterialResponse, au.id.katharos.robominions.api.RobotApi.MaterialResponse.Builder, au.id.katharos.robominions.api.RobotApi.MaterialResponseOrBuilder>(
+              au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder>(
                   materialResponse_,
                   getParentForChildren(),
                   isClean());
           materialResponse_ = null;
         }
         return materialResponseBuilder_;
+      }
+
+      // optional .robominions.InventoryResponse inventory_response = 6;
+      private au.id.katharos.robominions.api.RobotApi.InventoryResponse inventoryResponse_ = au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          au.id.katharos.robominions.api.RobotApi.InventoryResponse, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder, au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder> inventoryResponseBuilder_;
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public boolean hasInventoryResponse() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public au.id.katharos.robominions.api.RobotApi.InventoryResponse getInventoryResponse() {
+        if (inventoryResponseBuilder_ == null) {
+          return inventoryResponse_;
+        } else {
+          return inventoryResponseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public Builder setInventoryResponse(au.id.katharos.robominions.api.RobotApi.InventoryResponse value) {
+        if (inventoryResponseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          inventoryResponse_ = value;
+          onChanged();
+        } else {
+          inventoryResponseBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public Builder setInventoryResponse(
+          au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder builderForValue) {
+        if (inventoryResponseBuilder_ == null) {
+          inventoryResponse_ = builderForValue.build();
+          onChanged();
+        } else {
+          inventoryResponseBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public Builder mergeInventoryResponse(au.id.katharos.robominions.api.RobotApi.InventoryResponse value) {
+        if (inventoryResponseBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              inventoryResponse_ != au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance()) {
+            inventoryResponse_ =
+              au.id.katharos.robominions.api.RobotApi.InventoryResponse.newBuilder(inventoryResponse_).mergeFrom(value).buildPartial();
+          } else {
+            inventoryResponse_ = value;
+          }
+          onChanged();
+        } else {
+          inventoryResponseBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public Builder clearInventoryResponse() {
+        if (inventoryResponseBuilder_ == null) {
+          inventoryResponse_ = au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          inventoryResponseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder getInventoryResponseBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getInventoryResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      public au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder getInventoryResponseOrBuilder() {
+        if (inventoryResponseBuilder_ != null) {
+          return inventoryResponseBuilder_.getMessageOrBuilder();
+        } else {
+          return inventoryResponse_;
+        }
+      }
+      /**
+       * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          au.id.katharos.robominions.api.RobotApi.InventoryResponse, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder, au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder> 
+          getInventoryResponseFieldBuilder() {
+        if (inventoryResponseBuilder_ == null) {
+          inventoryResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              au.id.katharos.robominions.api.RobotApi.InventoryResponse, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder, au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder>(
+                  inventoryResponse_,
+                  getParentForChildren(),
+                  isClean());
+          inventoryResponse_ = null;
+        }
+        return inventoryResponseBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:robominions.RobotResponse)
@@ -7704,10 +8176,10 @@ public final class RobotApi {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_LocationResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_robominions_MaterialResponse_descriptor;
+    internal_static_robominions_InventoryResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_robominions_MaterialResponse_fieldAccessorTable;
+      internal_static_robominions_InventoryResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_RobotResponse_descriptor;
   private static
@@ -7739,42 +8211,44 @@ public final class RobotApi {
       "tion.Direction\"w\n\tDirection\022\006\n\002UP\020\000\022\010\n\004D",
       "OWN\020\001\022\010\n\004LEFT\020\002\022\t\n\005RIGHT\020\003\022\013\n\007FORWARD\020\004\022" +
       "\014\n\010BACKWARD\020\005\022\010\n\004EAST\020\006\022\010\n\004WEST\020\007\022\t\n\005NOR" +
-      "TH\020\010\022\t\n\005SOUTH\020\t\"\374\001\n\020RobotReadRequest\0225\n\021" +
+      "TH\020\010\022\t\n\005SOUTH\020\t\"\223\002\n\020RobotReadRequest\0225\n\021" +
       "identify_material\030\001 \001(\0132\032.robominions.Wo" +
       "rldLocation\0225\n\026locate_material_nearby\030\002 " +
       "\001(\0132\025.robominions.Material\022\036\n\026locate_non" +
       "solid_nearby\030\004 \001(\010\022;\n\rlocate_entity\030\003 \001(" +
-      "\0162$.robominions.RobotReadRequest.Entity\"" +
-      "\035\n\006Entity\022\010\n\004SELF\020\000\022\t\n\005OWNER\020\001\"\274\002\n\022Robot" +
-      "ActionRequest\022<\n\016move_direction\030\002 \001(\0162$.",
-      "robominions.WorldLocation.Direction\022<\n\016t" +
-      "urn_direction\030\003 \001(\0162$.robominions.WorldL" +
-      "ocation.Direction\022<\n\016mine_direction\030\004 \001(" +
-      "\0162$.robominions.WorldLocation.Direction\022" +
-      "=\n\017place_direction\030\005 \001(\0162$.robominions.W" +
-      "orldLocation.Direction\022-\n\016place_material" +
-      "\030\006 \001(\0132\025.robominions.Material\"A\n\020Locatio" +
-      "nResponse\022-\n\tlocations\030\001 \003(\0132\032.robominio" +
-      "ns.WorldLocation\"<\n\020MaterialResponse\022(\n\t" +
-      "materials\030\001 \003(\0132\025.robominions.Material\"\323",
-      "\001\n\rRobotResponse\022\013\n\003key\030\003 \001(\005\022\017\n\007success" +
-      "\030\001 \001(\010\0220\n\rerror_message\030\002 \001(\0132\031.robomini" +
-      "ons.ErrorMessage\0228\n\021location_response\030\004 " +
-      "\001(\0132\035.robominions.LocationResponse\0228\n\021ma" +
-      "terial_response\030\005 \001(\0132\035.robominions.Mate" +
-      "rialResponse\"\250\003\n\014ErrorMessage\0220\n\006reason\030" +
-      "\001 \001(\0162 .robominions.ErrorMessage.Reason\022" +
-      "0\n\006action\030\002 \001(\0162 .robominions.ErrorMessa" +
-      "ge.Action\022\017\n\007message\030\003 \001(\t\"\344\001\n\006Reason\022\013\n" +
-      "\007UNKNOWN\020\000\022\020\n\014SERVER_ERROR\020\001\022\026\n\022UNREADAB",
-      "LE_REQUEST\020\002\022\023\n\017INVALID_REQUEST\020\003\022\023\n\017BLO" +
-      "CK_COLLISION\020\004\022\024\n\020OUTSIDE_OF_WORLD\020\005\022\030\n\024" +
-      "ROBOT_DOES_NOT_EXIST\020\006\022\032\n\026BLOCK_IS_NOT_R" +
-      "EACHABLE\020\007\022\030\n\024BLOCK_IS_NOT_VISIBLE\020\010\022\023\n\017" +
-      "NOT_IMPLEMENTED\020\t\"<\n\006Action\022\017\n\013FAIL_ACTI" +
-      "ON\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT\020\002B" +
-      "*\n\036au.id.katharos.robominions.apiB\010Robot" +
-      "Api"
+      "\0162$.robominions.RobotReadRequest.Entity\022" +
+      "\025\n\rget_inventory\030\005 \001(\010\"\035\n\006Entity\022\010\n\004SELF" +
+      "\020\000\022\t\n\005OWNER\020\001\"\274\002\n\022RobotActionRequest\022<\n\016",
+      "move_direction\030\002 \001(\0162$.robominions.World" +
+      "Location.Direction\022<\n\016turn_direction\030\003 \001" +
+      "(\0162$.robominions.WorldLocation.Direction" +
+      "\022<\n\016mine_direction\030\004 \001(\0162$.robominions.W" +
+      "orldLocation.Direction\022=\n\017place_directio" +
+      "n\030\005 \001(\0162$.robominions.WorldLocation.Dire" +
+      "ction\022-\n\016place_material\030\006 \001(\0132\025.robomini" +
+      "ons.Material\"A\n\020LocationResponse\022-\n\tloca" +
+      "tions\030\001 \003(\0132\032.robominions.WorldLocation\"" +
+      "Q\n\021InventoryResponse\022(\n\tmaterials\030\001 \003(\0132",
+      "\025.robominions.Material\022\022\n\006counts\030\002 \003(\005B\002" +
+      "\020\001\"\207\002\n\rRobotResponse\022\013\n\003key\030\003 \001(\005\022\017\n\007suc" +
+      "cess\030\001 \001(\010\0220\n\rerror_message\030\002 \001(\0132\031.robo" +
+      "minions.ErrorMessage\0228\n\021location_respons" +
+      "e\030\004 \001(\0132\035.robominions.LocationResponse\0220" +
+      "\n\021material_response\030\005 \001(\0132\025.robominions." +
+      "Material\022:\n\022inventory_response\030\006 \001(\0132\036.r" +
+      "obominions.InventoryResponse\"\250\003\n\014ErrorMe" +
+      "ssage\0220\n\006reason\030\001 \001(\0162 .robominions.Erro" +
+      "rMessage.Reason\0220\n\006action\030\002 \001(\0162 .robomi",
+      "nions.ErrorMessage.Action\022\017\n\007message\030\003 \001" +
+      "(\t\"\344\001\n\006Reason\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ERR" +
+      "OR\020\001\022\026\n\022UNREADABLE_REQUEST\020\002\022\023\n\017INVALID_" +
+      "REQUEST\020\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n\020OUTSID" +
+      "E_OF_WORLD\020\005\022\030\n\024ROBOT_DOES_NOT_EXIST\020\006\022\032" +
+      "\n\026BLOCK_IS_NOT_REACHABLE\020\007\022\030\n\024BLOCK_IS_N" +
+      "OT_VISIBLE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\"<\n\006Act" +
+      "ion\022\017\n\013FAIL_ACTION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017" +
+      "\n\013EXIT_CLIENT\020\002B*\n\036au.id.katharos.robomi" +
+      "nions.apiB\010RobotApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7804,7 +8278,7 @@ public final class RobotApi {
           internal_static_robominions_RobotReadRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_RobotReadRequest_descriptor,
-              new java.lang.String[] { "IdentifyMaterial", "LocateMaterialNearby", "LocateNonsolidNearby", "LocateEntity", });
+              new java.lang.String[] { "IdentifyMaterial", "LocateMaterialNearby", "LocateNonsolidNearby", "LocateEntity", "GetInventory", });
           internal_static_robominions_RobotActionRequest_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_robominions_RobotActionRequest_fieldAccessorTable = new
@@ -7817,18 +8291,18 @@ public final class RobotApi {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_LocationResponse_descriptor,
               new java.lang.String[] { "Locations", });
-          internal_static_robominions_MaterialResponse_descriptor =
+          internal_static_robominions_InventoryResponse_descriptor =
             getDescriptor().getMessageTypes().get(6);
-          internal_static_robominions_MaterialResponse_fieldAccessorTable = new
+          internal_static_robominions_InventoryResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_MaterialResponse_descriptor,
-              new java.lang.String[] { "Materials", });
+              internal_static_robominions_InventoryResponse_descriptor,
+              new java.lang.String[] { "Materials", "Counts", });
           internal_static_robominions_RobotResponse_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_robominions_RobotResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_robominions_RobotResponse_descriptor,
-              new java.lang.String[] { "Key", "Success", "ErrorMessage", "LocationResponse", "MaterialResponse", });
+              new java.lang.String[] { "Key", "Success", "ErrorMessage", "LocationResponse", "MaterialResponse", "InventoryResponse", });
           internal_static_robominions_ErrorMessage_descriptor =
             getDescriptor().getMessageTypes().get(8);
           internal_static_robominions_ErrorMessage_fieldAccessorTable = new

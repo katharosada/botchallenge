@@ -8,12 +8,14 @@ import java.util.logging.Logger;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import au.id.katharos.robominions.api.RobotApi.Coordinate;
 import au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action;
 import au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason;
+import au.id.katharos.robominions.api.RobotApi.InventoryResponse;
 import au.id.katharos.robominions.api.RobotApi.LocationResponse;
-import au.id.katharos.robominions.api.RobotApi.MaterialResponse;
 import au.id.katharos.robominions.api.RobotApi.RobotReadRequest;
 import au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity;
 import au.id.katharos.robominions.api.RobotApi.RobotResponse;
@@ -92,8 +94,18 @@ public class ReadExecutor {
 			}
 			// TODO: Put this enum conversion logic in a util somewhere
 			response.setSuccess(true);
-			response.setMaterialResponse(MaterialResponse.newBuilder()
-					.addMaterials(Util.toProtoMaterial(block.getType())).build());
+			response.setMaterialResponse(Util.toProtoMaterial(block.getType()));
+		} else if (readRequest.hasGetInventory()) {
+			InventoryResponse.Builder inventoryBuilder = InventoryResponse.newBuilder();
+			Inventory inv = robot.getInventory();
+			for (ItemStack stack : inv.getContents()) {
+				if (stack != null) {
+					inventoryBuilder.addMaterials(Util.toProtoMaterial(stack.getType()));
+					inventoryBuilder.addCounts(stack.getAmount());
+				}
+			}
+			response.setInventoryResponse(inventoryBuilder);
+			response.setSuccess(true);
 		} else if (readRequest.hasLocateMaterialNearby()) {
 			// TODO: 
 			throw new RobotRequestException(Reason.NOT_IMPLEMENTED, "Searching nearby locations is not implemented yet.");
