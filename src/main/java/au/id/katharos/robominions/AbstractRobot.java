@@ -237,6 +237,7 @@ public abstract class AbstractRobot implements InventoryHolder {
 		} else {
 			inventory.getItem(inventory.first(Material.COBBLESTONE)).setAmount(64);
 		}
+		inventory.addItem(new ItemStack(Material.WOOD, 1));
 	}
 	
 	public Inventory getInventory() {
@@ -267,7 +268,28 @@ public abstract class AbstractRobot implements InventoryHolder {
 		}
 		return locations;
 	}
-	
+
+	public List<Location> scanForMaterial(Material material) {
+		// Scans cube area 5 blocks in every direction and returns the locations of all blocks
+		// which match the given material (limited to 20 blocks).
+		// TODO: Sort by distance from robot.
+		List<Location> locations = Lists.newLinkedList();
+		int dist = 5; // Five blocks in each direction (including diagonal)
+		for (int x = location.getBlockX() - dist; x <= location.getBlockX() + dist; x++) {
+			for (int y = location.getBlockY() - dist; y <= location.getBlockY() + dist; y++) {
+				for (int z = location.getBlockZ() - dist; z <= location.getBlockZ() + dist; z++) {
+					if (Util.materialsEqual(world.getBlockAt(x, y, z).getType(), material)) {
+						locations.add(new Location(world, x, y, z));
+						if (locations.size() >= 20) {
+							return locations;
+						}
+					}
+				}
+			}
+		}
+		return locations;
+	}
+
 	/**
 	 * Turn the facing direction of the robot to the given direction.
 	 * 

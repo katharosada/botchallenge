@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.Inventory;
@@ -39,6 +40,36 @@ public class ReadExecutor {
 		this.robotMap = robotMap;
 	}
 	
+	private Block getBlock(WorldLocation loc, AbstractRobot robot) throws RobotRequestException {
+		Block block = null;
+		if (loc.hasDirection()) {
+			block = robot.getBlockFromDirection(loc.getDirection());
+		} else if (loc.hasAbsoluteLocation()) {
+			Coordinate coord = loc.getAbsoluteLocation();
+			World world = robot.getWorld();
+			Location location = Util.locationFromCoords(world, coord);
+			boolean canSee = robot.isLocationVisible(location);
+			if (canSee) {
+				block = location.getBlock();
+			} else {
+				throw new RobotRequestException(Reason.BLOCK_IS_NOT_VISIBLE, "The robot can't see that block.");
+			}
+		} else {
+			throw new RobotRequestException(Reason.INVALID_REQUEST, "Location not recognised.");
+		}
+		return block;
+	}
+	
+	private LocationResponse buildLocationResponse(List<Location> locations) {
+		LocationResponse.Builder locResponse = LocationResponse.newBuilder(); 
+		for (Location loc : locations) {
+			WorldLocation worldLocation = WorldLocation.newBuilder().setAbsoluteLocation(
+					Util.coordsFromLocation(loc)).build();
+			locResponse.addLocations(worldLocation);
+		}
+		return locResponse.build();
+	}
+	
 	public RobotResponse execute(UUID playerId, int key, RobotReadRequest readRequest) 
 		throws RobotRequestException {
 		RobotResponse.Builder response = RobotResponse.newBuilder();
@@ -54,12 +85,8 @@ public class ReadExecutor {
 		
 		if (readRequest.hasLocateNonsolidNearby()) {
 			List<Location> locations = robot.scanForNonSolid();
-			LocationResponse.Builder locResponse = LocationResponse.newBuilder(); 
-			for (Location loc : locations) {
-				WorldLocation worldLocation = WorldLocation.newBuilder().setAbsoluteLocation(
-						Util.coordsFromLocation(loc)).build();
-				locResponse.addLocations(worldLocation);
-			}
+			LocationResponse locResponse = buildLocationResponse(locations);
+			response.setSuccess(true);
 			response.setLocationResponse(locResponse);
 		} else if (readRequest.hasLocateEntity()) {
 			Location location = null;
@@ -74,25 +101,14 @@ public class ReadExecutor {
 			
 			response.setLocationResponse(LocationResponse.newBuilder().addLocations(worldLocation).build());
 			response.setSuccess(true);
-		} else if (readRequest.hasIdentifyMaterial()) {
+		} else if (readRequest.hasIsSolid()) {
+			WorldLocation loc = readRequest.getIsSolid();
+            Block block = getBlock(loc, robot);
+            response.setSuccess(true);
+            response.setBooleanResponse(block.getType().isSolid());
+	    } else if (readRequest.hasIdentifyMaterial()) {
 			WorldLocation loc = readRequest.getIdentifyMaterial();
-			Block block = null;
-			if (loc.hasDirection()) {
-				block = robot.getBlockFromDirection(loc.getDirection());
-			} else if (loc.hasAbsoluteLocation()) {
-				Coordinate coord = loc.getAbsoluteLocation();
-				World world = robot.getWorld();
-				Location location = Util.locationFromCoords(world, coord);
-				boolean canSee = robot.isLocationVisible(location);
-				if (canSee) {
-					block = location.getBlock();
-				} else {
-					throw new RobotRequestException(Reason.BLOCK_IS_NOT_VISIBLE, "The robot can't see that block.");
-				}
-			} else {
-				throw new RobotRequestException(Reason.INVALID_REQUEST, "Location not recognised.");
-			}
-			// TODO: Put this enum conversion logic in a util somewhere
+            Block block = getBlock(loc, robot);
 			response.setSuccess(true);
 			response.setMaterialResponse(Util.toProtoMaterial(block.getType()));
 		} else if (readRequest.hasGetInventory()) {
@@ -107,8 +123,11 @@ public class ReadExecutor {
 			response.setInventoryResponse(inventoryBuilder);
 			response.setSuccess(true);
 		} else if (readRequest.hasLocateMaterialNearby()) {
-			// TODO: 
-			throw new RobotRequestException(Reason.NOT_IMPLEMENTED, "Searching nearby locations is not implemented yet.");
+			Material material = Util.toBukkitMaterial(readRequest.getLocateMaterialNearby());
+			List<Location> locations = robot.scanForMaterial(material);
+			LocationResponse locResponse = buildLocationResponse(locations);
+			response.setSuccess(true);
+			response.setLocationResponse(locResponse);
 		} else {
 			throw new RobotRequestException(Reason.INVALID_REQUEST, "The read request has no recognised request in it.");
 		}

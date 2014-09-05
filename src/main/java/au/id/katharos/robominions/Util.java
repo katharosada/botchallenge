@@ -17,6 +17,14 @@ public class Util {
 		return new Location(world, coords.getX(), coords.getY(), coords.getZ());
 	}
 	
+	public static boolean materialsEqual(Material a, Material b) {
+		// Special case, LOG and LOG_2 are equivalent
+		if (a == Material.LOG || a == Material.LOG_2) {
+			return b == Material.LOG || b == Material.LOG_2;
+		} 
+		return a == b;
+	}
+	
 	public static Coordinate coordsFromLocation(Location location) {
 		return Coordinate.newBuilder()
 				.setX(location.getBlockX())

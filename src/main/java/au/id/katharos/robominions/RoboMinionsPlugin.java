@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -149,7 +150,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	/**
 	 * Called every time a player right clicks a block, used only for spawning robots.
 	 */
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onBlockRightClick(PlayerInteractEvent event) {
 		if (event.hasBlock() && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(actionMap.containsKey(event.getPlayer().getName())) {
@@ -161,10 +162,14 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 						actionMap.get(event.getPlayer().getName()));
 				robotMap.put(event.getPlayer().getUniqueId(), robot);
 				actionMap.remove(event.getPlayer().getName());
+				event.setCancelled(true);
 			} else if (event.hasBlock() &&
 					event.getClickedBlock().getType() == Material.PUMPKIN) {
 				for (AbstractRobot robot : robotMap.values()) {
-					event.getPlayer().openInventory(robot.getInventory());
+					if (robot.getLocation().getBlock().equals(event.getClickedBlock())) {
+						event.getPlayer().openInventory(robot.getInventory());
+						event.setCancelled(true);
+					}
 				}
 			}
 		}
@@ -247,6 +252,12 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
         			moveSuccess = chicken.turn(direction);
         			if (!moveSuccess) {
             			sender.sendMessage("Can't turn up/down.");
+            			return true;
+            		}
+        		} else if (args[0].equalsIgnoreCase("mine")) {
+        			moveSuccess = chicken.mine(direction);
+        			if (!moveSuccess) {
+            			sender.sendMessage("Can't mine that with a pickaxe.");
             			return true;
             		}
         		}

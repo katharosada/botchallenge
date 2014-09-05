@@ -60,7 +60,8 @@ message RobotReadRequest {
   // This returns an inventory
   optional bool get_inventory = 5;
 
-  // TODO: Query the solidness of a block
+  // Returns a boolean
+  optional WorldLocation is_solid = 6;
 }
 
 message RobotActionRequest {
@@ -89,6 +90,7 @@ message RobotResponse {
   optional LocationResponse location_response = 4;
   optional Material material_response = 5;
   optional InventoryResponse inventory_response = 6;
+  optional bool boolean_response = 7;
 }
 
 message ErrorMessage {

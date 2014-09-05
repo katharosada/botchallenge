@@ -156,7 +156,12 @@ class Robot(object):
   def getType(self, direction):
     request = self._newAction()
     request.read_request.identify_material.direction = direction
-    return self._action(request).material_response.materials[0]
+    return self._action(request).material_response
+
+  def isSolid(self, direction):
+    request = self._newAction()
+    request.read_request.is_solid.direction = direction
+    return self._action(request).boolean_response
 
   def _locate(self, entity):
     request = self._newAction()
@@ -169,6 +174,13 @@ class Robot(object):
 
   def getOwnerLocation(self):
     return self._locate(robotapi_pb2.RobotReadRequest.OWNER)
+
+  def findMaterial(self, material):
+    request = self._newAction()
+    request.read_request.locate_material_nearby.type = material
+    loc_proto_list = self._action(request).location_response.locations
+    loc_list = [Location.fromProto(l.absolute_location) for l in loc_proto_list]
+    return loc_list
 
   def findPath(self, target_location):
     my_loc = self.getLocation()
