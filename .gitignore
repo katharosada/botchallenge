@@ -12,6 +12,13 @@
 *_pb2.py
 *.py.bak
 
+# Client build files
+client/build
+client/dist
+*.egg
+*.egg-info
+
+
 
 # Generated source and jar target output
 target

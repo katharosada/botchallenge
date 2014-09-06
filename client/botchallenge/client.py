@@ -1,5 +1,5 @@
-from api import robotapi_pb2
-from api import materials_pb2
+from .api import robotapi_pb2
+from .api import materials_pb2
 
 import struct
 import sys
