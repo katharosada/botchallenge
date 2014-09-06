@@ -11,7 +11,7 @@ while True:
     for i in range(4):
       success = robot.move(dir)
       if not success:
-        print "Failed to move", dir
+        print("Failed to move", dir)
 
 
 

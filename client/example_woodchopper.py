@@ -10,7 +10,7 @@ TARGET = Material.LOG
 TARGET2 = Material.LOG_2
 
 locations = robot.findMaterial(TARGET)
-print locations
+print(locations)
 
 while len(locations) > 0:
   location = locations[0]
