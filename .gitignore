@@ -10,6 +10,7 @@
 
 # Client proto generated files
 *_pb2.py
+*.py.bak
 
 
 # Generated source and jar target output
