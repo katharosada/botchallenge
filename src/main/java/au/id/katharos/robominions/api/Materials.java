@@ -8,10 +8,10 @@ public final class Materials {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface MaterialOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MaterialOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.Material)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .robominions.Material.Type type = 1 [default = AIR];
     /**
      * <code>optional .robominions.Material.Type type = 1 [default = AIR];</code>
      */
@@ -25,8 +25,9 @@ public final class Materials {
    * Protobuf type {@code robominions.Material}
    */
   public static final class Material extends
-      com.google.protobuf.GeneratedMessage
-      implements MaterialOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.Material)
+      MaterialOrBuilder {
     // Use Material.newBuilder() to construct.
     private Material(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -511,7 +512,7 @@ public final class Materials {
        * <code>STAINED_GLASS = 95;</code>
        *
        * <pre>
-       * @Deprecated
+       * &#64;Deprecated
        * LOCKED_CHEST = 95;
        * </pre>
        */
@@ -1233,7 +1234,7 @@ public final class Materials {
        *
        * <pre>
        **
-       * @see MapView
+       * &#64;see MapView
        * </pre>
        */
       MAP(273, 358),
@@ -1298,7 +1299,7 @@ public final class Materials {
        *
        * <pre>
        **
-       * @see Potion
+       * &#64;see Potion
        * </pre>
        */
       POTION(288, 373),
@@ -1900,7 +1901,7 @@ public final class Materials {
        * <code>STAINED_GLASS = 95;</code>
        *
        * <pre>
-       * @Deprecated
+       * &#64;Deprecated
        * LOCKED_CHEST = 95;
        * </pre>
        */
@@ -2622,7 +2623,7 @@ public final class Materials {
        *
        * <pre>
        **
-       * @see MapView
+       * &#64;see MapView
        * </pre>
        */
       public static final int MAP_VALUE = 358;
@@ -2687,7 +2688,7 @@ public final class Materials {
        *
        * <pre>
        **
-       * @see Potion
+       * &#64;see Potion
        * </pre>
        */
       public static final int POTION_VALUE = 373;
@@ -3303,7 +3304,6 @@ public final class Materials {
     }
 
     private int bitField0_;
-    // optional .robominions.Material.Type type = 1 [default = AIR];
     public static final int TYPE_FIELD_NUMBER = 1;
     private au.id.katharos.robominions.api.Materials.Material.Type type_;
     /**
@@ -3325,7 +3325,8 @@ public final class Materials {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -3432,8 +3433,9 @@ public final class Materials {
      * Protobuf type {@code robominions.Material}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.Materials.MaterialOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.Material)
+        au.id.katharos.robominions.api.Materials.MaterialOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.Materials.internal_static_robominions_Material_descriptor;
@@ -3546,7 +3548,6 @@ public final class Materials {
       }
       private int bitField0_;
 
-      // optional .robominions.Material.Type type = 1 [default = AIR];
       private au.id.katharos.robominions.api.Materials.Material.Type type_ = au.id.katharos.robominions.api.Materials.Material.Type.AIR;
       /**
        * <code>optional .robominions.Material.Type type = 1 [default = AIR];</code>
@@ -3593,7 +3594,7 @@ public final class Materials {
     // @@protoc_insertion_point(class_scope:robominions.Material)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_Material_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3757,23 +3758,23 @@ public final class Materials {
       "atharos.robominions.apiB\tMaterials"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_robominions_Material_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_robominions_Material_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_Material_descriptor,
-              new java.lang.String[] { "Type", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_robominions_Material_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_robominions_Material_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_Material_descriptor,
+        new java.lang.String[] { "Type", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

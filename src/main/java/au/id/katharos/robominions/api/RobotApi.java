@@ -8,10 +8,10 @@ public final class RobotApi {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface RobotRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RobotRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.RobotRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional string name = 1;
     /**
      * <code>optional string name = 1;</code>
      */
@@ -26,7 +26,6 @@ public final class RobotApi {
     com.google.protobuf.ByteString
         getNameBytes();
 
-    // optional int32 key = 2;
     /**
      * <code>optional int32 key = 2;</code>
      */
@@ -36,7 +35,6 @@ public final class RobotApi {
      */
     int getKey();
 
-    // optional .robominions.RobotReadRequest read_request = 3;
     /**
      * <code>optional .robominions.RobotReadRequest read_request = 3;</code>
      *
@@ -62,7 +60,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder getReadRequestOrBuilder();
 
-    // optional .robominions.RobotActionRequest action_request = 4;
     /**
      * <code>optional .robominions.RobotActionRequest action_request = 4;</code>
      */
@@ -80,8 +77,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.RobotRequest}
    */
   public static final class RobotRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements RobotRequestOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.RobotRequest)
+      RobotRequestOrBuilder {
     // Use RobotRequest.newBuilder() to construct.
     private RobotRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -128,8 +126,9 @@ public final class RobotApi {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              name_ = input.readBytes();
+              name_ = bs;
               break;
             }
             case 16: {
@@ -203,7 +202,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional string name = 1;
     public static final int NAME_FIELD_NUMBER = 1;
     private java.lang.Object name_;
     /**
@@ -246,7 +244,6 @@ public final class RobotApi {
       }
     }
 
-    // optional int32 key = 2;
     public static final int KEY_FIELD_NUMBER = 2;
     private int key_;
     /**
@@ -262,7 +259,6 @@ public final class RobotApi {
       return key_;
     }
 
-    // optional .robominions.RobotReadRequest read_request = 3;
     public static final int READ_REQUEST_FIELD_NUMBER = 3;
     private au.id.katharos.robominions.api.RobotApi.RobotReadRequest readRequest_;
     /**
@@ -296,7 +292,6 @@ public final class RobotApi {
       return readRequest_;
     }
 
-    // optional .robominions.RobotActionRequest action_request = 4;
     public static final int ACTION_REQUEST_FIELD_NUMBER = 4;
     private au.id.katharos.robominions.api.RobotApi.RobotActionRequest actionRequest_;
     /**
@@ -327,7 +322,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (hasReadRequest()) {
         if (!getReadRequest().isInitialized()) {
@@ -461,8 +457,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.RobotRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.RobotRequestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.RobotRequest)
+        au.id.katharos.robominions.api.RobotApi.RobotRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotRequest_descriptor;
@@ -628,7 +625,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional string name = 1;
       private java.lang.Object name_ = "";
       /**
        * <code>optional string name = 1;</code>
@@ -642,9 +638,12 @@ public final class RobotApi {
       public java.lang.String getName() {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          name_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -702,7 +701,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional int32 key = 2;
       private int key_ ;
       /**
        * <code>optional int32 key = 2;</code>
@@ -735,7 +733,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.RobotReadRequest read_request = 3;
       private au.id.katharos.robominions.api.RobotApi.RobotReadRequest readRequest_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.RobotReadRequest, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder> readRequestBuilder_;
@@ -880,7 +877,7 @@ public final class RobotApi {
         if (readRequestBuilder_ == null) {
           readRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.RobotReadRequest, au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder>(
-                  readRequest_,
+                  getReadRequest(),
                   getParentForChildren(),
                   isClean());
           readRequest_ = null;
@@ -888,7 +885,6 @@ public final class RobotApi {
         return readRequestBuilder_;
       }
 
-      // optional .robominions.RobotActionRequest action_request = 4;
       private au.id.katharos.robominions.api.RobotApi.RobotActionRequest actionRequest_ = au.id.katharos.robominions.api.RobotApi.RobotActionRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.RobotActionRequest, au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder> actionRequestBuilder_;
@@ -997,7 +993,7 @@ public final class RobotApi {
         if (actionRequestBuilder_ == null) {
           actionRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.RobotActionRequest, au.id.katharos.robominions.api.RobotApi.RobotActionRequest.Builder, au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder>(
-                  actionRequest_,
+                  getActionRequest(),
                   getParentForChildren(),
                   isClean());
           actionRequest_ = null;
@@ -1016,10 +1012,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.RobotRequest)
   }
 
-  public interface CoordinateOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface CoordinateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.Coordinate)
+      com.google.protobuf.MessageOrBuilder {
 
-    // required int32 x = 1;
     /**
      * <code>required int32 x = 1;</code>
      */
@@ -1029,7 +1025,6 @@ public final class RobotApi {
      */
     int getX();
 
-    // required int32 y = 2;
     /**
      * <code>required int32 y = 2;</code>
      */
@@ -1039,7 +1034,6 @@ public final class RobotApi {
      */
     int getY();
 
-    // required int32 z = 3;
     /**
      * <code>required int32 z = 3;</code>
      */
@@ -1053,8 +1047,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.Coordinate}
    */
   public static final class Coordinate extends
-      com.google.protobuf.GeneratedMessage
-      implements CoordinateOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.Coordinate)
+      CoordinateOrBuilder {
     // Use Coordinate.newBuilder() to construct.
     private Coordinate(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1155,7 +1150,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // required int32 x = 1;
     public static final int X_FIELD_NUMBER = 1;
     private int x_;
     /**
@@ -1171,7 +1165,6 @@ public final class RobotApi {
       return x_;
     }
 
-    // required int32 y = 2;
     public static final int Y_FIELD_NUMBER = 2;
     private int y_;
     /**
@@ -1187,7 +1180,6 @@ public final class RobotApi {
       return y_;
     }
 
-    // required int32 z = 3;
     public static final int Z_FIELD_NUMBER = 3;
     private int z_;
     /**
@@ -1211,7 +1203,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (!hasX()) {
         memoizedIsInitialized = 0;
@@ -1344,8 +1337,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.Coordinate}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.CoordinateOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.Coordinate)
+        au.id.katharos.robominions.api.RobotApi.CoordinateOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_Coordinate_descriptor;
@@ -1488,7 +1482,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // required int32 x = 1;
       private int x_ ;
       /**
        * <code>required int32 x = 1;</code>
@@ -1521,7 +1514,6 @@ public final class RobotApi {
         return this;
       }
 
-      // required int32 y = 2;
       private int y_ ;
       /**
        * <code>required int32 y = 2;</code>
@@ -1554,7 +1546,6 @@ public final class RobotApi {
         return this;
       }
 
-      // required int32 z = 3;
       private int z_ ;
       /**
        * <code>required int32 z = 3;</code>
@@ -1598,10 +1589,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.Coordinate)
   }
 
-  public interface WorldLocationOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface WorldLocationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.WorldLocation)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .robominions.Coordinate absolute_location = 1;
     /**
      * <code>optional .robominions.Coordinate absolute_location = 1;</code>
      */
@@ -1615,7 +1606,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.CoordinateOrBuilder getAbsoluteLocationOrBuilder();
 
-    // optional .robominions.WorldLocation.Direction direction = 2;
     /**
      * <code>optional .robominions.WorldLocation.Direction direction = 2;</code>
      *
@@ -1639,8 +1629,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.WorldLocation}
    */
   public static final class WorldLocation extends
-      com.google.protobuf.GeneratedMessage
-      implements WorldLocationOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.WorldLocation)
+      WorldLocationOrBuilder {
     // Use WorldLocation.newBuilder() to construct.
     private WorldLocation(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -1904,7 +1895,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional .robominions.Coordinate absolute_location = 1;
     public static final int ABSOLUTE_LOCATION_FIELD_NUMBER = 1;
     private au.id.katharos.robominions.api.RobotApi.Coordinate absoluteLocation_;
     /**
@@ -1926,7 +1916,6 @@ public final class RobotApi {
       return absoluteLocation_;
     }
 
-    // optional .robominions.WorldLocation.Direction direction = 2;
     public static final int DIRECTION_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction direction_;
     /**
@@ -1959,7 +1948,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (hasAbsoluteLocation()) {
         if (!getAbsoluteLocation().isInitialized()) {
@@ -2079,8 +2069,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.WorldLocation}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.WorldLocation)
+        au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_WorldLocation_descriptor;
@@ -2217,7 +2208,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional .robominions.Coordinate absolute_location = 1;
       private au.id.katharos.robominions.api.RobotApi.Coordinate absoluteLocation_ = au.id.katharos.robominions.api.RobotApi.Coordinate.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.Coordinate, au.id.katharos.robominions.api.RobotApi.Coordinate.Builder, au.id.katharos.robominions.api.RobotApi.CoordinateOrBuilder> absoluteLocationBuilder_;
@@ -2326,7 +2316,7 @@ public final class RobotApi {
         if (absoluteLocationBuilder_ == null) {
           absoluteLocationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.Coordinate, au.id.katharos.robominions.api.RobotApi.Coordinate.Builder, au.id.katharos.robominions.api.RobotApi.CoordinateOrBuilder>(
-                  absoluteLocation_,
+                  getAbsoluteLocation(),
                   getParentForChildren(),
                   isClean());
           absoluteLocation_ = null;
@@ -2334,7 +2324,6 @@ public final class RobotApi {
         return absoluteLocationBuilder_;
       }
 
-      // optional .robominions.WorldLocation.Direction direction = 2;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction direction_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       /**
        * <code>optional .robominions.WorldLocation.Direction direction = 2;</code>
@@ -2401,10 +2390,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.WorldLocation)
   }
 
-  public interface RobotReadRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RobotReadRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.RobotReadRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .robominions.WorldLocation identify_material = 1;
     /**
      * <code>optional .robominions.WorldLocation identify_material = 1;</code>
      *
@@ -2430,7 +2419,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder getIdentifyMaterialOrBuilder();
 
-    // optional .robominions.Material locate_material_nearby = 2;
     /**
      * <code>optional .robominions.Material locate_material_nearby = 2;</code>
      *
@@ -2456,7 +2444,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.Materials.MaterialOrBuilder getLocateMaterialNearbyOrBuilder();
 
-    // optional bool locate_nonsolid_nearby = 4;
     /**
      * <code>optional bool locate_nonsolid_nearby = 4;</code>
      */
@@ -2466,7 +2453,6 @@ public final class RobotApi {
      */
     boolean getLocateNonsolidNearby();
 
-    // optional .robominions.RobotReadRequest.Entity locate_entity = 3;
     /**
      * <code>optional .robominions.RobotReadRequest.Entity locate_entity = 3;</code>
      */
@@ -2476,7 +2462,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity getLocateEntity();
 
-    // optional bool get_inventory = 5;
     /**
      * <code>optional bool get_inventory = 5;</code>
      *
@@ -2494,7 +2479,6 @@ public final class RobotApi {
      */
     boolean getGetInventory();
 
-    // optional .robominions.WorldLocation is_solid = 6;
     /**
      * <code>optional .robominions.WorldLocation is_solid = 6;</code>
      *
@@ -2524,8 +2508,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.RobotReadRequest}
    */
   public static final class RobotReadRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements RobotReadRequestOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.RobotReadRequest)
+      RobotReadRequestOrBuilder {
     // Use RobotReadRequest.newBuilder() to construct.
     private RobotReadRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -2753,7 +2738,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional .robominions.WorldLocation identify_material = 1;
     public static final int IDENTIFY_MATERIAL_FIELD_NUMBER = 1;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation identifyMaterial_;
     /**
@@ -2787,7 +2771,6 @@ public final class RobotApi {
       return identifyMaterial_;
     }
 
-    // optional .robominions.Material locate_material_nearby = 2;
     public static final int LOCATE_MATERIAL_NEARBY_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.Materials.Material locateMaterialNearby_;
     /**
@@ -2821,7 +2804,6 @@ public final class RobotApi {
       return locateMaterialNearby_;
     }
 
-    // optional bool locate_nonsolid_nearby = 4;
     public static final int LOCATE_NONSOLID_NEARBY_FIELD_NUMBER = 4;
     private boolean locateNonsolidNearby_;
     /**
@@ -2837,7 +2819,6 @@ public final class RobotApi {
       return locateNonsolidNearby_;
     }
 
-    // optional .robominions.RobotReadRequest.Entity locate_entity = 3;
     public static final int LOCATE_ENTITY_FIELD_NUMBER = 3;
     private au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity locateEntity_;
     /**
@@ -2853,7 +2834,6 @@ public final class RobotApi {
       return locateEntity_;
     }
 
-    // optional bool get_inventory = 5;
     public static final int GET_INVENTORY_FIELD_NUMBER = 5;
     private boolean getInventory_;
     /**
@@ -2877,7 +2857,6 @@ public final class RobotApi {
       return getInventory_;
     }
 
-    // optional .robominions.WorldLocation is_solid = 6;
     public static final int IS_SOLID_FIELD_NUMBER = 6;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation isSolid_;
     /**
@@ -2922,7 +2901,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (hasIdentifyMaterial()) {
         if (!getIdentifyMaterial().isInitialized()) {
@@ -3076,8 +3056,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.RobotReadRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.RobotReadRequest)
+        au.id.katharos.robominions.api.RobotApi.RobotReadRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotReadRequest_descriptor;
@@ -3274,7 +3255,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional .robominions.WorldLocation identify_material = 1;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation identifyMaterial_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.WorldLocation, au.id.katharos.robominions.api.RobotApi.WorldLocation.Builder, au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder> identifyMaterialBuilder_;
@@ -3419,7 +3399,7 @@ public final class RobotApi {
         if (identifyMaterialBuilder_ == null) {
           identifyMaterialBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.WorldLocation, au.id.katharos.robominions.api.RobotApi.WorldLocation.Builder, au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder>(
-                  identifyMaterial_,
+                  getIdentifyMaterial(),
                   getParentForChildren(),
                   isClean());
           identifyMaterial_ = null;
@@ -3427,7 +3407,6 @@ public final class RobotApi {
         return identifyMaterialBuilder_;
       }
 
-      // optional .robominions.Material locate_material_nearby = 2;
       private au.id.katharos.robominions.api.Materials.Material locateMaterialNearby_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> locateMaterialNearbyBuilder_;
@@ -3572,7 +3551,7 @@ public final class RobotApi {
         if (locateMaterialNearbyBuilder_ == null) {
           locateMaterialNearbyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder>(
-                  locateMaterialNearby_,
+                  getLocateMaterialNearby(),
                   getParentForChildren(),
                   isClean());
           locateMaterialNearby_ = null;
@@ -3580,7 +3559,6 @@ public final class RobotApi {
         return locateMaterialNearbyBuilder_;
       }
 
-      // optional bool locate_nonsolid_nearby = 4;
       private boolean locateNonsolidNearby_ ;
       /**
        * <code>optional bool locate_nonsolid_nearby = 4;</code>
@@ -3613,7 +3591,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.RobotReadRequest.Entity locate_entity = 3;
       private au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity locateEntity_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity.SELF;
       /**
        * <code>optional .robominions.RobotReadRequest.Entity locate_entity = 3;</code>
@@ -3649,7 +3626,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional bool get_inventory = 5;
       private boolean getInventory_ ;
       /**
        * <code>optional bool get_inventory = 5;</code>
@@ -3698,7 +3674,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.WorldLocation is_solid = 6;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation isSolid_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.WorldLocation, au.id.katharos.robominions.api.RobotApi.WorldLocation.Builder, au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder> isSolidBuilder_;
@@ -3843,7 +3818,7 @@ public final class RobotApi {
         if (isSolidBuilder_ == null) {
           isSolidBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.WorldLocation, au.id.katharos.robominions.api.RobotApi.WorldLocation.Builder, au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder>(
-                  isSolid_,
+                  getIsSolid(),
                   getParentForChildren(),
                   isClean());
           isSolid_ = null;
@@ -3862,10 +3837,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.RobotReadRequest)
   }
 
-  public interface RobotActionRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RobotActionRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.RobotActionRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .robominions.WorldLocation.Direction move_direction = 2;
     /**
      * <code>optional .robominions.WorldLocation.Direction move_direction = 2;</code>
      */
@@ -3875,7 +3850,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction getMoveDirection();
 
-    // optional .robominions.WorldLocation.Direction turn_direction = 3;
     /**
      * <code>optional .robominions.WorldLocation.Direction turn_direction = 3;</code>
      */
@@ -3885,7 +3859,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction getTurnDirection();
 
-    // optional .robominions.WorldLocation.Direction mine_direction = 4;
     /**
      * <code>optional .robominions.WorldLocation.Direction mine_direction = 4;</code>
      */
@@ -3895,7 +3868,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction getMineDirection();
 
-    // optional .robominions.WorldLocation.Direction place_direction = 5;
     /**
      * <code>optional .robominions.WorldLocation.Direction place_direction = 5;</code>
      */
@@ -3905,7 +3877,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction getPlaceDirection();
 
-    // optional .robominions.Material place_material = 6;
     /**
      * <code>optional .robominions.Material place_material = 6;</code>
      */
@@ -3923,8 +3894,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.RobotActionRequest}
    */
   public static final class RobotActionRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements RobotActionRequestOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.RobotActionRequest)
+      RobotActionRequestOrBuilder {
     // Use RobotActionRequest.newBuilder() to construct.
     private RobotActionRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4067,7 +4039,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional .robominions.WorldLocation.Direction move_direction = 2;
     public static final int MOVE_DIRECTION_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction moveDirection_;
     /**
@@ -4083,7 +4054,6 @@ public final class RobotApi {
       return moveDirection_;
     }
 
-    // optional .robominions.WorldLocation.Direction turn_direction = 3;
     public static final int TURN_DIRECTION_FIELD_NUMBER = 3;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction turnDirection_;
     /**
@@ -4099,7 +4069,6 @@ public final class RobotApi {
       return turnDirection_;
     }
 
-    // optional .robominions.WorldLocation.Direction mine_direction = 4;
     public static final int MINE_DIRECTION_FIELD_NUMBER = 4;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction mineDirection_;
     /**
@@ -4115,7 +4084,6 @@ public final class RobotApi {
       return mineDirection_;
     }
 
-    // optional .robominions.WorldLocation.Direction place_direction = 5;
     public static final int PLACE_DIRECTION_FIELD_NUMBER = 5;
     private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction placeDirection_;
     /**
@@ -4131,7 +4099,6 @@ public final class RobotApi {
       return placeDirection_;
     }
 
-    // optional .robominions.Material place_material = 6;
     public static final int PLACE_MATERIAL_FIELD_NUMBER = 6;
     private au.id.katharos.robominions.api.Materials.Material placeMaterial_;
     /**
@@ -4163,7 +4130,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -4298,8 +4266,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.RobotActionRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.RobotActionRequest)
+        au.id.katharos.robominions.api.RobotApi.RobotActionRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotActionRequest_descriptor;
@@ -4457,7 +4426,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional .robominions.WorldLocation.Direction move_direction = 2;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction moveDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       /**
        * <code>optional .robominions.WorldLocation.Direction move_direction = 2;</code>
@@ -4493,7 +4461,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.WorldLocation.Direction turn_direction = 3;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction turnDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       /**
        * <code>optional .robominions.WorldLocation.Direction turn_direction = 3;</code>
@@ -4529,7 +4496,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.WorldLocation.Direction mine_direction = 4;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction mineDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       /**
        * <code>optional .robominions.WorldLocation.Direction mine_direction = 4;</code>
@@ -4565,7 +4531,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.WorldLocation.Direction place_direction = 5;
       private au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction placeDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       /**
        * <code>optional .robominions.WorldLocation.Direction place_direction = 5;</code>
@@ -4601,7 +4566,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.Material place_material = 6;
       private au.id.katharos.robominions.api.Materials.Material placeMaterial_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> placeMaterialBuilder_;
@@ -4710,7 +4674,7 @@ public final class RobotApi {
         if (placeMaterialBuilder_ == null) {
           placeMaterialBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder>(
-                  placeMaterial_,
+                  getPlaceMaterial(),
                   getParentForChildren(),
                   isClean());
           placeMaterial_ = null;
@@ -4729,10 +4693,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.RobotActionRequest)
   }
 
-  public interface LocationResponseOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface LocationResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.LocationResponse)
+      com.google.protobuf.MessageOrBuilder {
 
-    // repeated .robominions.WorldLocation locations = 1;
     /**
      * <code>repeated .robominions.WorldLocation locations = 1;</code>
      */
@@ -4761,8 +4725,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.LocationResponse}
    */
   public static final class LocationResponse extends
-      com.google.protobuf.GeneratedMessage
-      implements LocationResponseOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.LocationResponse)
+      LocationResponseOrBuilder {
     // Use LocationResponse.newBuilder() to construct.
     private LocationResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -4858,7 +4823,6 @@ public final class RobotApi {
       return PARSER;
     }
 
-    // repeated .robominions.WorldLocation locations = 1;
     public static final int LOCATIONS_FIELD_NUMBER = 1;
     private java.util.List<au.id.katharos.robominions.api.RobotApi.WorldLocation> locations_;
     /**
@@ -4900,7 +4864,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       for (int i = 0; i < getLocationsCount(); i++) {
         if (!getLocations(i).isInitialized()) {
@@ -5013,8 +4978,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.LocationResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.LocationResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.LocationResponse)
+        au.id.katharos.robominions.api.RobotApi.LocationResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_LocationResponse_descriptor;
@@ -5164,7 +5130,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // repeated .robominions.WorldLocation locations = 1;
       private java.util.List<au.id.katharos.robominions.api.RobotApi.WorldLocation> locations_ =
         java.util.Collections.emptyList();
       private void ensureLocationsIsMutable() {
@@ -5306,7 +5271,8 @@ public final class RobotApi {
           java.lang.Iterable<? extends au.id.katharos.robominions.api.RobotApi.WorldLocation> values) {
         if (locationsBuilder_ == null) {
           ensureLocationsIsMutable();
-          super.addAll(values, locations_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, locations_);
           onChanged();
         } else {
           locationsBuilder_.addAllMessages(values);
@@ -5415,10 +5381,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.LocationResponse)
   }
 
-  public interface InventoryResponseOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface InventoryResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.InventoryResponse)
+      com.google.protobuf.MessageOrBuilder {
 
-    // repeated .robominions.Material materials = 1;
     /**
      * <code>repeated .robominions.Material materials = 1;</code>
      */
@@ -5443,7 +5409,6 @@ public final class RobotApi {
     au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialsOrBuilder(
         int index);
 
-    // repeated int32 counts = 2 [packed = true];
     /**
      * <code>repeated int32 counts = 2 [packed = true];</code>
      */
@@ -5461,8 +5426,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.InventoryResponse}
    */
   public static final class InventoryResponse extends
-      com.google.protobuf.GeneratedMessage
-      implements InventoryResponseOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.InventoryResponse)
+      InventoryResponseOrBuilder {
     // Use InventoryResponse.newBuilder() to construct.
     private InventoryResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -5582,7 +5548,6 @@ public final class RobotApi {
       return PARSER;
     }
 
-    // repeated .robominions.Material materials = 1;
     public static final int MATERIALS_FIELD_NUMBER = 1;
     private java.util.List<au.id.katharos.robominions.api.Materials.Material> materials_;
     /**
@@ -5618,7 +5583,6 @@ public final class RobotApi {
       return materials_.get(index);
     }
 
-    // repeated int32 counts = 2 [packed = true];
     public static final int COUNTS_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Integer> counts_;
     /**
@@ -5649,7 +5613,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -5777,8 +5742,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.InventoryResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.InventoryResponse)
+        au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_InventoryResponse_descriptor;
@@ -5939,7 +5905,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // repeated .robominions.Material materials = 1;
       private java.util.List<au.id.katharos.robominions.api.Materials.Material> materials_ =
         java.util.Collections.emptyList();
       private void ensureMaterialsIsMutable() {
@@ -6081,7 +6046,8 @@ public final class RobotApi {
           java.lang.Iterable<? extends au.id.katharos.robominions.api.Materials.Material> values) {
         if (materialsBuilder_ == null) {
           ensureMaterialsIsMutable();
-          super.addAll(values, materials_);
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, materials_);
           onChanged();
         } else {
           materialsBuilder_.addAllMessages(values);
@@ -6179,7 +6145,6 @@ public final class RobotApi {
         return materialsBuilder_;
       }
 
-      // repeated int32 counts = 2 [packed = true];
       private java.util.List<java.lang.Integer> counts_ = java.util.Collections.emptyList();
       private void ensureCountsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
@@ -6231,7 +6196,8 @@ public final class RobotApi {
       public Builder addAllCounts(
           java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureCountsIsMutable();
-        super.addAll(values, counts_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, counts_);
         onChanged();
         return this;
       }
@@ -6256,10 +6222,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.InventoryResponse)
   }
 
-  public interface RobotResponseOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RobotResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.RobotResponse)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 key = 3;
     /**
      * <code>optional int32 key = 3;</code>
      */
@@ -6269,7 +6235,6 @@ public final class RobotApi {
      */
     int getKey();
 
-    // optional bool success = 1;
     /**
      * <code>optional bool success = 1;</code>
      */
@@ -6279,7 +6244,6 @@ public final class RobotApi {
      */
     boolean getSuccess();
 
-    // optional .robominions.ErrorMessage error_message = 2;
     /**
      * <code>optional .robominions.ErrorMessage error_message = 2;</code>
      */
@@ -6293,7 +6257,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.ErrorMessageOrBuilder getErrorMessageOrBuilder();
 
-    // optional .robominions.LocationResponse location_response = 4;
     /**
      * <code>optional .robominions.LocationResponse location_response = 4;</code>
      */
@@ -6307,7 +6270,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.LocationResponseOrBuilder getLocationResponseOrBuilder();
 
-    // optional .robominions.Material material_response = 5;
     /**
      * <code>optional .robominions.Material material_response = 5;</code>
      */
@@ -6321,7 +6283,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialResponseOrBuilder();
 
-    // optional .robominions.InventoryResponse inventory_response = 6;
     /**
      * <code>optional .robominions.InventoryResponse inventory_response = 6;</code>
      */
@@ -6335,7 +6296,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder getInventoryResponseOrBuilder();
 
-    // optional bool boolean_response = 7;
     /**
      * <code>optional bool boolean_response = 7;</code>
      */
@@ -6349,8 +6309,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.RobotResponse}
    */
   public static final class RobotResponse extends
-      com.google.protobuf.GeneratedMessage
-      implements RobotResponseOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.RobotResponse)
+      RobotResponseOrBuilder {
     // Use RobotResponse.newBuilder() to construct.
     private RobotResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -6503,7 +6464,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional int32 key = 3;
     public static final int KEY_FIELD_NUMBER = 3;
     private int key_;
     /**
@@ -6519,7 +6479,6 @@ public final class RobotApi {
       return key_;
     }
 
-    // optional bool success = 1;
     public static final int SUCCESS_FIELD_NUMBER = 1;
     private boolean success_;
     /**
@@ -6535,7 +6494,6 @@ public final class RobotApi {
       return success_;
     }
 
-    // optional .robominions.ErrorMessage error_message = 2;
     public static final int ERROR_MESSAGE_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.RobotApi.ErrorMessage errorMessage_;
     /**
@@ -6557,7 +6515,6 @@ public final class RobotApi {
       return errorMessage_;
     }
 
-    // optional .robominions.LocationResponse location_response = 4;
     public static final int LOCATION_RESPONSE_FIELD_NUMBER = 4;
     private au.id.katharos.robominions.api.RobotApi.LocationResponse locationResponse_;
     /**
@@ -6579,7 +6536,6 @@ public final class RobotApi {
       return locationResponse_;
     }
 
-    // optional .robominions.Material material_response = 5;
     public static final int MATERIAL_RESPONSE_FIELD_NUMBER = 5;
     private au.id.katharos.robominions.api.Materials.Material materialResponse_;
     /**
@@ -6601,7 +6557,6 @@ public final class RobotApi {
       return materialResponse_;
     }
 
-    // optional .robominions.InventoryResponse inventory_response = 6;
     public static final int INVENTORY_RESPONSE_FIELD_NUMBER = 6;
     private au.id.katharos.robominions.api.RobotApi.InventoryResponse inventoryResponse_;
     /**
@@ -6623,7 +6578,6 @@ public final class RobotApi {
       return inventoryResponse_;
     }
 
-    // optional bool boolean_response = 7;
     public static final int BOOLEAN_RESPONSE_FIELD_NUMBER = 7;
     private boolean booleanResponse_;
     /**
@@ -6651,7 +6605,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (hasLocationResponse()) {
         if (!getLocationResponse().isInitialized()) {
@@ -6806,8 +6761,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.RobotResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.RobotResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.RobotResponse)
+        au.id.katharos.robominions.api.RobotApi.RobotResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_RobotResponse_descriptor;
@@ -7016,7 +6972,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional int32 key = 3;
       private int key_ ;
       /**
        * <code>optional int32 key = 3;</code>
@@ -7049,7 +7004,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional bool success = 1;
       private boolean success_ ;
       /**
        * <code>optional bool success = 1;</code>
@@ -7082,7 +7036,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.ErrorMessage error_message = 2;
       private au.id.katharos.robominions.api.RobotApi.ErrorMessage errorMessage_ = au.id.katharos.robominions.api.RobotApi.ErrorMessage.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.ErrorMessage, au.id.katharos.robominions.api.RobotApi.ErrorMessage.Builder, au.id.katharos.robominions.api.RobotApi.ErrorMessageOrBuilder> errorMessageBuilder_;
@@ -7191,7 +7144,7 @@ public final class RobotApi {
         if (errorMessageBuilder_ == null) {
           errorMessageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.ErrorMessage, au.id.katharos.robominions.api.RobotApi.ErrorMessage.Builder, au.id.katharos.robominions.api.RobotApi.ErrorMessageOrBuilder>(
-                  errorMessage_,
+                  getErrorMessage(),
                   getParentForChildren(),
                   isClean());
           errorMessage_ = null;
@@ -7199,7 +7152,6 @@ public final class RobotApi {
         return errorMessageBuilder_;
       }
 
-      // optional .robominions.LocationResponse location_response = 4;
       private au.id.katharos.robominions.api.RobotApi.LocationResponse locationResponse_ = au.id.katharos.robominions.api.RobotApi.LocationResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.LocationResponse, au.id.katharos.robominions.api.RobotApi.LocationResponse.Builder, au.id.katharos.robominions.api.RobotApi.LocationResponseOrBuilder> locationResponseBuilder_;
@@ -7308,7 +7260,7 @@ public final class RobotApi {
         if (locationResponseBuilder_ == null) {
           locationResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.LocationResponse, au.id.katharos.robominions.api.RobotApi.LocationResponse.Builder, au.id.katharos.robominions.api.RobotApi.LocationResponseOrBuilder>(
-                  locationResponse_,
+                  getLocationResponse(),
                   getParentForChildren(),
                   isClean());
           locationResponse_ = null;
@@ -7316,7 +7268,6 @@ public final class RobotApi {
         return locationResponseBuilder_;
       }
 
-      // optional .robominions.Material material_response = 5;
       private au.id.katharos.robominions.api.Materials.Material materialResponse_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> materialResponseBuilder_;
@@ -7425,7 +7376,7 @@ public final class RobotApi {
         if (materialResponseBuilder_ == null) {
           materialResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder>(
-                  materialResponse_,
+                  getMaterialResponse(),
                   getParentForChildren(),
                   isClean());
           materialResponse_ = null;
@@ -7433,7 +7384,6 @@ public final class RobotApi {
         return materialResponseBuilder_;
       }
 
-      // optional .robominions.InventoryResponse inventory_response = 6;
       private au.id.katharos.robominions.api.RobotApi.InventoryResponse inventoryResponse_ = au.id.katharos.robominions.api.RobotApi.InventoryResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.RobotApi.InventoryResponse, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder, au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder> inventoryResponseBuilder_;
@@ -7542,7 +7492,7 @@ public final class RobotApi {
         if (inventoryResponseBuilder_ == null) {
           inventoryResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               au.id.katharos.robominions.api.RobotApi.InventoryResponse, au.id.katharos.robominions.api.RobotApi.InventoryResponse.Builder, au.id.katharos.robominions.api.RobotApi.InventoryResponseOrBuilder>(
-                  inventoryResponse_,
+                  getInventoryResponse(),
                   getParentForChildren(),
                   isClean());
           inventoryResponse_ = null;
@@ -7550,7 +7500,6 @@ public final class RobotApi {
         return inventoryResponseBuilder_;
       }
 
-      // optional bool boolean_response = 7;
       private boolean booleanResponse_ ;
       /**
        * <code>optional bool boolean_response = 7;</code>
@@ -7594,10 +7543,10 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.RobotResponse)
   }
 
-  public interface ErrorMessageOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ErrorMessageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:robominions.ErrorMessage)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional .robominions.ErrorMessage.Reason reason = 1;
     /**
      * <code>optional .robominions.ErrorMessage.Reason reason = 1;</code>
      */
@@ -7607,7 +7556,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason getReason();
 
-    // optional .robominions.ErrorMessage.Action action = 2;
     /**
      * <code>optional .robominions.ErrorMessage.Action action = 2;</code>
      */
@@ -7617,7 +7565,6 @@ public final class RobotApi {
      */
     au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action getAction();
 
-    // optional string message = 3;
     /**
      * <code>optional string message = 3;</code>
      */
@@ -7636,8 +7583,9 @@ public final class RobotApi {
    * Protobuf type {@code robominions.ErrorMessage}
    */
   public static final class ErrorMessage extends
-      com.google.protobuf.GeneratedMessage
-      implements ErrorMessageOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:robominions.ErrorMessage)
+      ErrorMessageOrBuilder {
     // Use ErrorMessage.newBuilder() to construct.
     private ErrorMessage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -7706,8 +7654,9 @@ public final class RobotApi {
               break;
             }
             case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              message_ = input.readBytes();
+              message_ = bs;
               break;
             }
           }
@@ -7995,7 +7944,6 @@ public final class RobotApi {
     }
 
     private int bitField0_;
-    // optional .robominions.ErrorMessage.Reason reason = 1;
     public static final int REASON_FIELD_NUMBER = 1;
     private au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason reason_;
     /**
@@ -8011,7 +7959,6 @@ public final class RobotApi {
       return reason_;
     }
 
-    // optional .robominions.ErrorMessage.Action action = 2;
     public static final int ACTION_FIELD_NUMBER = 2;
     private au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action action_;
     /**
@@ -8027,7 +7974,6 @@ public final class RobotApi {
       return action_;
     }
 
-    // optional string message = 3;
     public static final int MESSAGE_FIELD_NUMBER = 3;
     private java.lang.Object message_;
     /**
@@ -8078,7 +8024,8 @@ public final class RobotApi {
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -8199,8 +8146,9 @@ public final class RobotApi {
      * Protobuf type {@code robominions.ErrorMessage}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements au.id.katharos.robominions.api.RobotApi.ErrorMessageOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:robominions.ErrorMessage)
+        au.id.katharos.robominions.api.RobotApi.ErrorMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return au.id.katharos.robominions.api.RobotApi.internal_static_robominions_ErrorMessage_descriptor;
@@ -8333,7 +8281,6 @@ public final class RobotApi {
       }
       private int bitField0_;
 
-      // optional .robominions.ErrorMessage.Reason reason = 1;
       private au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason reason_ = au.id.katharos.robominions.api.RobotApi.ErrorMessage.Reason.UNKNOWN;
       /**
        * <code>optional .robominions.ErrorMessage.Reason reason = 1;</code>
@@ -8369,7 +8316,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional .robominions.ErrorMessage.Action action = 2;
       private au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action action_ = au.id.katharos.robominions.api.RobotApi.ErrorMessage.Action.FAIL_ACTION;
       /**
        * <code>optional .robominions.ErrorMessage.Action action = 2;</code>
@@ -8405,7 +8351,6 @@ public final class RobotApi {
         return this;
       }
 
-      // optional string message = 3;
       private java.lang.Object message_ = "";
       /**
        * <code>optional string message = 3;</code>
@@ -8419,9 +8364,12 @@ public final class RobotApi {
       public java.lang.String getMessage() {
         java.lang.Object ref = message_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          message_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            message_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
@@ -8490,47 +8438,47 @@ public final class RobotApi {
     // @@protoc_insertion_point(class_scope:robominions.ErrorMessage)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_RobotRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_RobotRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_Coordinate_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_Coordinate_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_WorldLocation_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_WorldLocation_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_RobotReadRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_RobotReadRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_RobotActionRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_RobotActionRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_LocationResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_LocationResponse_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_InventoryResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_InventoryResponse_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_RobotResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_robominions_RobotResponse_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_robominions_ErrorMessage_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8598,72 +8546,73 @@ public final class RobotApi {
       "iB\010RobotApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_robominions_RobotRequest_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_robominions_RobotRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_RobotRequest_descriptor,
-              new java.lang.String[] { "Name", "Key", "ReadRequest", "ActionRequest", });
-          internal_static_robominions_Coordinate_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_robominions_Coordinate_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_Coordinate_descriptor,
-              new java.lang.String[] { "X", "Y", "Z", });
-          internal_static_robominions_WorldLocation_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_robominions_WorldLocation_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_WorldLocation_descriptor,
-              new java.lang.String[] { "AbsoluteLocation", "Direction", });
-          internal_static_robominions_RobotReadRequest_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_robominions_RobotReadRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_RobotReadRequest_descriptor,
-              new java.lang.String[] { "IdentifyMaterial", "LocateMaterialNearby", "LocateNonsolidNearby", "LocateEntity", "GetInventory", "IsSolid", });
-          internal_static_robominions_RobotActionRequest_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_robominions_RobotActionRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_RobotActionRequest_descriptor,
-              new java.lang.String[] { "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
-          internal_static_robominions_LocationResponse_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_robominions_LocationResponse_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_LocationResponse_descriptor,
-              new java.lang.String[] { "Locations", });
-          internal_static_robominions_InventoryResponse_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_robominions_InventoryResponse_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_InventoryResponse_descriptor,
-              new java.lang.String[] { "Materials", "Counts", });
-          internal_static_robominions_RobotResponse_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_robominions_RobotResponse_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_RobotResponse_descriptor,
-              new java.lang.String[] { "Key", "Success", "ErrorMessage", "LocationResponse", "MaterialResponse", "InventoryResponse", "BooleanResponse", });
-          internal_static_robominions_ErrorMessage_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_robominions_ErrorMessage_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_robominions_ErrorMessage_descriptor,
-              new java.lang.String[] { "Reason", "Action", "Message", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           au.id.katharos.robominions.api.Materials.getDescriptor(),
         }, assigner);
+    internal_static_robominions_RobotRequest_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_robominions_RobotRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_RobotRequest_descriptor,
+        new java.lang.String[] { "Name", "Key", "ReadRequest", "ActionRequest", });
+    internal_static_robominions_Coordinate_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_robominions_Coordinate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_Coordinate_descriptor,
+        new java.lang.String[] { "X", "Y", "Z", });
+    internal_static_robominions_WorldLocation_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_robominions_WorldLocation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_WorldLocation_descriptor,
+        new java.lang.String[] { "AbsoluteLocation", "Direction", });
+    internal_static_robominions_RobotReadRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_robominions_RobotReadRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_RobotReadRequest_descriptor,
+        new java.lang.String[] { "IdentifyMaterial", "LocateMaterialNearby", "LocateNonsolidNearby", "LocateEntity", "GetInventory", "IsSolid", });
+    internal_static_robominions_RobotActionRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_robominions_RobotActionRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_RobotActionRequest_descriptor,
+        new java.lang.String[] { "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
+    internal_static_robominions_LocationResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_robominions_LocationResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_LocationResponse_descriptor,
+        new java.lang.String[] { "Locations", });
+    internal_static_robominions_InventoryResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_robominions_InventoryResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_InventoryResponse_descriptor,
+        new java.lang.String[] { "Materials", "Counts", });
+    internal_static_robominions_RobotResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_robominions_RobotResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_RobotResponse_descriptor,
+        new java.lang.String[] { "Key", "Success", "ErrorMessage", "LocationResponse", "MaterialResponse", "InventoryResponse", "BooleanResponse", });
+    internal_static_robominions_ErrorMessage_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_robominions_ErrorMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_robominions_ErrorMessage_descriptor,
+        new java.lang.String[] { "Reason", "Action", "Message", });
+    au.id.katharos.robominions.api.Materials.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
