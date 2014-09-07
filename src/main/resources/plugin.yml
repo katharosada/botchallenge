@@ -1,20 +1,19 @@
 name: RoboMinions
 main: au.id.katharos.robominions.RoboMinionsPlugin
 version: 0.1
-depend: [ControllableMobsAPI]
 
 commands:
    spawnrobot:
       description: Just a test command
       usage: /<command>
-      permission: roboadmin
+      permission: robouser
       permission-message: You don't have <permission>
    robot:
       description: Give the robot a command (only supports move and turn)
       usage: /<command> {turn|move} {up|down|east|west|forward|backward}
-      permission: roboadmin
+      permission: robouser
 
 permissions:
-   roboadmin:
-      description: Admin access for RoboMinions
+   robouser:
+      description: Normal user access for RoboMinions
       default: true

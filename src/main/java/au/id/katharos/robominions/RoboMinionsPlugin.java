@@ -37,6 +37,9 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	// The complete set of all bots in the game, maped by the name of the player that owns them. 
 	private HashMap<UUID, AbstractRobot> robotMap;
 	
+	// We need to be able to map a player name to the UUID even when they've gone offline.
+	private HashMap<String, UUID> uuidCache;
+	
 	// The Robot API server
 	private RobotApiServer apiServer;
 	
@@ -103,17 +106,18 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 		robotMap = new HashMap<UUID, AbstractRobot>();
 		actionMap = new HashMap<String, String>();
 		actionQueue = new ActionQueue(getLogger());
+		uuidCache = new HashMap<String, UUID>();
 
 		this.getServer().getPluginManager().registerEvents(this, this);
 
 		getServer().getScheduler().scheduleSyncRepeatingTask(
 				this, new FlyingTickRepeatingTask(), 1, 10);
 		getServer().getScheduler().scheduleSyncRepeatingTask(
-				this, new ActionExecutor(actionQueue, robotMap, getLogger()), 1, 2);
+				this, new ActionExecutor(actionQueue, robotMap, uuidCache, getLogger()), 1, 2);
 		getServer().getScheduler().scheduleSyncRepeatingTask(
 				this, new RobotTickRepeatingTask(), 1, 1);
 
-		ReadExecutor readExecutor = new ReadExecutor(getLogger(), robotMap);
+		ReadExecutor readExecutor = new ReadExecutor(getLogger(), robotMap, uuidCache);
 		this.apiServer = new RobotApiServer(API_PORT, getLogger(), actionQueue, readExecutor);
 		apiServerTask = getServer().getScheduler().runTaskAsynchronously(this, apiServer);
 	}
@@ -137,6 +141,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	 * @return The new robot.
 	 */
 	private AbstractRobot spawnRobot(Player player, Location location, String type) {
+		uuidCache.put(player.getName(), player.getUniqueId());
 		if (type == null) {
 			// Default spawn a Pumpkin bot (it works the best).
 			return new PumpkinRobot(player, location, getLogger());

@@ -35,10 +35,8 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(final ChannelHandlerContext ctx, Object msg) {
         try {
         	RobotRequest request = (RobotRequest) msg;
-        	// TODO FIX THIS
-        	UUID playerId = Bukkit.getPlayer(request.getName()).getUniqueId(); 
         	if (request.hasActionRequest()) {
-	        	ActionEvent event = new ActionEvent(playerId, request.getKey(), request.getActionRequest(),
+	        	ActionEvent event = new ActionEvent(request.getName(), request.getKey(), request.getActionRequest(),
 	        			new EventFinishedListener() {
 	        		
 	        		/*
@@ -60,7 +58,7 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
         		// might be in an inconsistent state but we'll see if it brings up any problems.
         		RobotResponse response;
 				try {
-					response = readExecutor.execute(playerId, request.getKey(), request.getReadRequest());
+					response = readExecutor.execute(request.getName(), request.getKey(), request.getReadRequest());
 				} catch (RobotRequestException e) {
 					logger.warning(e.getMessage());
 					response = e.getResponse();

@@ -30,13 +30,13 @@ public class ActionQueue {
 	}
 	
 	public static class ActionEvent {
-		private final UUID playerId;
+		private final String playerId;
 		private final int key;
 		private final RobotActionRequest actionRequest;
 		private final EventFinishedListener listener;
 		
 		public ActionEvent(
-				UUID playerName,
+				String playerName,
 				int key,
 				RobotActionRequest direction,
 				EventFinishedListener finishedListener) {
@@ -46,7 +46,7 @@ public class ActionQueue {
 			this.listener = finishedListener;
 		}
 		
-		public UUID getPlayerId() {
+		public String getPlayerId() {
 			return playerId;
 		}
 		
