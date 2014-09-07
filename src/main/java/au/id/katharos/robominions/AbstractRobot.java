@@ -244,7 +244,6 @@ public abstract class AbstractRobot implements InventoryHolder {
 		} else {
 			inventory.getItem(inventory.first(Material.COBBLESTONE)).setAmount(64);
 		}
-		inventory.addItem(new ItemStack(Material.WOOD, 1));
 	}
 	
 	public Inventory getInventory() {
