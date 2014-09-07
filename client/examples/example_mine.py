@@ -3,7 +3,7 @@ Mines a set of stairs 2 blocks wide going down in whatever direction the bot
 is facing when it starts.
 """
 
-from client import *
+from botchallenge import *
 
 robot = Robot()
 

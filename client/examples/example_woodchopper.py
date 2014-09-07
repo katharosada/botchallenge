@@ -1,8 +1,8 @@
 """
 Example robot which finds trees and gathers wood.
 """
-from client import *
-from api.materials_pb2 import Material
+from botchallenge import *
+from botchallenge.api.materials_pb2 import Material
 
 robot = Robot()
 

@@ -1,5 +1,5 @@
 
-from client import *
+from botchallenge import *
 
 robot = Robot()
 
