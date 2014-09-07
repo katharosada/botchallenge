@@ -45,6 +45,7 @@
                 <arg value="--proto_path=${project.basedir}/proto" />
                 <arg value="${project.basedir}/proto/robotapi.proto" />
                 <arg value="${project.basedir}/proto/materials.proto" />
+                <arg value="${project.basedir}/proto/storage.proto" />
               </exec>
             </tasks>
             <sourceRoot>target/generated-sources</sourceRoot>

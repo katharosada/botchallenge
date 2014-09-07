@@ -92,9 +92,9 @@ public abstract class AbstractRobot implements InventoryHolder {
 	 * @param location The initial location
 	 * @param logger A logger to log any info/etc. messages to.
 	 */
-	protected AbstractRobot(Player player, Location location, Logger logger) {
-		this.playerId = player.getUniqueId();
-		this.world = player.getWorld();
+	protected AbstractRobot(World world, UUID playerId, Location location, Logger logger) {
+		this.playerId = playerId;
+		this.world = world;
 		//this.inventory = new HashMap<Material, Integer>();
 		this.inventory = Bukkit.createInventory(this, 54, "Bot Inventory");
 		// Start off with 100 dirt blocks
@@ -110,6 +110,13 @@ public abstract class AbstractRobot implements InventoryHolder {
 	 */
 	public Location getLocation() {
 		return location;
+	}
+	
+	/**
+	 * Get the absolute direction (NSEW) that the robot is facing.
+	 */
+	public Direction getFacingDirection() {
+		return facingDirection;
 	}
 	
 	/**

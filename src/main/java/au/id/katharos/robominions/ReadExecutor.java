@@ -1,16 +1,12 @@
 package au.id.katharos.robominions;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,28 +31,14 @@ import au.id.katharos.robominions.api.RobotApi.WorldLocation;
 public class ReadExecutor {
 
 	private final Logger logger;
-	private final HashMap<UUID, AbstractRobot> robotMap;
-	private final HashMap<String, UUID> uuidCache;
+	private final RobotStateManager stateManager;
 	
-	public ReadExecutor(Logger logger, HashMap<UUID, AbstractRobot> robotMap,
-			HashMap<String, UUID> uuidCache) {
+	public ReadExecutor(Logger logger, RobotStateManager stateManager) {
 		this.logger = logger;
-		this.robotMap = robotMap;
-		this.uuidCache = uuidCache;
+		this.stateManager = stateManager;
 	}
 	
-	private AbstractRobot getRobot(String playerName) {
-		Player player = Bukkit.getPlayer(playerName);
-		UUID uuid = uuidCache.get(playerName);
-		if (player != null) {
-			uuid = player.getUniqueId();
-			uuidCache.put(playerName, uuid);
-		}
-		if (robotMap.containsKey(uuid)) {
-			return robotMap.get(uuid);
-		}
-		return null;
-	}
+
 	
 	private Block getBlock(WorldLocation loc, AbstractRobot robot) throws RobotRequestException {
 		Block block = null;
@@ -93,7 +75,7 @@ public class ReadExecutor {
 		RobotResponse.Builder response = RobotResponse.newBuilder();
 		response.setKey(key);
 		
-		AbstractRobot robot = getRobot(playerName);
+		AbstractRobot robot = stateManager.getRobot(playerName);
 		if (robot == null) {
 			throw new RobotRequestException(
 				Reason.ROBOT_DOES_NOT_EXIST, 

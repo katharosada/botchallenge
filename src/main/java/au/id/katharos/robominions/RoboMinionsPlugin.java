@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -33,12 +34,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	// actually happens when the player right-clicks. This state is stored here. 
 	private HashMap<String, String> actionMap;
 	
-
-	// The complete set of all bots in the game, maped by the name of the player that owns them. 
-	private HashMap<UUID, AbstractRobot> robotMap;
-	
-	// We need to be able to map a player name to the UUID even when they've gone offline.
-	private HashMap<String, UUID> uuidCache;
+	private RobotStateManager stateManager;
 	
 	// The Robot API server
 	private RobotApiServer apiServer;
@@ -57,7 +53,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	private class FlyingTickRepeatingTask implements Runnable {
 
 		public void run() {
-			for (AbstractRobot robot : robotMap.values()) {
+			for (AbstractRobot robot : stateManager.getRobotMap().values()) {
 				robot.flyingTick();
 			}
 		}
@@ -69,27 +65,23 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	private class RobotTickRepeatingTask implements Runnable {
 
 		public void run() {
-			for (AbstractRobot robot : robotMap.values()) {
+			for (AbstractRobot robot : stateManager.getRobotMap().values()) {
 				robot.tick();
 			}
 		}
 	}
-
-	/**
-	 * Checks if this Player already has a robot.
-	 */
-	private boolean hasRobot(UUID playerId) {
-		return robotMap.containsKey(playerId);
+	
+	private class SaveStateTask implements Runnable {
+		public void run() {
+			stateManager.saveState();
+		}
 	}
 	
 	/**
 	 * Get the bot that belongs to this player
 	 */
 	private AbstractRobot getRobot(UUID playerId) {
-		if (robotMap.containsKey(playerId)) {
-			return robotMap.get(playerId);
-		}
-		return null;
+		return stateManager.getRobot(playerId);
 	}
 	
 	/**
@@ -103,33 +95,26 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	 */
 	@Override
     public void onEnable() {
-		robotMap = new HashMap<UUID, AbstractRobot>();
+		
 		actionMap = new HashMap<String, String>();
 		actionQueue = new ActionQueue(getLogger());
-		uuidCache = new HashMap<String, UUID>();
+		stateManager = new RobotStateManager(getLogger());
+		stateManager.loadState();
 
 		this.getServer().getPluginManager().registerEvents(this, this);
 
 		getServer().getScheduler().scheduleSyncRepeatingTask(
 				this, new FlyingTickRepeatingTask(), 1, 10);
 		getServer().getScheduler().scheduleSyncRepeatingTask(
-				this, new ActionExecutor(actionQueue, robotMap, uuidCache, getLogger()), 1, 2);
+				this, new ActionExecutor(actionQueue, stateManager, getLogger()), 1, 2);
 		getServer().getScheduler().scheduleSyncRepeatingTask(
 				this, new RobotTickRepeatingTask(), 1, 1);
+		getServer().getScheduler().scheduleSyncRepeatingTask(
+				this, new SaveStateTask(), 10, 20);
 
-		ReadExecutor readExecutor = new ReadExecutor(getLogger(), robotMap, uuidCache);
+		ReadExecutor readExecutor = new ReadExecutor(getLogger(), stateManager);
 		this.apiServer = new RobotApiServer(API_PORT, getLogger(), actionQueue, readExecutor);
 		apiServerTask = getServer().getScheduler().runTaskAsynchronously(this, apiServer);
-	}
-	
-	/**
-	 * Kill the robot that belongs to the given player and remove it from the map.
-	 */
-	private void removeChicken(UUID playerId) {
-		if (robotMap.containsKey(playerId)) {
-			robotMap.get(playerId).die();
-			robotMap.remove(playerId);
-		}
 	}
 	
 	/**
@@ -141,15 +126,16 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	 * @return The new robot.
 	 */
 	private AbstractRobot spawnRobot(Player player, Location location, String type) {
-		uuidCache.put(player.getName(), player.getUniqueId());
+		World world = player.getWorld();
+		UUID playerId = player.getUniqueId();
 		if (type == null) {
 			// Default spawn a Pumpkin bot (it works the best).
-			return new PumpkinRobot(player, location, getLogger());
+			return new PumpkinRobot(world, playerId, location, getLogger());
 		}
 		if (type.toLowerCase().equals("pumpkin")) {
-			return new PumpkinRobot(player, location, getLogger());
+			return new PumpkinRobot(world, playerId, location, getLogger());
 		}
-		return new PumpkinRobot(player, location, getLogger());
+		return new PumpkinRobot(world, playerId, location, getLogger());
 	}
 
 	/**
@@ -159,18 +145,18 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	public void onBlockRightClick(PlayerInteractEvent event) {
 		if (event.hasBlock() && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(actionMap.containsKey(event.getPlayer().getName())) {
-				removeChicken(event.getPlayer().getUniqueId());
+				stateManager.removeRobot(event.getPlayer().getUniqueId());
 				// Spawn a chicken next to the block face that was clicked.
 				AbstractRobot robot = spawnRobot(
 						event.getPlayer(),
 						event.getClickedBlock().getRelative(event.getBlockFace()).getLocation(),
 						actionMap.get(event.getPlayer().getName()));
-				robotMap.put(event.getPlayer().getUniqueId(), robot);
+				stateManager.addRobot(event.getPlayer(), robot);
 				actionMap.remove(event.getPlayer().getName());
 				event.setCancelled(true);
 			} else if (event.hasBlock() &&
 					event.getClickedBlock().getType() == Material.PUMPKIN) {
-				for (AbstractRobot robot : robotMap.values()) {
+				for (AbstractRobot robot : stateManager.getRobotMap().values()) {
 					if (robot.getLocation().getBlock().equals(event.getClickedBlock())) {
 						event.getPlayer().openInventory(robot.getInventory());
 						event.setCancelled(true);
@@ -188,7 +174,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 	public void onItemSpawnEvent(ItemSpawnEvent spawnEvent) {
 		AbstractRobot winner = null;
 		double minDistance = 3.0;
-		for (AbstractRobot robot : robotMap.values()) {
+		for (AbstractRobot robot : stateManager.getRobotMap().values()) {
 			double distance = spawnEvent.getLocation().distance(robot.getLocation());
 			if (distance < minDistance) {
 				minDistance = distance;
@@ -206,11 +192,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
     	apiServer.shutDown();
-    	
-    	for (UUID playerId : robotMap.keySet()) {
-    		removeChicken(playerId);
-    	}
-    	robotMap.clear();
+    	stateManager.shutDown();
     	actionMap.clear();
     }
 
@@ -239,7 +221,7 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     			sender.sendMessage("You must also provide a move and a direction");
     			return false;
     		}
-    		if (sender instanceof Player && hasRobot(((Player) sender).getUniqueId())) {
+    		if (sender instanceof Player && stateManager.hasRobot(((Player) sender).getUniqueId())) {
     			AbstractRobot chicken = getRobot(((Player) sender).getUniqueId());
         		Direction direction = Direction.valueOf(args[1].toUpperCase());
         		if (direction == null) {

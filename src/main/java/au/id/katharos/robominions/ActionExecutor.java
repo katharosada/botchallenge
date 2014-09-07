@@ -1,11 +1,6 @@
 package au.id.katharos.robominions;
 
-import java.util.HashMap;
-import java.util.UUID;
 import java.util.logging.Logger;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import au.id.katharos.robominions.ActionQueue.ActionEvent;
 import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
@@ -13,32 +8,17 @@ import au.id.katharos.robominions.api.RobotApi.RobotActionRequest;
 public class ActionExecutor implements Runnable {
 
 	private final ActionQueue actionQueue;
-	private final HashMap<UUID, AbstractRobot> robotMap;
-	private final HashMap<String, UUID> uuidCache;
+	private final RobotStateManager stateManager;
 	private final Logger logger;
 	
 	public ActionExecutor(
 			ActionQueue actionQueue,
-			HashMap<UUID, AbstractRobot> chickenMap,
-			HashMap<String, UUID> uuidCache,
+			RobotStateManager stateManager,
 			Logger logger) {
 		this.actionQueue = actionQueue;
-		this.robotMap = chickenMap;
+		this.stateManager = stateManager;
 		this.logger = logger;
-		this.uuidCache = uuidCache;
-	}
-
-	private AbstractRobot getRobot(String playerName) {
-		Player player = Bukkit.getPlayer(playerName);
-		UUID uuid = uuidCache.get(playerName);
-		if (player != null) {
-			uuid = player.getUniqueId();
-			uuidCache.put(playerName, uuid);
-		}
-		if (robotMap.containsKey(uuid)) {
-			return robotMap.get(uuid);
-		}
-		return null;
+		
 	}
 	
 	@Override
@@ -46,7 +26,7 @@ public class ActionExecutor implements Runnable {
 		ActionEvent event = actionQueue.getNextEvent();
 		while (event != null) {
 			
-			AbstractRobot robot = getRobot(event.getPlayerId());
+			AbstractRobot robot = stateManager.getRobot(event.getPlayerName());
 			RobotActionRequest actionRequest = event.getActionRequest();
 			if (robot != null) {
 				// Move chicken according to instruction.
@@ -63,7 +43,7 @@ public class ActionExecutor implements Runnable {
 				}
 				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
-				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerId());
+				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerName());
 			}
 			// Get next event from queue (null if there is none);
 			event = actionQueue.getNextEvent();

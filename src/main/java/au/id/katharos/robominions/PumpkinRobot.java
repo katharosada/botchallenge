@@ -1,9 +1,11 @@
 package au.id.katharos.robominions;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -25,8 +27,8 @@ public class PumpkinRobot extends AbstractRobot {
 	/**
 	 * Create a new pumpkin bot. See {@link AbstractRobot}
 	 */
-	protected PumpkinRobot(Player player, Location location, Logger logger) {
-		super(player, location, logger);
+	protected PumpkinRobot(World world, UUID playerId, Location location, Logger logger) {
+		super(world, playerId, location, logger);
 		Block block = world.getBlockAt(location);
 		oldMaterial = block.getType();
 		block.setType(Material.PUMPKIN);

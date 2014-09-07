@@ -46,7 +46,7 @@ public class ActionQueue {
 			this.listener = finishedListener;
 		}
 		
-		public String getPlayerId() {
+		public String getPlayerName() {
 			return playerId;
 		}
 		

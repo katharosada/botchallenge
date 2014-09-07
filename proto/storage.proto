@@ -1,0 +1,28 @@
+
+package robominions;
+
+option java_package = "au.id.katharos.robominions.api";
+option java_outer_classname = "RobotStorage";
+
+
+import "materials.proto";
+import "robotapi.proto";
+
+message PluginState {
+  repeated RobotState robot_state = 1;
+}
+
+message RobotState {
+  optional string player_name = 1;
+  optional string uuid = 2;
+  optional Coordinate robot_location = 4;
+  optional string world_name = 5;
+  optional WorldLocation.Direction robot_direction = 6;  
+  repeated ItemStack robot_inventory = 7;
+}
+
+message ItemStack {
+  optional Material material = 1;
+  optional int32 count = 2;
+}
+
