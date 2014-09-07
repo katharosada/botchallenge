@@ -4,6 +4,7 @@ class handles the direct commands from the user and translates them into
 API calls to the server.
 """
 import random
+import math
 
 from .client import ContextHandler
 from .api import robotapi_pb2
