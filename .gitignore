@@ -9,7 +9,6 @@
 *.swp
 
 # Client proto generated files
-*_pb2.py
 *.py.bak
 
 # Client build files
