@@ -94,7 +94,7 @@ class ContextHandler(object):
     self.protocol = RobotClientProtocol(self)
     asyncio.async(loop.create_connection(
         lambda: self.protocol,
-        host="192.168.0.22",
+        host="130.211.85.227",
         port=26656))
 
     # Main asyncio event loop running in the asyncio_greenlet
