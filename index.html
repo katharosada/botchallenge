@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>The Bot Challenge by katharosada</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>The Bot Challenge</h1>
+        <h2>Remove the boring bits of Minecraft with your own Python code.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/katharosada/botchallenge/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/katharosada/botchallenge/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/katharosada/botchallenge" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h2>
+<a name="welcome-to-the-bot-challenge" class="anchor" href="#welcome-to-the-bot-challenge"><span class="octicon octicon-link"></span></a>Welcome to the Bot Challenge.</h2>
+
+<p>Minecraft is a great example of how in everyday life we have to do some boring repetitive tasks, something a robot could do. Since our world and jobs are going to gradually be replaced with robots and computers, learning to take our every day tasks and break them down into step-by-step computer programs is going to be a valuable skill. Here's your chance to play Minecraft and practice your Python coding at the same time.</p>
+
+<h3>
+<a name="what-you-need" class="anchor" href="#what-you-need"><span class="octicon octicon-link"></span></a>What you need</h3>
+
+<ol>
+<li>A little bit of Python experience (just the basics)</li>
+<li>A regular Minecraft account (from <a href="http://minecraft.net">http://minecraft.net</a>)</li>
+<li>A computer with Minecraft installed and an internet connection</li>
+</ol><p>Note that this is not a modification to your Minecraft client, we've modified the server only so you don't need to mess around with mods unless you want to run your own server. You'll only need to install standard Python and a couple of extra Python modules, but we've got instructions for that below.</p>
+
+<h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
+
+<p>When you join our multiplayer Minecraft server which has the BotChallenge plugin installed, it looks just like a regular shared Minecraft world. The difference is, you can spawn a robot helper. It looks like a regular Pumpkin, but you can connect to it from your Python code and give it commands, you can tell it to move around (it can fly), mine and place blocks.</p>
+
+<p>We've got a bunch of example scripts to get you started, like a bot which just follows you around, a bot which mines stairs and a bot which builds a simple dirt hut to get you started. See the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a>.</p>
+
+<h2>
+<a name="setting-up-on-windows" class="anchor" href="#setting-up-on-windows"><span class="octicon octicon-link"></span></a>Setting up on Windows</h2>
+
+<p>You'll need to download and install each of these packages (Python must be installed before you install the others).</p>
+
+<ol>
+<li>Python 3.3 or higher: <a href="https://www.python.org/download">https://www.python.org/download</a>
+</li>
+<li>The Greenlet Python module: <a href="https://pypi.python.org/pypi/greenlet">https://pypi.python.org/pypi/greenlet</a> (Make sure you pick the same version as the Python version you installed)</li>
+<li>The botchallenge module: (link coming soon)</li>
+</ol><p>As part of installing Python, you should have The IDLE Python editor installed. Open it up, create a new file (File &gt; New) and save it as mybot.py (you can call it what you like as long as it has .py on the end). Then type in (or copy-paste) the following:</p>
+
+<pre><code>from botchallenge import *
+</code></pre>
+
+<p>The go to Run Module (in the menu) to run it (or hit F5). If it prints nothing, then everything is installed correctly. If it shows an error, then there might have been a problem installing the modules or you might have more than one version of Python installed and you're using the wrong one.</p>
+
+<p>If it's working, you can try this simple bot. But first, you need to connect to our Minecraft server to spawn a bot. Since we're still testing this out we're keeping the address a secret so if you've got the address in your email or someone shared it with you, then go ahead and join the server in Minecraft as a regular player.</p>
+
+<p>When you're there (in Minecraft), type:</p>
+
+<pre><code>/spawnrobot
+</code></pre>
+
+<p>Then right-click anywhere and you should see your brand new Pumpkin minion appear! It's there waiting for your instructions. You can give a few instructions in the game itself, by typing: </p>
+
+<pre><code>/robot move up
+</code></pre>
+
+<p>You can use any of up, down, left, right, forward, backward, north, south, east or west for the direction. You can also tell the robot to 'turn' to face a direction or 'mine' the block in any direction. We chose a pumpkin to represent the bot so that you can see which direction is it's facing.</p>
+
+<p>Of course running these commands one by one is even more tedious than mining by yourself, so now that our robot exists, let's start with a simple script:</p>
+
+<pre><code>from botchallenge import *
+bot = Bot()
+
+for i in range(10):
+    bot.move(Dir.UP)
+    bot.place(Material.DIRT, Dir.DOWN)
+    bot.move(Dir.RIGHT)
+    bot.place(Material.DIRT, Dir.DOWN)
+</code></pre>
+
+<p>If there's enough space nearby, your robot should be building you a some dirt stairs! If that works, then you're good to go, you should check out the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a> for more ideas of what you can do.</p>
+
+<h3>
+<a name="installing-on-mac-or-linux" class="anchor" href="#installing-on-mac-or-linux"><span class="octicon octicon-link"></span></a>Installing on Mac or Linux</h3>
+
+<p>Instructions coming soon.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
