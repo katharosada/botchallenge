@@ -22,7 +22,9 @@ message RobotState {
 }
 
 message ItemStack {
-  optional Material material = 1;
-  optional int32 count = 2;
+  optional int32 index = 1;
+  optional Material material = 2;
+  optional int32 count = 3;
+  optional bytes data = 4;
 }
 

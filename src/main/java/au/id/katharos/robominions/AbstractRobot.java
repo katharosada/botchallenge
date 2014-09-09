@@ -225,12 +225,17 @@ public abstract class AbstractRobot implements InventoryHolder {
 	 */
 	public void pickUp(Item item) {
 		ensureCorrectInventory();
-		Material mat = item.getItemStack().getType();
+		pickUp(item.getItemStack());
+		item.remove();
+	}
+	
+	public void pickUp(ItemStack stack) {
+		ensureCorrectInventory();
+		Material mat = stack.getType();
 		if (mat != Material.DIRT && mat != Material.COBBLESTONE) {
 			logger.info("Picked up item: " + mat);
-			inventory.addItem(item.getItemStack());
+			inventory.addItem(stack);
 		}
-		item.remove();
 	}
 	
 	public void ensureCorrectInventory() {

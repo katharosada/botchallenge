@@ -33,9 +33,13 @@ public class Util {
 				.build();
 	}
 	
-	@SuppressWarnings("deprecation") // No alternative
 	public static Materials.Material toProtoMaterial(Material material) {
-		if (material == Material.LOG_2) {
+		return toProtoMaterial(material, false);
+	}
+	
+	@SuppressWarnings("deprecation") // No alternative
+	public static Materials.Material toProtoMaterial(Material material, boolean exact) {
+		if (!exact && material == Material.LOG_2) {
 			material = Material.LOG;
 		}
 		Materials.Material protoMaterial = Materials.Material.newBuilder()

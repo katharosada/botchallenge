@@ -10,9 +10,16 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
+import com.google.protobuf.ByteString;
+
+import au.id.katharos.robominions.api.RobotStorage;
 import au.id.katharos.robominions.api.RobotStorage.PluginState;
 import au.id.katharos.robominions.api.RobotStorage.RobotState;
 
@@ -72,7 +79,18 @@ public class RobotStateManager {
 				String playerName = robotState.getPlayerName();
 				uuidCache.put(playerName, playerId);
 				nameCache.put(playerId, playerName);
+				
+				// Load inventory:
+				for (RobotStorage.ItemStack itemStack : robotState.getRobotInventoryList()) {
+					int index = itemStack.getIndex();
+					Material material = Util.toBukkitMaterial(itemStack.getMaterial());
+					ItemStack newItemStack = new ItemStack(material, itemStack.getCount());
+				    
+					newItemStack.setData(new MaterialData(material, itemStack.getData().byteAt(0)));
+					robot.getInventory().setItem(index, newItemStack);
+				}
 			}
+			fis.close();
 		} catch (FileNotFoundException e) {
 			logger.info("No robot minions saved data found. Will start from scratch.");
 		} catch (IOException e) {
@@ -99,6 +117,25 @@ public class RobotStateManager {
 	    	robotState.setRobotLocation(Util.coordsFromLocation(robot.getLocation()));
 	    	robotState.setRobotDirection(robot.getFacingDirection());
 	    	robotState.setWorldName(robot.getWorld().getName());
+
+			// Save inventory:
+	    	Inventory inventory = robot.getInventory();
+	    	for (int i = 0; i < inventory.getSize(); i++) {
+	    		ItemStack itemStack = inventory.getItem(i);
+	    		if (itemStack != null) {
+	    			RobotStorage.ItemStack.Builder protoItemStack =
+	    					RobotStorage.ItemStack.newBuilder();
+	    			protoItemStack.setIndex(i);
+	    			protoItemStack.setMaterial(Util.toProtoMaterial(itemStack.getType(), true));
+	    			protoItemStack.setCount(itemStack.getAmount());
+
+	    			byte[] data = new byte[1];
+	    			data[0] = itemStack.getData().getData();
+	    			protoItemStack.setData(ByteString.copyFrom(data));
+	    			robotState.addRobotInventory(protoItemStack.build());
+	    		}
+			}
+	    	
 	    	stateBuilder.addRobotState(robotState.build());
 	    }
 		PluginState state = stateBuilder.build();

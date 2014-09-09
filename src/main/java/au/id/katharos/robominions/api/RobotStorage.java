@@ -2139,26 +2139,44 @@ public final class RobotStorage {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .robominions.Material material = 1;</code>
+     * <code>optional int32 index = 1;</code>
+     */
+    boolean hasIndex();
+    /**
+     * <code>optional int32 index = 1;</code>
+     */
+    int getIndex();
+
+    /**
+     * <code>optional .robominions.Material material = 2;</code>
      */
     boolean hasMaterial();
     /**
-     * <code>optional .robominions.Material material = 1;</code>
+     * <code>optional .robominions.Material material = 2;</code>
      */
     au.id.katharos.robominions.api.Materials.Material getMaterial();
     /**
-     * <code>optional .robominions.Material material = 1;</code>
+     * <code>optional .robominions.Material material = 2;</code>
      */
     au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialOrBuilder();
 
     /**
-     * <code>optional int32 count = 2;</code>
+     * <code>optional int32 count = 3;</code>
      */
     boolean hasCount();
     /**
-     * <code>optional int32 count = 2;</code>
+     * <code>optional int32 count = 3;</code>
      */
     int getCount();
+
+    /**
+     * <code>optional bytes data = 4;</code>
+     */
+    boolean hasData();
+    /**
+     * <code>optional bytes data = 4;</code>
+     */
+    com.google.protobuf.ByteString getData();
   }
   /**
    * Protobuf type {@code robominions.ItemStack}
@@ -2212,9 +2230,14 @@ public final class RobotStorage {
               }
               break;
             }
-            case 10: {
+            case 8: {
+              bitField0_ |= 0x00000001;
+              index_ = input.readInt32();
+              break;
+            }
+            case 18: {
               au.id.katharos.robominions.api.Materials.Material.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = material_.toBuilder();
               }
               material_ = input.readMessage(au.id.katharos.robominions.api.Materials.Material.PARSER, extensionRegistry);
@@ -2222,12 +2245,17 @@ public final class RobotStorage {
                 subBuilder.mergeFrom(material_);
                 material_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000002;
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
+            case 24: {
+              bitField0_ |= 0x00000004;
               count_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              data_ = input.readBytes();
               break;
             }
           }
@@ -2270,45 +2298,77 @@ public final class RobotStorage {
     }
 
     private int bitField0_;
-    public static final int MATERIAL_FIELD_NUMBER = 1;
-    private au.id.katharos.robominions.api.Materials.Material material_;
+    public static final int INDEX_FIELD_NUMBER = 1;
+    private int index_;
     /**
-     * <code>optional .robominions.Material material = 1;</code>
+     * <code>optional int32 index = 1;</code>
      */
-    public boolean hasMaterial() {
+    public boolean hasIndex() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .robominions.Material material = 1;</code>
+     * <code>optional int32 index = 1;</code>
+     */
+    public int getIndex() {
+      return index_;
+    }
+
+    public static final int MATERIAL_FIELD_NUMBER = 2;
+    private au.id.katharos.robominions.api.Materials.Material material_;
+    /**
+     * <code>optional .robominions.Material material = 2;</code>
+     */
+    public boolean hasMaterial() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .robominions.Material material = 2;</code>
      */
     public au.id.katharos.robominions.api.Materials.Material getMaterial() {
       return material_;
     }
     /**
-     * <code>optional .robominions.Material material = 1;</code>
+     * <code>optional .robominions.Material material = 2;</code>
      */
     public au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialOrBuilder() {
       return material_;
     }
 
-    public static final int COUNT_FIELD_NUMBER = 2;
+    public static final int COUNT_FIELD_NUMBER = 3;
     private int count_;
     /**
-     * <code>optional int32 count = 2;</code>
+     * <code>optional int32 count = 3;</code>
      */
     public boolean hasCount() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 count = 2;</code>
+     * <code>optional int32 count = 3;</code>
      */
     public int getCount() {
       return count_;
     }
 
+    public static final int DATA_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString data_;
+    /**
+     * <code>optional bytes data = 4;</code>
+     */
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes data = 4;</code>
+     */
+    public com.google.protobuf.ByteString getData() {
+      return data_;
+    }
+
     private void initFields() {
+      index_ = 0;
       material_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       count_ = 0;
+      data_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2324,10 +2384,16 @@ public final class RobotStorage {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, material_);
+        output.writeInt32(1, index_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, count_);
+        output.writeMessage(2, material_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, count_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, data_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2340,11 +2406,19 @@ public final class RobotStorage {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, material_);
+          .computeInt32Size(1, index_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, count_);
+          .computeMessageSize(2, material_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, count_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, data_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2464,14 +2538,18 @@ public final class RobotStorage {
 
       public Builder clear() {
         super.clear();
+        index_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (materialBuilder_ == null) {
           material_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
         } else {
           materialBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        count_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        count_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -2503,15 +2581,23 @@ public final class RobotStorage {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
+        result.index_ = index_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
         if (materialBuilder_ == null) {
           result.material_ = material_;
         } else {
           result.material_ = materialBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
         result.count_ = count_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.data_ = data_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2528,11 +2614,17 @@ public final class RobotStorage {
 
       public Builder mergeFrom(au.id.katharos.robominions.api.RobotStorage.ItemStack other) {
         if (other == au.id.katharos.robominions.api.RobotStorage.ItemStack.getDefaultInstance()) return this;
+        if (other.hasIndex()) {
+          setIndex(other.getIndex());
+        }
         if (other.hasMaterial()) {
           mergeMaterial(other.getMaterial());
         }
         if (other.hasCount()) {
           setCount(other.getCount());
+        }
+        if (other.hasData()) {
+          setData(other.getData());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2561,17 +2653,49 @@ public final class RobotStorage {
       }
       private int bitField0_;
 
+      private int index_ ;
+      /**
+       * <code>optional int32 index = 1;</code>
+       */
+      public boolean hasIndex() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 index = 1;</code>
+       */
+      public int getIndex() {
+        return index_;
+      }
+      /**
+       * <code>optional int32 index = 1;</code>
+       */
+      public Builder setIndex(int value) {
+        bitField0_ |= 0x00000001;
+        index_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 index = 1;</code>
+       */
+      public Builder clearIndex() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        index_ = 0;
+        onChanged();
+        return this;
+      }
+
       private au.id.katharos.robominions.api.Materials.Material material_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> materialBuilder_;
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public boolean hasMaterial() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public au.id.katharos.robominions.api.Materials.Material getMaterial() {
         if (materialBuilder_ == null) {
@@ -2581,7 +2705,7 @@ public final class RobotStorage {
         }
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public Builder setMaterial(au.id.katharos.robominions.api.Materials.Material value) {
         if (materialBuilder_ == null) {
@@ -2593,11 +2717,11 @@ public final class RobotStorage {
         } else {
           materialBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public Builder setMaterial(
           au.id.katharos.robominions.api.Materials.Material.Builder builderForValue) {
@@ -2607,15 +2731,15 @@ public final class RobotStorage {
         } else {
           materialBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public Builder mergeMaterial(au.id.katharos.robominions.api.Materials.Material value) {
         if (materialBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
               material_ != au.id.katharos.robominions.api.Materials.Material.getDefaultInstance()) {
             material_ =
               au.id.katharos.robominions.api.Materials.Material.newBuilder(material_).mergeFrom(value).buildPartial();
@@ -2626,11 +2750,11 @@ public final class RobotStorage {
         } else {
           materialBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public Builder clearMaterial() {
         if (materialBuilder_ == null) {
@@ -2639,19 +2763,19 @@ public final class RobotStorage {
         } else {
           materialBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public au.id.katharos.robominions.api.Materials.Material.Builder getMaterialBuilder() {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return getMaterialFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       public au.id.katharos.robominions.api.Materials.MaterialOrBuilder getMaterialOrBuilder() {
         if (materialBuilder_ != null) {
@@ -2661,7 +2785,7 @@ public final class RobotStorage {
         }
       }
       /**
-       * <code>optional .robominions.Material material = 1;</code>
+       * <code>optional .robominions.Material material = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           au.id.katharos.robominions.api.Materials.Material, au.id.katharos.robominions.api.Materials.Material.Builder, au.id.katharos.robominions.api.Materials.MaterialOrBuilder> 
@@ -2679,32 +2803,67 @@ public final class RobotStorage {
 
       private int count_ ;
       /**
-       * <code>optional int32 count = 2;</code>
+       * <code>optional int32 count = 3;</code>
        */
       public boolean hasCount() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 count = 2;</code>
+       * <code>optional int32 count = 3;</code>
        */
       public int getCount() {
         return count_;
       }
       /**
-       * <code>optional int32 count = 2;</code>
+       * <code>optional int32 count = 3;</code>
        */
       public Builder setCount(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         count_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 count = 2;</code>
+       * <code>optional int32 count = 3;</code>
        */
       public Builder clearCount() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         count_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes data = 4;</code>
+       */
+      public boolean hasData() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes data = 4;</code>
+       */
+      public com.google.protobuf.ByteString getData() {
+        return data_;
+      }
+      /**
+       * <code>optional bytes data = 4;</code>
+       */
+      public Builder setData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        data_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes data = 4;</code>
+       */
+      public Builder clearData() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
@@ -2752,10 +2911,11 @@ public final class RobotStorage {
       "obominions.Coordinate\022\022\n\nworld_name\030\005 \001(" +
       "\t\022=\n\017robot_direction\030\006 \001(\0162$.robominions" +
       ".WorldLocation.Direction\022/\n\017robot_invent" +
-      "ory\030\007 \003(\0132\026.robominions.ItemStack\"C\n\tIte" +
-      "mStack\022\'\n\010material\030\001 \001(\0132\025.robominions.M",
-      "aterial\022\r\n\005count\030\002 \001(\005B.\n\036au.id.katharos" +
-      ".robominions.apiB\014RobotStorage"
+      "ory\030\007 \003(\0132\026.robominions.ItemStack\"`\n\tIte" +
+      "mStack\022\r\n\005index\030\001 \001(\005\022\'\n\010material\030\002 \001(\0132",
+      "\025.robominions.Material\022\r\n\005count\030\003 \001(\005\022\014\n" +
+      "\004data\030\004 \001(\014B.\n\036au.id.katharos.robominion" +
+      "s.apiB\014RobotStorage"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2788,7 +2948,7 @@ public final class RobotStorage {
     internal_static_robominions_ItemStack_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_robominions_ItemStack_descriptor,
-        new java.lang.String[] { "Material", "Count", });
+        new java.lang.String[] { "Index", "Material", "Count", "Data", });
     au.id.katharos.robominions.api.Materials.getDescriptor();
     au.id.katharos.robominions.api.RobotApi.getDescriptor();
   }
