@@ -5,8 +5,8 @@ is facing when it starts.
 
 from botchallenge import *
 
-USERNAME = "katharosada" # Put your minecraft username here
-SERVER = "europe.botchallenge.net" # Put the address of the minecraft server here
+USERNAME = "" # Put your minecraft username here
+SERVER = "" # Put the address of the minecraft server here
 
 robot = Robot(USERNAME, SERVER)
 

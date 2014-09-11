@@ -4,8 +4,8 @@ Example robot which finds trees and gathers wood.
 from botchallenge import *
 from botchallenge.api.materials_pb2 import Material
 
-USERNAME = "katharosada" # Put your minecraft username here
-SERVER = "europe.botchallenge.net" # Put the address of the minecraft server here
+USERNAME = "" # Put your minecraft username here
+SERVER = "" # Put the address of the minecraft server here
 
 robot = Robot(USERNAME, SERVER)
 
