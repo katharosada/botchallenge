@@ -8,6 +8,7 @@ import math
 
 from .client import ContextHandler
 from .api import robotapi_pb2
+from .blocktypes import BlockType
 
 class Robot(object):
     """Represents the robot itself, commands are sent to the server and the
@@ -65,7 +66,11 @@ class Robot(object):
         """Find the type of the adjacent block in the given direction."""
         request = self._new_action()
         request.read_request.identify_material.direction = direction
-        return self._action(request).material_response
+        material_id = self._action(request).material_response.type
+        if material_id in BlockType.value_map:
+            return BlockType.value_map[material_id]
+        logging.warn("Unrecognized block type: %d", material_id)
+        return None
 
     def is_block_solid(self, direction):
         """Check if the adjacent block in the given direction is one that the
@@ -95,7 +100,7 @@ class Robot(object):
         """Returns a list of the locations of blocks nearby that match the
         specified block type."""
         request = self._new_action()
-        request.read_request.locate_material_nearby.type = blocktype
+        request.read_request.locate_material_nearby.type = blocktype.get_value()
         loc_proto_list = (
             self._action(request).location_response.locations)
         loc_list = [
