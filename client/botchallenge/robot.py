@@ -13,7 +13,9 @@ class Robot(object):
   """Represents the robot itself, commands are sent to the server and the
      result is returned."""
 
-  def __init__(self):
+  def __init__(self, host, port=26656):
+    self.host = host
+    self.port = port
     self._contextHandler = ContextHandler(self)
     self._counter = random.randint(1, 2^16) 
 
