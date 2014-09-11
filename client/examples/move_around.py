@@ -3,8 +3,8 @@ from botchallenge import *
 
 square = [Dir.LEFT, Dir.UP, Dir.RIGHT, Dir.DOWN]
 
-USERNAME = "" # Put your minecraft username here
-SERVER = "" # Put the address of the minecraft server here
+USERNAME = "katharosada" # Put your minecraft username here
+SERVER = "europe.botchallenge.net" # Put the address of the minecraft server here
 
 robot = Robot(USERNAME, SERVER)
 

@@ -17,14 +17,17 @@ class Robot(object):
         self.host = host
         self.owner_name = owner_name
         self.port = port
-        self._contextHandler = ContextHandler(self)
-        self._counter = random.randint(1, 2^16) 
+        self._context_handler = ContextHandler(self)
+        self._counter = random.randint(1, 2^16)
 
     def _action(self, request):
-        response = self._contextHandler.sendRequest(request)
+        """Send an action request to the server (via the context handler)."""
+        response = self._context_handler.sendRequest(request)
         return response
 
-    def _newAction(self):
+    def _new_action(self):
+        """Construct a new robot api request with the owner name, and counter
+        filled in."""
         request = robotapi_pb2.RobotRequest()
         request.name = self.owner_name
         self._counter += 1
@@ -32,63 +35,89 @@ class Robot(object):
         return request
 
     def move(self, direction):
-        request = self._newAction()
+        """Move the robot one block in the given direction."""
+        request = self._new_action()
         request.action_request.move_direction = direction
         return self._action(request)
 
     def turn(self, direction):
-        request = self._newAction()
+        """Turn the robot to face the given direction."""
+        request = self._new_action()
         request.action_request.turn_direction = direction
         return self._action(request)
 
     def mine(self, direction):
-        request = self._newAction()
+        """Mine the adjacent block in the given direction and pick up the
+        item that results from destrying that block."""
+        request = self._new_action()
         request.action_request.mine_direction = direction
         return self._action(request)
 
-    def place(self, direction, material):
-        request = self._newAction()
+    def place(self, direction, blocktype):
+        """Place a block next to the robot in the given direction, with the
+        given type."""
+        request = self._new_action()
         request.action_request.place_direction = direction
-        request.action_request.place_material.type = material
+        request.action_request.place_material.type = blocktype
         return self._action(request)
 
-    def getType(self, direction):
-        request = self._newAction()
+    def get_block_type(self, direction):
+        """Find the type of the adjacent block in the given direction."""
+        request = self._new_action()
         request.read_request.identify_material.direction = direction
         return self._action(request).material_response
 
-    def isSolid(self, direction):
-        request = self._newAction()
+    def is_block_solid(self, direction):
+        """Check if the adjacent block in the given direction is one that the
+        robot can walk through or not (returns a boolean)."""
+        request = self._new_action()
         request.read_request.is_solid.direction = direction
         return self._action(request).boolean_response
 
     def _locate(self, entity):
-        request = self._newAction()
+        """Return the location of the entity type specified."""
+        request = self._new_action()
         request.read_request.locate_entity = entity
         loc_proto = self._action(request).location_response.locations[0]
-        return Location._fromProto(loc_proto.absolute_location)
+        return Location.from_proto(loc_proto.absolute_location)
 
-    def getLocation(self):
+    def get_location(self):
+        """Returns the Location object for the location coordinates of the
+        robot itself."""
         return self._locate(robotapi_pb2.RobotReadRequest.SELF)
 
-    def getOwnerLocation(self):
+    def get_owner_location(self):
+        """Returns the Location object for the location coordinates of the
+        robot's owner player."""
         return self._locate(robotapi_pb2.RobotReadRequest.OWNER)
 
-    def findMaterial(self, material):
-        request = self._newAction()
-        request.read_request.locate_material_nearby.type = material
-        loc_proto_list = self._action(request).location_response.locations
-        loc_list = [Location._fromProto(l.absolute_location) for l in loc_proto_list]
+    def find_type_nearby(self, blocktype):
+        """Returns a list of the locations of blocks nearby that match the
+        specified block type."""
+        request = self._new_action()
+        request.read_request.locate_material_nearby.type = blocktype
+        loc_proto_list = (
+            self._action(request).location_response.locations)
+        loc_list = [
+            Location.from_proto(l.absolute_location) for l in loc_proto_list]
         return loc_list
 
-    def findPath(self, target_location):
-        my_loc = self.getLocation()
-        request = self._newAction()
+    def find_path(self, target_location):
+        """Returns the direction to move in, to (hopefully) reach the target
+        location (or None if the robot is completely stuck).
+
+        This is a very basic pathfinding algorithm, it looks for which empty
+        (non-solid) adjacent block is closest to the target location and
+        returns the direction for that block."""
+        my_loc = self.get_location()
+        request = self._new_action()
         request.read_request.locate_nonsolid_nearby = True
         loc_proto_list = self._action(request).location_response.locations
-        loc_list = [Location._fromProto(l.absolute_location) for l in loc_proto_list]
-        
-        # Find point which is furthest from our current point and closest to the target
+        loc_list = [
+            Location.from_proto(l.absolute_location) for l in loc_proto_list]
+
+        # Find point which is furthest from our current point and closest to
+        # the target
         best = None
         targetdist = target_location.distance(loc_list[0]) + 20
         for loc in loc_list:
@@ -96,53 +125,61 @@ class Robot(object):
             if newdist < targetdist and my_loc.distance(loc) == 1:
                 best = loc
                 targetdist = newdist
-        if best == None:
-            log.error("Follow bot can't move no free blocks!")
-            best = loc_list[0]
         return my_loc.direction(best)
 
-    def getInventory(self):
-        request = self._newAction()
+    def get_inventory(self):
+        """Returns a list of pairs (blocktype, count) for all the items in the
+        robot's inventory."""
+        request = self._new_action()
         request.read_request.get_inventory = True
         inv = self._action(request).inventory_response
-        return [(mat.type, count) for mat, count in zip(inv.materials, inv.counts)]
-    
+        return [
+            (mat.type, count) for mat, count in zip(inv.materials, inv.counts)]
+
 
 class Location(object):
     """A location in the Minecraft world as a set of 3D coordinates."""
 
     @classmethod
-    def _fromProto(cls, location_proto):
+    def from_proto(cls, location_proto):
+        """Internal use only. Used to convert the wireformat location into a
+        more convenient Location object."""
         return Location(location_proto.x, location_proto.y, location_proto.z)
-    
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
+
+    def __init__(self, x_coord, y_coord, z_coord):
+        self.x_coord = x_coord
+        self.y_coord = y_coord
+        self.z_coord = z_coord
 
     def distance(self, other):
+        """Returns the distance between this location and the given other
+        location."""
         return math.sqrt(
-            (self.x - other.x) ** 2 +
-            (self.y - other.y) ** 2 +
-            (self.z - other.z) ** 2) 
+            (self.x_coord - other.x_coord) ** 2 +
+            (self.y_coord - other.y_coord) ** 2 +
+            (self.z_coord - other.z_coord) ** 2)
 
     def direction(self, other):
+        """Find the direction (North, South, East or West) of the other
+        location from this one."""
+        if other == None:
+            return None
         loc = [0, 0, 0]
-        loc[0] = other.x - self.x
-        loc[1] = other.y - self.y
-        loc[2] = other.z - self.z
-        m = max(list(map(abs, loc)))
-        maxDir = 0
-        if m in loc:
-            maxDir = loc.index(m)
+        loc[0] = other.x_coord - self.x_coord
+        loc[1] = other.y_coord - self.y_coord
+        loc[2] = other.z_coord - self.z_coord
+        max_value = max(list(map(abs, loc)))
+        max_direction = 0
+        if max_value in loc:
+            max_direction = loc.index(max_value)
         else:
-            maxDir = loc.index(-1 * m)
+            max_direction = loc.index(-1 * max_value)
         # check up/down first
-        if maxDir == 1:
+        if max_direction == 1:
             if loc[1] > 0:
                 return Dir.UP
             return Dir.DOWN
-        if maxDir == 0:
+        if max_direction == 0:
             if loc[0] > 0:
                 return Dir.EAST
             return Dir.WEST
@@ -152,6 +189,11 @@ class Location(object):
 
 
 class Dir:
+    """A direction enum.
+
+    This includes absolute compass directions, up, down and directions relative
+    to the direction that the robot is facing (forward, backward, left, right)
+    """
     UP = robotapi_pb2.WorldLocation.UP
     DOWN = robotapi_pb2.WorldLocation.DOWN
     LEFT = robotapi_pb2.WorldLocation.LEFT
@@ -162,10 +204,5 @@ class Dir:
     SOUTH = robotapi_pb2.WorldLocation.SOUTH
     EAST = robotapi_pb2.WorldLocation.EAST
     WEST = robotapi_pb2.WorldLocation.WEST
-
-
-
-
-
 
 
