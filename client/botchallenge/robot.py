@@ -38,34 +38,34 @@ class Robot(object):
     def move(self, direction):
         """Move the robot one block in the given direction."""
         request = self._new_action()
-        request.action_request.move_direction = direction
+        request.action_request.move_direction = direction.value
         return self._action(request)
 
     def turn(self, direction):
         """Turn the robot to face the given direction."""
         request = self._new_action()
-        request.action_request.turn_direction = direction
+        request.action_request.turn_direction = direction.value
         return self._action(request)
 
     def mine(self, direction):
         """Mine the adjacent block in the given direction and pick up the
         item that results from destrying that block."""
         request = self._new_action()
-        request.action_request.mine_direction = direction
+        request.action_request.mine_direction = direction.value
         return self._action(request)
 
     def place(self, direction, blocktype):
         """Place a block next to the robot in the given direction, with the
         given type."""
         request = self._new_action()
-        request.action_request.place_direction = direction
+        request.action_request.place_direction = direction.value
         request.action_request.place_material.type = blocktype
         return self._action(request)
 
     def get_block_type(self, direction):
         """Find the type of the adjacent block in the given direction."""
         request = self._new_action()
-        request.read_request.identify_material.direction = direction
+        request.read_request.identify_material.direction = direction.value
         material_id = self._action(request).material_response.type
         if material_id in BlockType.value_map:
             return BlockType.value_map[material_id]
@@ -76,7 +76,7 @@ class Robot(object):
         """Check if the adjacent block in the given direction is one that the
         robot can walk through or not (returns a boolean)."""
         request = self._new_action()
-        request.read_request.is_solid.direction = direction
+        request.read_request.is_solid.direction = direction.value
         return self._action(request).boolean_response
 
     def _locate(self, entity):
@@ -156,6 +156,10 @@ class Location(object):
         self.y_coord = y_coord
         self.z_coord = z_coord
 
+    def __repr__(self):
+        return "Location(X:{}, Y:{}, Z:{})".format(
+            self.x_coord, self.y_coord, self.z_coord)
+
     def distance(self, other):
         """Returns the distance between this location and the given other
         location."""
@@ -199,15 +203,29 @@ class Dir:
     This includes absolute compass directions, up, down and directions relative
     to the direction that the robot is facing (forward, backward, left, right)
     """
-    UP = robotapi_pb2.WorldLocation.UP
-    DOWN = robotapi_pb2.WorldLocation.DOWN
-    LEFT = robotapi_pb2.WorldLocation.LEFT
-    RIGHT = robotapi_pb2.WorldLocation.RIGHT
-    FORWARD = robotapi_pb2.WorldLocation.FORWARD
-    BACKWARD = robotapi_pb2.WorldLocation.BACKWARD
-    NORTH = robotapi_pb2.WorldLocation.NORTH
-    SOUTH = robotapi_pb2.WorldLocation.SOUTH
-    EAST = robotapi_pb2.WorldLocation.EAST
-    WEST = robotapi_pb2.WorldLocation.WEST
 
+    def __init__(self, name, value):
+        self.value = value
+        self.name = name
+
+    def __repr__(self):
+        return "{} ({})".format(self.name, self.value)
+
+    def __str__(self):
+        return self.name
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+def setup_dir():
+    """Initalize the Dir enum with proto values."""
+    value_map = {}
+    for attr, value in robotapi_pb2.WorldLocation.__dict__.items():
+        if attr.isupper() and type(value) == int:
+            dir_obj = Dir(attr, value)
+            setattr(Dir, attr, dir_obj)
+            value_map[value] = dir_obj
+    Dir.value_map = value_map
+
+setup_dir()
 
