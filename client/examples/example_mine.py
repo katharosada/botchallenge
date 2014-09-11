@@ -5,7 +5,10 @@ is facing when it starts.
 
 from botchallenge import *
 
-robot = Robot()
+USERNAME = "" # Put your minecraft username here
+SERVER = "" # Put the address of the minecraft server here
+
+robot = Robot(USERNAME, SERVER)
 
 def mineUntilFree(direction):
   """Keeps mining until the mine action fails."""

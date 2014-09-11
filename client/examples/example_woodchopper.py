@@ -4,7 +4,10 @@ Example robot which finds trees and gathers wood.
 from botchallenge import *
 from botchallenge.api.materials_pb2 import Material
 
-robot = Robot()
+USERNAME = "" # Put your minecraft username here
+SERVER = "" # Put the address of the minecraft server here
+
+robot = Robot(USERNAME, SERVER)
 
 TARGET = Material.LOG
 TARGET2 = Material.LOG_2

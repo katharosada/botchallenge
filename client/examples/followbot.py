@@ -1,7 +1,10 @@
 
 from botchallenge import *
 
-robot = Robot()
+USERNAME = "" # Put your minecraft username here
+SERVER = "" # Put the address of the minecraft server here
+
+robot = Robot(USERNAME, SERVER)
 
 while True:
   me = robot.getLocation()

@@ -1,6 +1,9 @@
 from botchallenge import *
 
-robot = Robot()
+USERNAME = "" # Put your minecraft username here
+SERVER = "" # Put the address of the minecraft server here
+
+robot = Robot(USERNAME, SERVER)
 
 block = robot.getType(Dir.DOWN)
 print("Underneath me is: %s" % block)
