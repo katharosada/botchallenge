@@ -22,7 +22,7 @@ class Robot(object):
 
     def _action(self, request):
         """Send an action request to the server (via the context handler)."""
-        response = self._context_handler.sendRequest(request)
+        response = self._context_handler.send_request(request)
         return response
 
     def _new_action(self):
