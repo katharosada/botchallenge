@@ -9,10 +9,10 @@ SERVER = "" # Put the address of the minecraft server here
 robot = Robot(USERNAME, SERVER)
 
 while True:
-  for dir in square:
-    for i in range(4):
-      success = robot.move(dir)
-      if not success:
-        print("Failed to move", dir)
+    for dir in square:
+        for i in range(4):
+            success = robot.move(dir)
+            if not success:
+                print("Failed to move", dir)
 
 
