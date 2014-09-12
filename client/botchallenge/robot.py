@@ -59,7 +59,7 @@ class Robot(object):
         given type."""
         request = self._new_action()
         request.action_request.place_direction = direction.value
-        request.action_request.place_material.type = blocktype
+        request.action_request.place_material.type = blocktype.value
         return self._action(request)
 
     def get_block_type(self, direction):
@@ -100,7 +100,7 @@ class Robot(object):
         """Returns a list of the locations of blocks nearby that match the
         specified block type."""
         request = self._new_action()
-        request.read_request.locate_material_nearby.type = blocktype.get_value()
+        request.read_request.locate_material_nearby.type = blocktype.value
         loc_proto_list = (
             self._action(request).location_response.locations)
         loc_list = [
@@ -139,7 +139,13 @@ class Robot(object):
         request.read_request.get_inventory = True
         inv = self._action(request).inventory_response
         return [
-            (mat.type, count) for mat, count in zip(inv.materials, inv.counts)]
+            (self._material_to_block(mat), count)
+            for mat, count in zip(inv.materials, inv.counts)]
+
+    def _material_to_block(self, material):
+        if material.type in BlockType.value_map:
+            return BlockType.value_map[material.type]
+        return None
 
 
 class Location(object):
