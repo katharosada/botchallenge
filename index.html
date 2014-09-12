@@ -49,8 +49,70 @@
 
 <p>We've got a bunch of example scripts to get you started, like a bot which just follows you around, a bot which mines stairs and a bot which builds a simple dirt hut to get you started. See the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a>.</p>
 
+<h3>
+<a name="setting-up" class="anchor" href="#setting-up"><span class="octicon octicon-link"></span></a>Setting up</h3>
+
+<p>First, you need to connect to our Minecraft server to spawn your bot. Since we're still testing this out we're keeping the address a secret so if you've got the address in your email or someone shared it with you, then go ahead and join the server in Minecraft as a regular player with a regular client.</p>
+
+<p>When you're there (in Minecraft), type:</p>
+
+<pre><code>/spawnrobot
+</code></pre>
+
+<p>Then right-click anywhere and you should see your brand new Pumpkin minion appear! It's there waiting for your instructions. You can give a few instructions in the game itself, by typing: </p>
+
+<pre><code>/robot move up
+</code></pre>
+
+<p>You can use any of up, down, left, right, forward, backward, north, south, east or west for the direction. You can also tell the robot to 'turn' to face a direction or 'mine' the block in any direction. We chose a pumpkin to represent the bot so that you can see which direction is it's facing.</p>
+
+<p>Of course running these commands one by one is even more tedious than mining by yourself, so now that our robot exists, let's start with a simple script.</p>
+
+<p>Before this will work, you need to install the botchallenge library, instructions for different platforms are below. Once you've got it setup, open a Python file and past this simple script:</p>
+
+<pre><code>from botchallenge import *
+bot = Bot()
+
+for i in range(10):
+    bot.move(Dir.UP)
+    bot.place(BlockType.DIRT, Dir.DOWN)
+    bot.move(Dir.RIGHT)
+    bot.place(BlockType.DIRT, Dir.DOWN)
+</code></pre>
+
+<p>If there's enough space nearby, your robot should be building you a some dirt stairs! If that works, then you're good to go, you should check out the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a> for more ideas of what you can do.</p>
+
 <h2>
-<a name="setting-up-on-windows" class="anchor" href="#setting-up-on-windows"><span class="octicon octicon-link"></span></a>Setting up on Windows</h2>
+<a name="installing-on-mac" class="anchor" href="#installing-on-mac"><span class="octicon octicon-link"></span></a>Installing on Mac</h2>
+
+<p>First install Python3, If you like terminals I would recommend using homebrew from <a href="http://brew.sh">http://brew.sh</a>
+Once homebrew is installed run:</p>
+
+<pre><code>brew install python3
+</code></pre>
+
+<p>This will also install pip3, use it to install the botchallenge module.</p>
+
+<pre><code>pip3 install botchallenge
+</code></pre>
+
+<p>If you don't want to use homebrew, then you could install Python3 from the python.org site, then follow the instructions at <a href="http://pip.pypa.io">http://pip.pypa.io</a> for installing pip, then use pip3 to install botchallenge as above.</p>
+
+<h2>
+<a name="installing-on-linux" class="anchor" href="#installing-on-linux"><span class="octicon octicon-link"></span></a>Installing on Linux</h2>
+
+<p>On Ubuntu/Debian run these commands, for other distributions there should be equivalent packages.</p>
+
+<pre><code>sudo apt-get install python3 python3-dev python3-pip
+</code></pre>
+
+<p>Then use pip3 to install the botchallenge module</p>
+
+<pre><code>sudo pip3 install botchallenge
+</code></pre>
+
+<h2>
+<a name="installing-on-windows" class="anchor" href="#installing-on-windows"><span class="octicon octicon-link"></span></a>Installing on Windows</h2>
 
 <p>You'll need to download and install each of these packages (Python must be installed before you install the others).</p>
 
@@ -66,38 +128,7 @@
 
 <p>The go to Run Module (in the menu) to run it (or hit F5). If it prints nothing, then everything is installed correctly. If it shows an error, then there might have been a problem installing the modules or you might have more than one version of Python installed and you're using the wrong one.</p>
 
-<p>If it's working, you can try this simple bot. But first, you need to connect to our Minecraft server to spawn a bot. Since we're still testing this out we're keeping the address a secret so if you've got the address in your email or someone shared it with you, then go ahead and join the server in Minecraft as a regular player.</p>
-
-<p>When you're there (in Minecraft), type:</p>
-
-<pre><code>/spawnrobot
-</code></pre>
-
-<p>Then right-click anywhere and you should see your brand new Pumpkin minion appear! It's there waiting for your instructions. You can give a few instructions in the game itself, by typing: </p>
-
-<pre><code>/robot move up
-</code></pre>
-
-<p>You can use any of up, down, left, right, forward, backward, north, south, east or west for the direction. You can also tell the robot to 'turn' to face a direction or 'mine' the block in any direction. We chose a pumpkin to represent the bot so that you can see which direction is it's facing.</p>
-
-<p>Of course running these commands one by one is even more tedious than mining by yourself, so now that our robot exists, let's start with a simple script:</p>
-
-<pre><code>from botchallenge import *
-bot = Bot()
-
-for i in range(10):
-    bot.move(Dir.UP)
-    bot.place(Material.DIRT, Dir.DOWN)
-    bot.move(Dir.RIGHT)
-    bot.place(Material.DIRT, Dir.DOWN)
-</code></pre>
-
-<p>If there's enough space nearby, your robot should be building you a some dirt stairs! If that works, then you're good to go, you should check out the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a> for more ideas of what you can do.</p>
-
-<h3>
-<a name="installing-on-mac-or-linux" class="anchor" href="#installing-on-mac-or-linux"><span class="octicon octicon-link"></span></a>Installing on Mac or Linux</h3>
-
-<p>Instructions coming soon.</p>
+<p>If it's working, you can try the simple bot above.</p>
       </section>
     </div>
 
