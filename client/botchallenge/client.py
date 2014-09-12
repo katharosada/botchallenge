@@ -96,7 +96,7 @@ class ContextHandler(object):
         # Grab the current execution context as the robot greenlet
         self.robot_greenlet = greenlet.getcurrent()
         # Prepare to run the asyncio event loop in the network greenlet
-        self.network_greenlet = greenlet(self.run_event_loop)
+        self.network_greenlet = greenlet(self._run_event_loop)
         # Start the asyncio event loop and switch to it (to connect)
         self.network_greenlet.switch()
 
@@ -110,7 +110,7 @@ class ContextHandler(object):
         # We've got our first command:
         self.protocol.send_request(request)
 
-    def run_event_loop(self):
+    def _run_event_loop(self):
         """Start the main asyncio event loop (must be in the network greenlet).
         """
         self.protocol = RobotClientProtocol(self)
