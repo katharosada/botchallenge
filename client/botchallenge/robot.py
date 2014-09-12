@@ -20,7 +20,7 @@ class Robot(object):
         self.port = port
         self._context_handler = context_handler
         if not context_handler:
-            self._context_handler = ContextHandler(self)
+            self._context_handler = ContextHandler(host, port)
         self._counter = random.randint(1, 2^16)
 
     def _action(self, request):
