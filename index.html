@@ -75,9 +75,9 @@ robot = Robot()
 
 for i in range(10):
     robot.move(Dir.UP)
-    robot.place(BlockType.DIRT, Dir.DOWN)
+    robot.place(Dir.DOWN, BlockType.DIRT)
     robot.move(Dir.RIGHT)
-    robot.place(BlockType.DIRT, Dir.DOWN)
+    robot.place(Dir.DOWN, BlockType.DIRT)
 </code></pre>
 
 <p>If there's enough space nearby, your robot should be building you a some dirt stairs! If that works, then you're good to go, you should check out the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a> for more ideas of what you can do.</p>
