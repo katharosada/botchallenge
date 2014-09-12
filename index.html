@@ -71,13 +71,13 @@
 <p>Before this will work, you need to install the botchallenge library, instructions for different platforms are below. Once you've got it setup, open a Python file and past this simple script:</p>
 
 <pre><code>from botchallenge import *
-bot = Bot()
+robot = Robot()
 
 for i in range(10):
-    bot.move(Dir.UP)
-    bot.place(BlockType.DIRT, Dir.DOWN)
-    bot.move(Dir.RIGHT)
-    bot.place(BlockType.DIRT, Dir.DOWN)
+    robot.move(Dir.UP)
+    robot.place(BlockType.DIRT, Dir.DOWN)
+    robot.move(Dir.RIGHT)
+    robot.place(BlockType.DIRT, Dir.DOWN)
 </code></pre>
 
 <p>If there's enough space nearby, your robot should be building you a some dirt stairs! If that works, then you're good to go, you should check out the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a> for more ideas of what you can do.</p>
