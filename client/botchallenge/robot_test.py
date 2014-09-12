@@ -129,6 +129,52 @@ class TestRobot(object):
         assert result == Location(-200, 46, 10)
         self.mock_context.validate()
 
+    def test_find_path(self):
+        request1 = self.get_request()
+        request1.read_request.locate_entity = robotapi_pb2.RobotReadRequest.SELF
+        response1 = self.get_response()
+        own_loc = response1.location_response.locations.add().absolute_location
+        own_loc.x, own_loc.y, own_loc.z = 10, 20, 30
+        self.mock_context.expect(request1, response1)
+
+        request2 = self.get_request()
+        request2.read_request.locate_nonsolid_nearby = True
+        response2 = self.get_response()
+
+        loc1 = response2.location_response.locations.add().absolute_location
+        loc1.x, loc1.y, loc1.z = 11, 20, 30
+
+        loc2 = response2.location_response.locations.add().absolute_location
+        loc2.x, loc2.y, loc2.z = 10, 21, 30
+
+        loc3 = response2.location_response.locations.add().absolute_location
+        loc3.x, loc3.y, loc3.z = 10, 20, 31
+        self.mock_context.expect(request2, response2)
+
+        direction = self.robot.find_path(Location(15, 30, 30))
+        assert direction == Dir.UP
+        self.mock_context.validate()
+
+    def test_get_inventory(self):
+        request = self.get_request()
+        request.read_request.get_inventory = True
+        response = self.get_response()
+        response.inventory_response.materials.add().type = BlockType.DIRT.value
+        response.inventory_response.materials.add().type = (
+                BlockType.COBBLESTONE.value)
+        response.inventory_response.materials.add().type = BlockType.WOOL.value
+        response.inventory_response.counts.append(64)
+        response.inventory_response.counts.append(64)
+        response.inventory_response.counts.append(5)
+
+        self.mock_context.expect(request, response)
+        inv = self.robot.get_inventory()
+        assert (BlockType.DIRT, 64) in inv
+        assert (BlockType.COBBLESTONE, 64) in inv
+        assert (BlockType.WOOL, 5) in inv
+        assert len(inv) == 3
+        self.mock_context.validate()
+
 
 class TestLocation(object):
     """Tests for the Location type."""
