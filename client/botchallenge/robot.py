@@ -14,11 +14,13 @@ class Robot(object):
     """Represents the robot itself, commands are sent to the server and the
          result is returned."""
 
-    def __init__(self, owner_name, host, port=26656):
+    def __init__(self, owner_name, host, port=26656, context_handler=None):
         self.host = host
         self.owner_name = owner_name
         self.port = port
-        self._context_handler = ContextHandler(self)
+        self._context_handler = context_handler
+        if not context_handler:
+            self._context_handler = ContextHandler(host, port)
         self._counter = random.randint(1, 2^16)
 
     def _action(self, request):
@@ -39,20 +41,20 @@ class Robot(object):
         """Move the robot one block in the given direction."""
         request = self._new_action()
         request.action_request.move_direction = direction.value
-        return self._action(request)
+        return self._action(request).success
 
     def turn(self, direction):
         """Turn the robot to face the given direction."""
         request = self._new_action()
         request.action_request.turn_direction = direction.value
-        return self._action(request)
+        return self._action(request).success
 
     def mine(self, direction):
         """Mine the adjacent block in the given direction and pick up the
         item that results from destrying that block."""
         request = self._new_action()
         request.action_request.mine_direction = direction.value
-        return self._action(request)
+        return self._action(request).success
 
     def place(self, direction, blocktype):
         """Place a block next to the robot in the given direction, with the
@@ -60,7 +62,7 @@ class Robot(object):
         request = self._new_action()
         request.action_request.place_direction = direction.value
         request.action_request.place_material.type = blocktype.value
-        return self._action(request)
+        return self._action(request).success
 
     def get_block_type(self, direction):
         """Find the type of the adjacent block in the given direction."""
@@ -166,6 +168,13 @@ class Location(object):
         return "Location(X:{}, Y:{}, Z:{})".format(
             self.x_coord, self.y_coord, self.z_coord)
 
+    def __eq__(self, other):
+        if not other:
+            return False
+        return (self.x_coord == other.x_coord and
+                self.y_coord == other.y_coord and
+                self.z_coord == other.z_coord)
+
     def distance(self, other):
         """Returns the distance between this location and the given other
         location."""
@@ -221,6 +230,8 @@ class Dir:
         return self.name
 
     def __eq__(self, other):
+        if not other:
+            return False
         return self.value == other.value
 
 def setup_dir():

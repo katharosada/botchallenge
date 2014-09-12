@@ -87,16 +87,17 @@ class ContextHandler(object):
     and asynchronously wait for the response. When the response is receieved
     we switch back to the robot greenlet to await the next request."""
 
-    def __init__(self, robot):
+    def __init__(self, host, port):
         self.loop = asyncio.get_event_loop()
-        self.robot = robot
+        self.host = host
+        self.port = port
         self.network_greenlet = None
         self.protocol = None
 
         # Grab the current execution context as the robot greenlet
         self.robot_greenlet = greenlet.getcurrent()
         # Prepare to run the asyncio event loop in the network greenlet
-        self.network_greenlet = greenlet(self.run_event_loop)
+        self.network_greenlet = greenlet(self._run_event_loop)
         # Start the asyncio event loop and switch to it (to connect)
         self.network_greenlet.switch()
 
@@ -106,11 +107,11 @@ class ContextHandler(object):
         logging.debug("Connected. Waiting for first robot request...")
         self.protocol = protocol
         # Switch to the robot execution context until it returns an request:
-        request = self.robot_greenlet.switch(self.robot)
+        request = self.robot_greenlet.switch()
         # We've got our first command:
         self.protocol.send_request(request)
 
-    def run_event_loop(self):
+    def _run_event_loop(self):
         """Start the main asyncio event loop (must be in the network greenlet).
         """
         self.protocol = RobotClientProtocol(self)
@@ -118,8 +119,8 @@ class ContextHandler(object):
         asyncio.async(
             self.loop.create_connection(
                 lambda: self.protocol,
-                host=self.robot.host,
-                port=self.robot.port))
+                host=self.host,
+                port=self.port))
 
         # Main asyncio event loop running in the asyncio_greenlet
         self.loop.run_forever()
