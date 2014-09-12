@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -93,7 +94,13 @@ public class ReadExecutor {
 			if (readRequest.getLocateEntity() == Entity.SELF) {
 				location = robot.getLocation();
 			} else if (readRequest.getLocateEntity() == Entity.OWNER) {
-				location = robot.getPlayer().getLocation();
+				Player player = robot.getPlayer();
+				if (player == null) {
+					throw new RobotRequestException(
+						Reason.OWNER_DOES_NOT_EXIST,
+						"The owner player is no longer on this server.");
+				}
+				location = player.getLocation();
 			}
 			
 			WorldLocation worldLocation = WorldLocation.newBuilder().setAbsoluteLocation(

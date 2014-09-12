@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Chest;
 import org.bukkit.util.Vector;
 
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 import com.google.common.collect.Lists;
@@ -263,42 +264,78 @@ public abstract class AbstractRobot implements InventoryHolder {
 		return world.getBlockAt(loc);
 	}
 	
-	public List<Location> scanForNonSolid() {
-		// Scans cube area 1 block in every direction and returns the locations of all blocks
-		// which are non-solid in that space.
-		List<Location> locations = Lists.newLinkedList();
-		int dist = 1; // One block in each direction (including diagonal)
-		for (int x = location.getBlockX() - dist; x <= location.getBlockX() + dist; x++) {
-			for (int y = location.getBlockY() - dist; y <= location.getBlockY() + dist; y++) {
-				for (int z = location.getBlockZ() - dist; z <= location.getBlockZ() + dist; z++) {
-					if (!world.getBlockAt(x, y, z).getType().isSolid()) {
-						locations.add(new Location(world, x, y, z));
-					}
-				}
-			}
-		}
-		return locations;
+	private Block getRelativeBlock(int x, int y, int z) {
+		return world.getBlockAt(location.clone().add(x, y, z));
 	}
+	
+	private static interface BlockChooser {
+		public boolean match(Block block);
+	}
+	
+	private static class NonSolidChooser implements BlockChooser {
+		@Override
+		public boolean match(Block block) {
+			return !block.getType().isSolid();
+		}
+	}
+	
+	private static class MaterialChooser implements BlockChooser {
 
-	public List<Location> scanForMaterial(Material material) {
-		// Scans cube area 5 blocks in every direction and returns the locations of all blocks
-		// which match the given material (limited to 20 blocks).
-		// TODO: Sort by distance from robot.
+		private final Material material;
+		
+		public MaterialChooser(Material material) {
+			this.material = material;
+		}
+		
+		@Override
+		public boolean match(Block block) {
+			return Util.materialsEqual(material, block.getType());
+		}
+	}
+	
+	private List<Location> scanForBlocks(int max_distance, int limit, BlockChooser chooser) {
 		List<Location> locations = Lists.newLinkedList();
-		int dist = 5; // Five blocks in each direction (including diagonal)
-		for (int x = location.getBlockX() - dist; x <= location.getBlockX() + dist; x++) {
-			for (int y = location.getBlockY() - dist; y <= location.getBlockY() + dist; y++) {
-				for (int z = location.getBlockZ() - dist; z <= location.getBlockZ() + dist; z++) {
-					if (Util.materialsEqual(world.getBlockAt(x, y, z).getType(), material)) {
-						locations.add(new Location(world, x, y, z));
-						if (locations.size() >= 20) {
+		
+		for (int d = 1; d <= max_distance; d++) {
+			for (int x = -d; x <= d; x++) {
+				for (int y =  - (d - Math.abs(x)); y <= (d - Math.abs(x)); y++) {
+					int z = - (d - Math.abs(x) - Math.abs(y));
+					Block b = getRelativeBlock(x, y, z);
+					if (chooser.match(b)) {
+						locations.add(b.getLocation());
+						if (locations.size() >= limit) {
 							return locations;
+						}
+					}
+					if (z != 0){
+						z = -z;
+						b = getRelativeBlock(x, y, z);
+						if (chooser.match(b)) {
+							locations.add(b.getLocation());
+							if (locations.size() >= limit) {
+								return locations;
+							}
 						}
 					}
 				}
 			}
 		}
 		return locations;
+	}
+	
+	/**
+	 * Scan blocks 1 distance away and return the locations which are non-solid.
+	 */
+	public List<Location> scanForNonSolid() {
+		return scanForBlocks(1, 10, new NonSolidChooser());
+	}
+
+	/**
+	 * Scans the area 5 blocks in every direction (by manhattan distance) and returns the
+	 * locations of all blocks which match the given material (limited to 20 blocks). 
+	 */
+	public List<Location> scanForMaterial(Material material) {
+		return scanForBlocks(5, 20, new MaterialChooser(material));
 	}
 
 	/**

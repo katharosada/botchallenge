@@ -7743,6 +7743,10 @@ public final class RobotApi {
        * <code>NOT_IMPLEMENTED = 9;</code>
        */
       NOT_IMPLEMENTED(9, 9),
+      /**
+       * <code>OWNER_DOES_NOT_EXIST = 10;</code>
+       */
+      OWNER_DOES_NOT_EXIST(10, 10),
       ;
 
       /**
@@ -7785,6 +7789,10 @@ public final class RobotApi {
        * <code>NOT_IMPLEMENTED = 9;</code>
        */
       public static final int NOT_IMPLEMENTED_VALUE = 9;
+      /**
+       * <code>OWNER_DOES_NOT_EXIST = 10;</code>
+       */
+      public static final int OWNER_DOES_NOT_EXIST_VALUE = 10;
 
 
       public final int getNumber() { return value; }
@@ -7801,6 +7809,7 @@ public final class RobotApi {
           case 7: return BLOCK_IS_NOT_REACHABLE;
           case 8: return BLOCK_IS_NOT_VISIBLE;
           case 9: return NOT_IMPLEMENTED;
+          case 10: return OWNER_DOES_NOT_EXIST;
           default: return null;
         }
       }
@@ -8531,19 +8540,19 @@ public final class RobotApi {
       "onse\0220\n\021material_response\030\005 \001(\0132\025.robomi" +
       "nions.Material\022:\n\022inventory_response\030\006 \001" +
       "(\0132\036.robominions.InventoryResponse\022\030\n\020bo" +
-      "olean_response\030\007 \001(\010\"\250\003\n\014ErrorMessage\0220\n",
+      "olean_response\030\007 \001(\010\"\302\003\n\014ErrorMessage\0220\n",
       "\006reason\030\001 \001(\0162 .robominions.ErrorMessage" +
       ".Reason\0220\n\006action\030\002 \001(\0162 .robominions.Er" +
-      "rorMessage.Action\022\017\n\007message\030\003 \001(\t\"\344\001\n\006R" +
+      "rorMessage.Action\022\017\n\007message\030\003 \001(\t\"\376\001\n\006R" +
       "eason\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ERROR\020\001\022\026\n\022" +
       "UNREADABLE_REQUEST\020\002\022\023\n\017INVALID_REQUEST\020" +
       "\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n\020OUTSIDE_OF_WOR" +
       "LD\020\005\022\030\n\024ROBOT_DOES_NOT_EXIST\020\006\022\032\n\026BLOCK_" +
       "IS_NOT_REACHABLE\020\007\022\030\n\024BLOCK_IS_NOT_VISIB" +
-      "LE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\"<\n\006Action\022\017\n\013F" +
-      "AIL_ACTION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_C",
-      "LIENT\020\002B*\n\036au.id.katharos.robominions.ap" +
-      "iB\010RobotApi"
+      "LE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\022\030\n\024OWNER_DOES_" +
+      "NOT_EXIST\020\n\"<\n\006Action\022\017\n\013FAIL_ACTION\020\000\022\020",
+      "\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT\020\002B*\n\036au." +
+      "id.katharos.robominions.apiB\010RobotApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
