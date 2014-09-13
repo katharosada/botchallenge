@@ -342,7 +342,7 @@ public abstract class AbstractRobot implements InventoryHolder {
 	 * locations of all blocks which match the given material (limited to 20 blocks). 
 	 */
 	public List<Location> scanForMaterial(Material material) {
-		return scanForBlocks(5, 20, new MaterialChooser(material));
+		return scanForBlocks(10, 20, new MaterialChooser(material));
 	}
 
 	/**
