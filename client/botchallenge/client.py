@@ -52,7 +52,7 @@ class RobotClientProtocol(asyncio.Protocol):
         else:
             logging.warn("Recieved extra response for a retry. Response was "
                          "for key: %s but I expected key %s.",
-                         self.last_sent_request.key, response.key)
+                         response.key, self.last_sent_request.key)
 
     def send_request(self, request):
         """Serialize and send the given proto request object."""

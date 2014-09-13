@@ -207,15 +207,22 @@ public abstract class AbstractRobot implements InventoryHolder {
 	public boolean place(Direction dir, Material material) {
 		Block block = getBlockFromDirection(dir);
 		boolean success = !block.getType().isSolid();
+		byte data = 0x0;
 		if (success && inventory.contains(material)) {
-			ItemStack i = inventory.getItem(inventory.first(material));
-			i.setAmount(i.getAmount() - 1);
+			ItemStack itemStack = inventory.getItem(inventory.first(material));
+			data = itemStack.getData().getData();
+			if (itemStack.getAmount() > 1) {
+				itemStack.setAmount(itemStack.getAmount() - 1);
+			} else {
+				inventory.remove(itemStack);
+			}
 		} else {
 			// don't have that in your inventory
 			return false;
 		}
 		if (success) {
 			block.setType(material);
+			block.setData(data);
 		}
 		return success;
 	}

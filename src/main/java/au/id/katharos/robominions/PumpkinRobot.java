@@ -23,6 +23,7 @@ public class PumpkinRobot extends AbstractRobot {
 	// To not wipe out flowers/water etc. we store the old contents of the block
 	// we are currently occupying
 	private Material oldMaterial;
+	private byte oldMetadata;
 	
 	// The world block which we are currently on.
 	private Block currentBlock;
@@ -36,9 +37,11 @@ public class PumpkinRobot extends AbstractRobot {
 		super(world, playerId, location, logger);
 		Block block = world.getBlockAt(location);
 		oldMaterial = block.getType();
+		oldMetadata = block.getData();
 		// If the previous block is like me, it's probably a glitch. Remove it.
 		if (oldMaterial == AVATAR) {
 			oldMaterial = Material.AIR;
+			oldMetadata = 0x0;
 		}
 		currentMaterial = AVATAR;
 		block.setType(currentMaterial);
@@ -61,6 +64,7 @@ public class PumpkinRobot extends AbstractRobot {
 	protected void die() {
 		super.die();
 		currentBlock.setType(oldMaterial);
+		currentBlock.setData(oldMetadata);
 	}
 	
 	@Override
@@ -118,10 +122,12 @@ public class PumpkinRobot extends AbstractRobot {
 		if (success) {
 			//Replace our old block with the stored material
 			currentBlock.setType(oldMaterial);
+			currentBlock.setData(oldMetadata);
 			currentBlock = world.getBlockAt(location);
 
 			// remember what we're stepping on so we can put it back.
 			oldMaterial = currentBlock.getType();
+			oldMetadata = currentBlock.getData();
 
 			// Create pumpkin!
 			currentBlock.setType(currentMaterial);
