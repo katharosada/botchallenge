@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import com.google.protobuf.Internal.EnumLiteMap;
+
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
 /**
@@ -223,11 +225,14 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     		}
     		if (sender instanceof Player && stateManager.hasRobot(((Player) sender).getUniqueId())) {
     			AbstractRobot chicken = getRobot(((Player) sender).getUniqueId());
-        		Direction direction = Direction.valueOf(args[1].toUpperCase());
-        		if (direction == null) {
-        			sender.sendMessage("Invalid direction");
-        			return false;
-        		}
+    			String dir = args[1].toUpperCase();
+    			Direction direction = Direction.UP;
+    			try {
+    				direction = Direction.valueOf(dir);
+    			} catch (IllegalArgumentException ex) {
+    				sender.sendMessage("Invalid direction.");
+    				return false;
+    			}
         		boolean moveSuccess = false;
         		if (args[0].equalsIgnoreCase("move")) {
         			moveSuccess = chicken.move(direction);

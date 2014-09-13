@@ -10,7 +10,7 @@ commands:
       permission-message: You don't have <permission>
    robot:
       description: Give the robot a command (only supports move and turn)
-      usage: /<command> {turn|move|mine} {up|down|east|west|forward|backward}
+      usage: /<command> action direction. Where action is move, turn or mine and direction is up, down, left, right, forward, backward, north, south, east or west.
       permission: robouser
 
 permissions:
