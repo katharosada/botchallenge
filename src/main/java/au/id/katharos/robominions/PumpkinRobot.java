@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
 
@@ -16,6 +16,9 @@ import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
  * facing direction.
  */
 public class PumpkinRobot extends AbstractRobot {
+	
+	public static final Material AVATAR = Material.PUMPKIN;
+	public static final Material AVATAR_LIT = Material.JACK_O_LANTERN;
 
 	// To not wipe out flowers/water etc. we store the old contents of the block
 	// we are currently occupying
@@ -24,6 +27,8 @@ public class PumpkinRobot extends AbstractRobot {
 	// The world block which we are currently on.
 	private Block currentBlock;
 	
+	private Material currentMaterial;
+	
 	/**
 	 * Create a new pumpkin bot. See {@link AbstractRobot}
 	 */
@@ -31,9 +36,25 @@ public class PumpkinRobot extends AbstractRobot {
 		super(world, playerId, location, logger);
 		Block block = world.getBlockAt(location);
 		oldMaterial = block.getType();
-		block.setType(Material.PUMPKIN);
+		// If the previous block is like me, it's probably a glitch. Remove it.
+		if (oldMaterial == AVATAR) {
+			oldMaterial = Material.AIR;
+		}
+		currentMaterial = AVATAR;
+		block.setType(currentMaterial);
 		currentBlock = block;
 		setDirectionOnCurrentBlock();
+	}
+	
+	/**
+	 * Switch to a jack-o-lantern or back to a pumpkin.
+	 */
+	public void light(boolean on) {
+		if (on) {
+			currentMaterial = AVATAR_LIT;
+		} else {
+			currentMaterial = AVATAR;
+		}
 	}
 	
 	@Override
@@ -43,10 +64,19 @@ public class PumpkinRobot extends AbstractRobot {
 	}
 	
 	@Override
+	public void pickUp(ItemStack item) {
+		// Don't pick up any self-like objects (usually caused by self-destruction)
+		if (item.getType() == currentMaterial) {
+			return;
+		}
+		super.pickUp(item);
+	}
+	
+	@Override
 	protected void tick() {
 		super.tick();
 		// Make sure the current block is still a pumpkin
-		currentBlock.setType(Material.PUMPKIN);
+		currentBlock.setType(currentMaterial);
 		// Set the facing direction of the pumpkin
 		setDirectionOnCurrentBlock();
 	}
@@ -77,7 +107,7 @@ public class PumpkinRobot extends AbstractRobot {
 		boolean success = super.turn(direction);
 		if (success) {
 			setDirectionOnCurrentBlock();
-			currentBlock.setType(Material.PUMPKIN);
+			currentBlock.setType(currentMaterial);
 		}
 		return success;
 	}
@@ -90,11 +120,11 @@ public class PumpkinRobot extends AbstractRobot {
 			currentBlock.setType(oldMaterial);
 			currentBlock = world.getBlockAt(location);
 
-			// remeber what we're stepping on so we can put it back.
+			// remember what we're stepping on so we can put it back.
 			oldMaterial = currentBlock.getType();
 
 			// Create pumpkin!
-			currentBlock.setType(Material.PUMPKIN);
+			currentBlock.setType(currentMaterial);
 			// Set the facing direction of the pumpkin
 			setDirectionOnCurrentBlock();
 		}

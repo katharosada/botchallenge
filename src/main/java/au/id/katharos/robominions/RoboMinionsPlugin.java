@@ -156,12 +156,14 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
 				stateManager.addRobot(event.getPlayer(), robot);
 				actionMap.remove(event.getPlayer().getName());
 				event.setCancelled(true);
-			} else if (event.hasBlock() &&
-					event.getClickedBlock().getType() == Material.PUMPKIN) {
-				for (AbstractRobot robot : stateManager.getRobotMap().values()) {
-					if (robot.getLocation().getBlock().equals(event.getClickedBlock())) {
-						event.getPlayer().openInventory(robot.getInventory());
-						event.setCancelled(true);
+			} else if (event.hasBlock()) {
+				Material blockType = event.getClickedBlock().getType();
+				if (blockType == PumpkinRobot.AVATAR || blockType == PumpkinRobot.AVATAR_LIT) {
+					for (AbstractRobot robot : stateManager.getRobotMap().values()) {
+						if (robot.getLocation().getBlock().equals(event.getClickedBlock())) {
+							event.getPlayer().openInventory(robot.getInventory());
+							event.setCancelled(true);
+						}
 					}
 				}
 			}
@@ -224,7 +226,16 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     			return false;
     		}
     		if (sender instanceof Player && stateManager.hasRobot(((Player) sender).getUniqueId())) {
-    			AbstractRobot chicken = getRobot(((Player) sender).getUniqueId());
+    			AbstractRobot robot = getRobot(((Player) sender).getUniqueId());
+    			if (args[0].equalsIgnoreCase("light") && robot instanceof PumpkinRobot) {
+    				if (args[1].equalsIgnoreCase("on")) {
+    					((PumpkinRobot) robot).light(true);
+    				} else if (args[1].equalsIgnoreCase("off")) {
+    					((PumpkinRobot) robot).light(false);
+    				}
+    				return true;
+    			}
+    			
     			String dir = args[1].toUpperCase();
     			Direction direction = Direction.UP;
     			try {
@@ -235,19 +246,19 @@ public class RoboMinionsPlugin extends JavaPlugin implements Listener {
     			}
         		boolean moveSuccess = false;
         		if (args[0].equalsIgnoreCase("move")) {
-        			moveSuccess = chicken.move(direction);
+        			moveSuccess = robot.move(direction);
         			if (!moveSuccess) {
             			sender.sendMessage("Can't move there, there's something in the way.");
             			return true;
             		}
         		} else if (args[0].equalsIgnoreCase("turn")) {
-        			moveSuccess = chicken.turn(direction);
+        			moveSuccess = robot.turn(direction);
         			if (!moveSuccess) {
             			sender.sendMessage("Can't turn up/down.");
             			return true;
             		}
         		} else if (args[0].equalsIgnoreCase("mine")) {
-        			moveSuccess = chicken.mine(direction);
+        			moveSuccess = robot.mine(direction);
         			if (!moveSuccess) {
             			sender.sendMessage("Can't mine that with a pickaxe.");
             			return true;
