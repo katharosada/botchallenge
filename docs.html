@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>The Bot Challenge by katharosada</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>The Bot Challenge</h1>
+        <h2>Remove the boring bits of Minecraft with your own Python code.</h2>
+
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+
+<h2>
+<a name="setting-up" class="anchor" href="#setting-up"><span class="octicon octicon-link"></span></a>The Robot API</h2>
+
+<p>Connecting to your Robot</p>
+
+<pre><code>username = "username"
+server_address = "server.address.net"
+robot = Robot(username, server_address)
+</code></pre>
+<p>This connects to your robot on the Minecraft server and lets you start sending commands through the robot object.</p>
+
+<h2>Moving, Turning and Mining</h2>
+<p>These are all the possible directions that you can use for the various actions. Some are relative to the way the robot is
+facing (see the face of the pumpkin) and some are absolute compass directions.
+<pre><code>Dir.UP
+Dir.DOWN
+Dir.LEFT
+Dir.RIGHT
+Dir.FORWARD
+Dir.BACKWARD
+Dir.NORTH
+Dir.SOUTH
+Dir.EAST
+Dir.WEST
+</code></pre>
+
+<h3>Robot.move(direction)</h3>
+<pre><code>robot.move(Dir.LEFT)
+</code></pre>
+<p>Moves the robot in the given direction, and returns a boolean whether the move succeeded or not (fails if there's a solid block in the way).</p>
+
+
+<h3>Robot.turn(direction)</h3>
+<pre><code>robot.turn(Dir.LEFT)
+</code></pre>
+<p>Turns the robot to face the given direction, and returns a boolean if successful. Turning always succeeds, except if turning UP/DOWN which is impossible.</p>
+
+
+<h3>Robot.mine(direction)</h3>
+<pre><code>robot.mine(Dir.LEFT)
+</code></pre>
+<p>Mines away the adjacent block in the given direction, and returns a boolean if successful.</p>
+<p>All mines are done as though the robot is holding a Diamond Pickaxe. If the block cannot be broken with a diamond pickaxe (e.g. Water) then the mine action will fail (return False). Whatever the result of the break is (e.g. COAL_ORE -&gt; COAL) is spawned as an item, automatically picked up by the robot and added to the inventory.</p>
+
+<h2>Robot.get_inventory()</h2>
+<pre><code>robot.get_inventory()
+</code></pre>
+<p>Returns a list of tuples (pairs) where each pair contains the BlockType and the count of how many of that block type are in the inventory.</p>
+<p>Block types which take up multiple spaces in the inventory will return multiple results, they are not aggregated together.</p>
+<p>Note: The robot has an infinite supply of DIRT and COBBLESTONE, since these are the normal products of mining. The robot will not pick up additional dirt or cobblestone and placing dirt or cobblestone does not reduce the inventory.</p>
+
+<h2>Placing blocks</h2>
+<p>The BlockType enum lists all available block types in Minecraft, any types missing from this list are likely to be sub-types of one of the types. This
+gets confusing, but I don't have a good solution for it just yet. For example granite is a subtype of STONE, so there is no granite in the list.</p>
+<p><a href="https://github.com/katharosada/botchallenge/blob/master/proto/materials.proto">The complete list of supported block types</a>.</p>
+
+<h3>Robot.place(direction, block_type)</h3>
+<pre><code>robot.place(Dir.LEFT, BlockType.DIRT)
+</code></pre>
+<p>Places a block of the given type, adjacent to the robot in the given direction, and reduces it from the inventory. Returns True if the place succeeds, and False otherwise</p>
+<p>Placing a block will fail if there is none of that type in the inventory or if there is a solid block in the way.
+If there are multiple items in the inventory matching the block type, then the first match is used. When the place is successful, the placed type
+is deducted from the inventory.</p>
+
+<h2>Locations</h2>
+<p>Coming soon.</p>
+
+<h2>Searching</h2>
+<p>Coming soon.</p>
+
+  </body>
+</html>

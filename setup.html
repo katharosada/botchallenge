@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>The Bot Challenge by katharosada</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>The Bot Challenge</h1>
+        <h2>Remove the boring bits of Minecraft with your own Python code.</h2>
+
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h2>
+          <a name="welcome-to-the-bot-challenge" class="anchor" href="#welcome-to-the-bot-challenge"><span class="octicon octicon-link"></span></a>Setting up your robot.</h2>
+
+<h3>
+<a name="setting-up" class="anchor" href="#setting-up"><span class="octicon octicon-link"></span></a>Connecting to the server</h3>
+
+<p>First, you need to connect to our Minecraft server to spawn your bot. Since we're still testing this out we're keeping the address a secret so if you've got the address in your email or someone shared it with you, then go ahead and join the server in Minecraft as a regular player with a regular client.</p>
+
+<p>When you're there (in Minecraft), type:</p>
+
+<pre><code>/spawnrobot
+</code></pre>
+
+<p>Then right-click anywhere and you should see your brand new Pumpkin minion appear! It's there waiting for your instructions.</p>
+
+<h3>Connect from Python</h3>
+
+<p>In IDLE (or python3 on the command line) open a Python interpreter shell. It should say something like this:</p>
+<pre><code>Python 3.4.0 (default, Apr 11 2014, 13:05:11) 
+[GCC 4.8.2] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt;
+</code></pre>
+
+<p>Type in the following:</p>
+<pre><code>&gt;&gt;&gt; from botchallenge import *
+&gt;&gt;&gt; robot = Robot("username", "server.address.net")
+&gt;&gt;&gt; 
+</code></pre>
+<p>But instead of "username" and "server.address.net" you should put your own minecraft username, and the address of the server (same as the one you connected to in Minecraft).</p>
+<p>Now you have a connection to your robot, you can send commands:</p>
+<pre><code>&gt;&gt;&gt; robot.move(Dir.UP)
+True
+&gt;&gt;&gt;
+</code></pre>
+<p>The robot should be 1 block higher than it was before (it might say False if there was something in the way).</p>
+<p>Try this out with other directions, UP/DOWN, LEFT/RIGHT, FORWARD/BACKWARD and NORTH/SOUTH/EAST/WEST all work.</p>
+
+<p>Your robot comes with an infinite supply of Dirt and Cobblestone, so try placing some blocks:</p>
+<pre><code>&gt;&gt;&gt; robot.place(Dir.LEFT, BlockType.DIRT)
+True
+&gt;&gt;&gt;
+</code></pre>
+<p>Try moving the robot up, and placing some more blocks.</p>
+<p>You can find out what type of block is next to the robot:<p>
+<pre><code>&gt;&gt;&gt; robot.get_block_type(Dir.LEFT)
+DIRT
+&gt;&gt;&gt;
+</code></pre>
+
+<p>Then you can mine the blocks away again with the mine function:</p>
+<pre><code>&gt;&gt;&gt; robot.mine(Dir.LEFT)
+True
+&gt;&gt;&gt;
+</code></pre>
+
+<p>You can also find out what the robot has in its inventory and where it is.<p>
+<pre><code>&gt;&gt;&gt; robot.get_inventory()
+[(DIRT, 64), (COBBLESTONE, 64)]
+&gt;&gt;&gt; robot.get_location()
+Location(X:53, Y:67, Z:245)
+&gt;&gt;&gt;
+</code></pre>
+
+<p>There's a bunch of other things that you can do, so take a look at the <a href="docs.html">complete list of available robot functions</a>.</p>
+<p>And if you want more ideas, check the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a>.</p>
+
+<h3>Writing a script</h3>
+<p>If you don't want to type the comands one by one, over and over, you can write a script and save it in a python file to run as many times as you want.</p>
+<p>Here's an example, create a new file in IDLE and paste this (remember to change the username and server address!).</p>
+<pre><code>from botchallenge import *
+robot = Robot("username", "server.address.net")
+
+for i in range(10):
+    robot.move(Dir.UP)
+    robot.place(Dir.DOWN, BlockType.DIRT)
+    robot.move(Dir.RIGHT)
+    robot.place(Dir.DOWN, BlockType.DIRT)
+</code></pre>
+
+<p>If there's enough space nearby, your robot should be building you a some dirt stairs! You're all set to start writing your own bot scripts. For inspiration you should check out the <a href="https://github.com/katharosada/botchallenge/tree/master/client/examples">example scripts</a> for more ideas of what you can do.</p>
+
+
+<h3>In-game commands</h3>
+<p>While you're in Minecraft, it's sometimes convenient to move the Robot around a little bit. You can use in-game commands by typing / in the game to give commands.</p>
+<p>For example:</p>
+<pre><code>/robot move up
+</code></pre>
+<p>You can use any of up, down, left, right, forward, backward, north, south, east or west for the direction. You can also tell the robot to 'turn' to face a direction or 'mine' the block in any direction. We chose a pumpkin to represent the bot so that you can see which direction is it's facing.</p>
+
+<p>Of course running these commands one by one is even more tedious than mining by yourself, so you probably want to do most stuff in Python.</p>
+    
+  </body>
+</html>
