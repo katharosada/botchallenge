@@ -55,12 +55,10 @@ Dir.WEST
 </code></pre>
 <p>Moves the robot in the given direction, and returns a boolean whether the move succeeded or not (fails if there's a solid block in the way).</p>
 
-
 <h3>Robot.turn(direction)</h3>
 <pre><code>robot.turn(Dir.LEFT)
 </code></pre>
 <p>Turns the robot to face the given direction, and returns a boolean if successful. Turning always succeeds, except if turning UP/DOWN which is impossible.</p>
-
 
 <h3>Robot.mine(direction)</h3>
 <pre><code>robot.mine(Dir.LEFT)
@@ -68,16 +66,10 @@ Dir.WEST
 <p>Mines away the adjacent block in the given direction, and returns a boolean if successful.</p>
 <p>All mines are done as though the robot is holding a Diamond Pickaxe. If the block cannot be broken with a diamond pickaxe (e.g. Water) then the mine action will fail (return False). Whatever the result of the break is (e.g. COAL_ORE -&gt; COAL) is spawned as an item, automatically picked up by the robot and added to the inventory.</p>
 
-<h2>Robot.get_inventory()</h2>
-<pre><code>robot.get_inventory()
-</code></pre>
-<p>Returns a list of tuples (pairs) where each pair contains the BlockType and the count of how many of that block type are in the inventory.</p>
-<p>Block types which take up multiple spaces in the inventory will return multiple results, they are not aggregated together.</p>
-<p>Note: The robot has an infinite supply of DIRT and COBBLESTONE, since these are the normal products of mining. The robot will not pick up additional dirt or cobblestone and placing dirt or cobblestone does not reduce the inventory.</p>
-
-<h2>Placing blocks</h2>
-<p>The BlockType enum lists all available block types in Minecraft, any types missing from this list are likely to be sub-types of one of the types. This
-gets confusing, but I don't have a good solution for it just yet. For example granite is a subtype of STONE, so there is no granite in the list.</p>
+<h2>Block Types</h2>
+<p>The BlockType enum lists all available block types in Minecraft, any types missing from this
+list are likely to be sub-types of one of the types. This gets confusing, but I don't have a good
+solution for it just yet. For example granite is a subtype of STONE, so there is no granite type in the list.</p>
 <p><a href="https://github.com/katharosada/botchallenge/blob/master/proto/materials.proto">The complete list of supported block types</a>.</p>
 
 <h3>Robot.place(direction, block_type)</h3>
@@ -87,12 +79,67 @@ gets confusing, but I don't have a good solution for it just yet. For example gr
 <p>Placing a block will fail if there is none of that type in the inventory or if there is a solid block in the way.
 If there are multiple items in the inventory matching the block type, then the first match is used. When the place is successful, the placed type
 is deducted from the inventory.</p>
+<h3>Robot.get_block_type(direction)</h3>
+<pre><code>robot.get_block_type(Dir.LEFT)
+</code></pre>
+<p>Returns the BlockType of the adjancent block in the given direction.</p>
 
-<h2>Locations</h2>
-<p>Coming soon.</p>
+<h3>Robot.is_block_solid(direction)</h3>
+<pre><code>robot.is_block_solid(Dir.LEFT)
+</code></pre>
+<p>Returns True if the block is solid, False if it can be moved through.</p>
+
+<h2>Inventory</h2>
+<h3>Robot.get_inventory()</h3>
+<pre><code>robot.get_inventory()
+</code></pre>
+<p>Returns a list of tuples (pairs) where each pair contains the BlockType and the count of how many of that block type are in the inventory.</p>
+<p>Block types which take up multiple spaces in the inventory will return multiple results, they are not aggregated together.</p>
+<p>Note: The robot has an infinite supply of DIRT and COBBLESTONE, since these are the normal products of mining. The robot will not pick up additional dirt or cobblestone and placing dirt or cobblestone does not reduce the inventory.</p>
+
+
+<h2>Location</h2>
+<p>A Location object is a 3D coordinate in the Minecraft world, same as the coordinates used in the game.</p>
+<p>The Location object has a few useful methods for finding distances and navigating.</p> 
+<pre><code>loc = Location(4, 10, 1)
+</code></pre>
+<p>Constructs a new location with the given X, Y, Z coordinate values.</p>
+
+<h3>Location.distance(location)</h3>
+<pre><code>loc.distance(Location(3, -23, 80))
+</code></pre>
+<p>Returns the distance from this location to another location as a float.</p>
+
+<h3>Location.direction(location)</h3>
+<pre><code>loc.direction(Location(2, 24, -23))
+</code></pre>
+<p>Returns the direction or Dir (UP/DOWN/NORTH/SOUTH/EAST/WEST) that best fits the direction from this
+location to the given location.</p>
+
+<h3>Robot and owner locations</h3>
+<pre><code>robot.get_location()
+</code></pre>
+<p>Returns the location of the robot as a Location object.</p>
+<pre><code>robot.get_owner_location()
+</code></pre>
+<p>Returns the location of the robot's onwer (you) as a Location object.</p>
 
 <h2>Searching</h2>
-<p>Coming soon.</p>
+<h3>Robot.find_type_nearby(block_type)</h3>
+<pre><code>robot.find_type_nearby(BlockType.DIAMOND_ORE)
+</code></pre>
+<p>Returns a list of Locations near to the robot which match the given block type.</p>
+<p>The search has a limit of 5 blocks in every direction by <a href="http://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan Distance</a>,
+and the results are sorted by distance with the nearest locations first in the list.</p>
+
+<h3>Robot.find_path(location)</h3>
+<pre><code>robot.find_path(Location(4, 29, 0))
+</code></pre>
+<p>Extremely basic path-finding tool. Out of the non-solid blocks adjacent to the robot, this function
+selects the one closest to the target location and returns the direction for the robot to move.</p>
+
+<p>Note that this only uses the blocks immediately surrounding the Robot, this is not enough information
+to accurately find a path and the Robot will get stuck pretty often.</p>
 
   </body>
 </html>
