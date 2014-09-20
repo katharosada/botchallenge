@@ -16,7 +16,7 @@ destroying each other's work or the entire world. :)
 
 How to build the server plugin
 ==============================
-https://github.com/katharosada/botchallenge/edit/master/README.md#fullscreen_blob_contents
+
 These instructions are for Ubuntu/Debian, but they should (in theory) translate
 well enough for Mac if you get the Maven, Ant and Protocol Buffer tools
 installed with Homebrew or package manager of your choice.
@@ -27,9 +27,9 @@ Python client and the server need the protocol buffer libraries and protoc
 compiler to generate source.)
 
 Install Maven and the protobuf compiler:
-````
+```
 sudo apt-get install maven ant protobuf-compiler
-````
+```
 
 
 Checkout this git repo and cd to the top-level directory then run:
@@ -46,9 +46,9 @@ Setting up an Eclipse development environment
 =============================================
 
 After following the build instructions above, in the repositories root directory, run:
-````
+```
 mvn eclipse:eclipse 
-````
+```
 
 This generates Eclipse workspace files which you can import into Eclipse.
 
@@ -61,33 +61,33 @@ Building and running the Python client
 ======================================
 
 Again you need the protocol buffer compiler:
-````
+```
 sudo apt-get install protobuf-compiler
-````
+```
 
 OR (for Macs with homebrew):
-````
+```
 brew install protobuf
-````
+```
 
 Check that it's installed with:
-````
+```
 which protoc
-````
+```
 
 For the Python libraries, you need greenlet, twisted and the protocol buffer
 Python lib, you can install these with:
-````
+```
 pip install greenlet protobuf twisted
-````
+```
 
 In the client directory, generate the Python protobuffer source with:
-````
+```
 ./gen_proto.sh
-````
+```
 
 Then run the example robot with:
-````
+```
 python robot.py
-````
+```
 
