@@ -2,7 +2,7 @@ Bot Challenge
 =============
 
 A Bukkit plugin which adds (on a separate network port) a programming interface
-allowing the creation of mining bot which can move independently around the
+allowing the creation of a mining bot which can move independently around the
 world and mine and place blocks.
 
 This is designed for those who want an easy scriptable programming interface
