@@ -43,7 +43,7 @@ In the targets directory there's a jar file called RoboMinionsPlugin, copy that
 jar into the plugins/ directory of your CraftBukkit server.
 
 If you don't have a CraftBukkit server, follow the instructions at:
-[wiki.bukkit.org/Setting_up_a_server](wiki.bukkit.org/Setting_up_a_server)
+[wiki.bukkit.org/Setting_up_a_server](http://wiki.bukkit.org/Setting_up_a_server)
 
 
 Setting up an Eclipse development environment
