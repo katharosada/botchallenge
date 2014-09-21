@@ -1,8 +1,12 @@
 Bot Challenge
 =============
 
-A Bukkit plugin which adds (on a separate network port) a programming interface
-allowing the creation of a mining bot which can move independently around the
+NOTE: These instructions are for contributors, if you want to try it out and use the
+Python API, see these docs:
+[katharosada.github.io/botchallenge](katharosada.github.io/botchallenge)
+
+Botchallenge is a Bukkit plugin which adds (on a separate network port) a programming
+interface allowing the creation of a mining bot which can move independently around the
 world and mine and place blocks.
 
 This is designed for those who want an easy scriptable programming interface
@@ -81,13 +85,16 @@ Python lib, you can install these with:
 pip install greenlet protobuf twisted
 ```
 
-In the client directory, generate the Python protobuffer source with:
+In the proto directory, generate the Python protobuffer source with:
 ```
-./gen_proto.sh
+./gen_python.sh
 ```
 
-Then run the example robot with:
+Go to the client directory, and the modules are there for you to use (locally importing) if you like.
+
+To install (again, use python3):
 ```
-python robot.py
+python setup.py build
+python setup.py install
 ```
 
