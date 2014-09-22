@@ -3,7 +3,7 @@ Bot Challenge
 
 NOTE: These instructions are for contributors, if you want to try it out and use the
 Python API, see these docs:
-[katharosada.github.io/botchallenge](katharosada.github.io/botchallenge)
+[katharosada.github.io/botchallenge](http://katharosada.github.io/botchallenge)
 
 Botchallenge is a Bukkit plugin which adds (on a separate network port) a programming
 interface allowing the creation of a mining bot which can move independently around the
