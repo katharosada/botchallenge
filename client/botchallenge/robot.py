@@ -21,7 +21,7 @@ class Robot(object):
         self._context_handler = context_handler
         if not context_handler:
             self._context_handler = ContextHandler(host, port)
-        self._counter = random.randint(1, 2^16)
+        self._counter = random.randint(1, 2**16)
 
     def _action(self, request):
         """Send an action request to the server (via the context handler)."""
