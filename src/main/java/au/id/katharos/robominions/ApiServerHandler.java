@@ -62,6 +62,7 @@ public class ApiServerHandler extends ChannelInboundHandlerAdapter {
 				} catch (RobotRequestException e) {
 					logger.warning(e.getMessage());
 					response = e.getResponse();
+					response.setKey(request.getKey());
 				}
         		ctx.write(response);
         		ctx.flush();
