@@ -165,7 +165,7 @@ class Location(object):
         self.z_coord = z_coord
 
     def __repr__(self):
-        return "Location(X:{}, Y:{}, Z:{})".format(
+        return "Location(x_coord={}, y_coord={}, z_coord={})".format(
             self.x_coord, self.y_coord, self.z_coord)
 
     def __eq__(self, other):
