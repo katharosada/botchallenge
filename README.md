@@ -21,6 +21,11 @@ destroying each other's work or the entire world. :)
 How to build the server plugin
 ==============================
 
+**Warning: If you want to run a server you'll need a CraftBukkit or Spigot
+server to run it on (or anything that supports Bukkit plugins). Due to
+licensing concerns, these are currently hard to come by. I'd recommend getting
+a working server before you bother trying to build this plugin.**
+
 These instructions are for Ubuntu/Debian, but they should (in theory) translate
 well enough for Mac if you get the Maven, Ant and Protocol Buffer tools
 installed with Homebrew or package manager of your choice.
