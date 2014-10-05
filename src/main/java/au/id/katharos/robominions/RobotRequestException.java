@@ -24,7 +24,7 @@ public class RobotRequestException extends Exception {
 		this.action = action;
 	}
 	
-	public RobotResponse getResponse() {
+	public RobotResponse getResponse(int requestKey) {
 		RobotResponse.Builder response = RobotResponse.newBuilder();
 		response.setSuccess(false);
 		ErrorMessage errMessage = ErrorMessage.newBuilder()
@@ -33,6 +33,7 @@ public class RobotRequestException extends Exception {
 			.setAction(action)
 			.build();
 		response.setErrorMessage(errMessage);
+		response.setKey(requestKey);
 		return response.build();
 	}
 }

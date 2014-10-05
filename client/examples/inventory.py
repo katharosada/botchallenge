@@ -1,5 +1,5 @@
 """
-Builds a simple dirt hut to shelter you from the enemies at night.
+Displays the contents of the bot's inventory.
 """
 
 from botchallenge import *
