@@ -71,6 +71,7 @@ message RobotActionRequest {
   
   optional WorldLocation.Direction place_direction = 5;
   optional Material place_material = 6;
+  optional string chat_message = 7;
 }
 
 message LocationResponse {

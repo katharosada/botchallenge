@@ -3889,6 +3889,20 @@ public final class RobotApi {
      * <code>optional .robominions.Material place_material = 6;</code>
      */
     au.id.katharos.robominions.api.Materials.MaterialOrBuilder getPlaceMaterialOrBuilder();
+
+    /**
+     * <code>optional string chat_message = 7;</code>
+     */
+    boolean hasChatMessage();
+    /**
+     * <code>optional string chat_message = 7;</code>
+     */
+    java.lang.String getChatMessage();
+    /**
+     * <code>optional string chat_message = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getChatMessageBytes();
   }
   /**
    * Protobuf type {@code robominions.RobotActionRequest}
@@ -3997,6 +4011,12 @@ public final class RobotApi {
                 placeMaterial_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000010;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              chatMessage_ = bs;
               break;
             }
           }
@@ -4120,12 +4140,55 @@ public final class RobotApi {
       return placeMaterial_;
     }
 
+    public static final int CHAT_MESSAGE_FIELD_NUMBER = 7;
+    private java.lang.Object chatMessage_;
+    /**
+     * <code>optional string chat_message = 7;</code>
+     */
+    public boolean hasChatMessage() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string chat_message = 7;</code>
+     */
+    public java.lang.String getChatMessage() {
+      java.lang.Object ref = chatMessage_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          chatMessage_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string chat_message = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChatMessageBytes() {
+      java.lang.Object ref = chatMessage_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        chatMessage_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       moveDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       turnDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       mineDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       placeDirection_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction.UP;
       placeMaterial_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
+      chatMessage_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4155,6 +4218,9 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeMessage(6, placeMaterial_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(7, getChatMessageBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4183,6 +4249,10 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, placeMaterial_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getChatMessageBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4316,6 +4386,8 @@ public final class RobotApi {
           placeMaterialBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
+        chatMessage_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -4368,6 +4440,10 @@ public final class RobotApi {
         } else {
           result.placeMaterial_ = placeMaterialBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.chatMessage_ = chatMessage_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4398,6 +4474,11 @@ public final class RobotApi {
         }
         if (other.hasPlaceMaterial()) {
           mergePlaceMaterial(other.getPlaceMaterial());
+        }
+        if (other.hasChatMessage()) {
+          bitField0_ |= 0x00000020;
+          chatMessage_ = other.chatMessage_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4680,6 +4761,82 @@ public final class RobotApi {
           placeMaterial_ = null;
         }
         return placeMaterialBuilder_;
+      }
+
+      private java.lang.Object chatMessage_ = "";
+      /**
+       * <code>optional string chat_message = 7;</code>
+       */
+      public boolean hasChatMessage() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string chat_message = 7;</code>
+       */
+      public java.lang.String getChatMessage() {
+        java.lang.Object ref = chatMessage_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            chatMessage_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string chat_message = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChatMessageBytes() {
+        java.lang.Object ref = chatMessage_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          chatMessage_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string chat_message = 7;</code>
+       */
+      public Builder setChatMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        chatMessage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string chat_message = 7;</code>
+       */
+      public Builder clearChatMessage() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        chatMessage_ = getDefaultInstance().getChatMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string chat_message = 7;</code>
+       */
+      public Builder setChatMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        chatMessage_ = value;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:robominions.RobotActionRequest)
@@ -8521,7 +8678,7 @@ public final class RobotApi {
       "\0162$.robominions.RobotReadRequest.Entity\022" +
       "\025\n\rget_inventory\030\005 \001(\010\022,\n\010is_solid\030\006 \001(\013" +
       "2\032.robominions.WorldLocation\"\035\n\006Entity\022\010",
-      "\n\004SELF\020\000\022\t\n\005OWNER\020\001\"\274\002\n\022RobotActionReque" +
+      "\n\004SELF\020\000\022\t\n\005OWNER\020\001\"\322\002\n\022RobotActionReque" +
       "st\022<\n\016move_direction\030\002 \001(\0162$.robominions" +
       ".WorldLocation.Direction\022<\n\016turn_directi" +
       "on\030\003 \001(\0162$.robominions.WorldLocation.Dir" +
@@ -8529,30 +8686,31 @@ public final class RobotApi {
       "ions.WorldLocation.Direction\022=\n\017place_di" +
       "rection\030\005 \001(\0162$.robominions.WorldLocatio" +
       "n.Direction\022-\n\016place_material\030\006 \001(\0132\025.ro" +
-      "bominions.Material\"A\n\020LocationResponse\022-" +
-      "\n\tlocations\030\001 \003(\0132\032.robominions.WorldLoc",
-      "ation\"Q\n\021InventoryResponse\022(\n\tmaterials\030" +
-      "\001 \003(\0132\025.robominions.Material\022\022\n\006counts\030\002" +
-      " \003(\005B\002\020\001\"\241\002\n\rRobotResponse\022\013\n\003key\030\003 \001(\005\022" +
-      "\017\n\007success\030\001 \001(\010\0220\n\rerror_message\030\002 \001(\0132" +
-      "\031.robominions.ErrorMessage\0228\n\021location_r" +
-      "esponse\030\004 \001(\0132\035.robominions.LocationResp" +
-      "onse\0220\n\021material_response\030\005 \001(\0132\025.robomi" +
-      "nions.Material\022:\n\022inventory_response\030\006 \001" +
-      "(\0132\036.robominions.InventoryResponse\022\030\n\020bo" +
-      "olean_response\030\007 \001(\010\"\302\003\n\014ErrorMessage\0220\n",
-      "\006reason\030\001 \001(\0162 .robominions.ErrorMessage" +
-      ".Reason\0220\n\006action\030\002 \001(\0162 .robominions.Er" +
-      "rorMessage.Action\022\017\n\007message\030\003 \001(\t\"\376\001\n\006R" +
-      "eason\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ERROR\020\001\022\026\n\022" +
-      "UNREADABLE_REQUEST\020\002\022\023\n\017INVALID_REQUEST\020" +
-      "\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n\020OUTSIDE_OF_WOR" +
-      "LD\020\005\022\030\n\024ROBOT_DOES_NOT_EXIST\020\006\022\032\n\026BLOCK_" +
-      "IS_NOT_REACHABLE\020\007\022\030\n\024BLOCK_IS_NOT_VISIB" +
-      "LE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\022\030\n\024OWNER_DOES_" +
-      "NOT_EXIST\020\n\"<\n\006Action\022\017\n\013FAIL_ACTION\020\000\022\020",
-      "\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT\020\002B*\n\036au." +
-      "id.katharos.robominions.apiB\010RobotApi"
+      "bominions.Material\022\024\n\014chat_message\030\007 \001(\t" +
+      "\"A\n\020LocationResponse\022-\n\tlocations\030\001 \003(\0132",
+      "\032.robominions.WorldLocation\"Q\n\021Inventory" +
+      "Response\022(\n\tmaterials\030\001 \003(\0132\025.robominion" +
+      "s.Material\022\022\n\006counts\030\002 \003(\005B\002\020\001\"\241\002\n\rRobot" +
+      "Response\022\013\n\003key\030\003 \001(\005\022\017\n\007success\030\001 \001(\010\0220" +
+      "\n\rerror_message\030\002 \001(\0132\031.robominions.Erro" +
+      "rMessage\0228\n\021location_response\030\004 \001(\0132\035.ro" +
+      "bominions.LocationResponse\0220\n\021material_r" +
+      "esponse\030\005 \001(\0132\025.robominions.Material\022:\n\022" +
+      "inventory_response\030\006 \001(\0132\036.robominions.I" +
+      "nventoryResponse\022\030\n\020boolean_response\030\007 \001",
+      "(\010\"\302\003\n\014ErrorMessage\0220\n\006reason\030\001 \001(\0162 .ro" +
+      "bominions.ErrorMessage.Reason\0220\n\006action\030" +
+      "\002 \001(\0162 .robominions.ErrorMessage.Action\022" +
+      "\017\n\007message\030\003 \001(\t\"\376\001\n\006Reason\022\013\n\007UNKNOWN\020\000" +
+      "\022\020\n\014SERVER_ERROR\020\001\022\026\n\022UNREADABLE_REQUEST" +
+      "\020\002\022\023\n\017INVALID_REQUEST\020\003\022\023\n\017BLOCK_COLLISI" +
+      "ON\020\004\022\024\n\020OUTSIDE_OF_WORLD\020\005\022\030\n\024ROBOT_DOES" +
+      "_NOT_EXIST\020\006\022\032\n\026BLOCK_IS_NOT_REACHABLE\020\007" +
+      "\022\030\n\024BLOCK_IS_NOT_VISIBLE\020\010\022\023\n\017NOT_IMPLEM" +
+      "ENTED\020\t\022\030\n\024OWNER_DOES_NOT_EXIST\020\n\"<\n\006Act",
+      "ion\022\017\n\013FAIL_ACTION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017" +
+      "\n\013EXIT_CLIENT\020\002B*\n\036au.id.katharos.robomi" +
+      "nions.apiB\010RobotApi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8596,7 +8754,7 @@ public final class RobotApi {
     internal_static_robominions_RobotActionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_robominions_RobotActionRequest_descriptor,
-        new java.lang.String[] { "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", });
+        new java.lang.String[] { "MoveDirection", "TurnDirection", "MineDirection", "PlaceDirection", "PlaceMaterial", "ChatMessage", });
     internal_static_robominions_LocationResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_robominions_LocationResponse_fieldAccessorTable = new

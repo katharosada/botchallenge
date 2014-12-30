@@ -4,7 +4,7 @@ version: 0.1
 
 commands:
    spawnrobot:
-      description: Just a test command
+      description: Spawn a new robot
       usage: /<command>
       permission: robouser
       permission-message: You don't have <permission>

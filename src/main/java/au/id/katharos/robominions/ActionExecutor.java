@@ -40,7 +40,9 @@ public class ActionExecutor implements Runnable {
 				} else if (actionRequest.hasPlaceDirection() && actionRequest.hasPlaceMaterial()) {
 					success = robot.place(actionRequest.getPlaceDirection(),
 							Util.toBukkitMaterial(actionRequest.getPlaceMaterial()));
-				}
+				} else if (actionRequest.hasChatMessage()) {
+                    success = robot.chat(actionRequest.getChatMessage());
+                }
 				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
 				logger.info("Attempted to move nonexistant chicken for " + event.getPlayerName());

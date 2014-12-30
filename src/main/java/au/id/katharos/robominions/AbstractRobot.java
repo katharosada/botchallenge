@@ -386,4 +386,17 @@ public abstract class AbstractRobot implements InventoryHolder {
 		return success;
 	}
 
+    /**
+     * Send a chat message.
+     * @param msg The message to send.
+     * @return True if sending was successful. 
+     */
+    public boolean chat(String msg) {
+        Player p = this.getPlayer();
+        // By default send the message privately to the owner
+        p.sendRawMessage(msg);
+        // How could we find out whether a message was succesfully sent?
+        // For now this always returns true.
+        return true;
+    }
 }
