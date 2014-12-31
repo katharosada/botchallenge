@@ -1,4 +1,4 @@
-
+syntax = "proto2";
 package robominions;
 
 option java_package = "au.id.katharos.robominions.api";

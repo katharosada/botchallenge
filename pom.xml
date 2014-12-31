@@ -40,6 +40,7 @@
           <phase>generate-sources</phase>
           <configuration>
             <tasks>
+                <!-- Ensure that the protoc executable is version 2.5.0 -->
               <exec executable="protoc">
                 <arg value="--java_out=${project.basedir}/src/main/java" />
                 <arg value="--proto_path=${project.basedir}/proto" />
