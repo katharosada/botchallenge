@@ -19,6 +19,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Chest;
 import org.bukkit.util.Vector;
+import org.bukkit.ChatColor;
 
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
@@ -386,4 +387,35 @@ public abstract class AbstractRobot implements InventoryHolder {
 		return success;
 	}
 
+	/**
+	 * Send a chat message to the Robot's owner.
+	 * @param msg The message to send.
+	 * @return True if sending was successful. 
+	 */
+	public boolean message_owner(String msg) {
+		Player player = this.getPlayer();
+
+		// getPlayer will return null for an offline player
+		if(player == null) {
+			return false;
+		}
+
+		// This uses the same syntax as Bukkit Essentials does for private messages
+		String prefix = ChatColor.GOLD + "[My Robot -> Me] " + ChatColor.WHITE; 
+		player.sendRawMessage(prefix + msg);
+		return true;
+	}
+
+	/**
+	 * Send a public chat message to all players on the server.
+	 * @param msg The message to send.
+	 * @return True if sending was successful. 
+	 */
+	public boolean message_all(String msg) {
+		// The robot should be able to chat publicly regardless of whether the owner is online or offline.
+		String ownerName = Bukkit.getOfflinePlayer(this.playerId).getName();
+		String prefix = ChatColor.GOLD + "<" + ownerName + "'s Robot> " + ChatColor.WHITE; 
+		Bukkit.getServer().broadcastMessage(prefix + msg);
+		return true;
+	}
 }

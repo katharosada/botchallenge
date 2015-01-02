@@ -149,6 +149,18 @@ class Robot(object):
             return BlockType.value_map[material.type]
         return None
 
+    def message_owner(self, msg):
+        request = self._new_action()
+        request.action_request.chat_message = msg
+        request.action_request.is_public_message = False
+        return self._action(request).success
+
+    def message_all(self, msg):
+        request = self._new_action()
+        request.action_request.chat_message = msg
+        request.action_request.is_public_message = True
+        return self._action(request).success
+
 
 class Location(object):
     """A location in the Minecraft world as a set of 3D coordinates."""

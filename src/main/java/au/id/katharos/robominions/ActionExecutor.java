@@ -40,6 +40,12 @@ public class ActionExecutor implements Runnable {
 				} else if (actionRequest.hasPlaceDirection() && actionRequest.hasPlaceMaterial()) {
 					success = robot.place(actionRequest.getPlaceDirection(),
 							Util.toBukkitMaterial(actionRequest.getPlaceMaterial()));
+				} else if (actionRequest.hasChatMessage()) {
+					if(actionRequest.getIsPublicMessage()) {
+						success = robot.message_all(actionRequest.getChatMessage());
+					} else {
+						success = robot.message_owner(actionRequest.getChatMessage());
+					}
 				}
 				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
