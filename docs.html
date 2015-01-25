@@ -141,5 +141,16 @@ selects the one closest to the target location and returns the direction for the
 <p>Note that this only uses the blocks immediately surrounding the Robot, this is not enough information
 to accurately find a path and the Robot will get stuck pretty often.</p>
 
+<h2>Sending chat messages</h2>
+<h3>Robot.message_owner(str)</h3>
+<pre><code>robot.message_owner("Hey, I finished mining!")
+</code></pre>
+<p>Sends an in-game chat message to you, the owner of the robot only.</p>
+
+<h3>Robot.message_all(str)</h3>
+<pre><code>robot.message_all("Hi everyone!")
+</code></pre>
+<p>Sends an in-game chat message to everyone on the server, use with caution and please don't spam everyone.</p>
+
   </body>
 </html>
