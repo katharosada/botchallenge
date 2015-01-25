@@ -26,39 +26,34 @@
 <h2>
 <a name="installing-on-mac" class="anchor" href="#installing-on-mac"><span class="octicon octicon-link"></span></a>Installing on Mac OSX</h2>
 
-<h3>Using the terminal</h3>
-<p>It is possible to install Python and get everything set up to use a graphical interface, but it turns out that for Python on Mac OSX the command-line way of doing things is much simpler.</p>
-<p>If you've never used a terminal before, check out <a href="http://mac.appstorm.net/how-to/utilities-how-to/how-to-use-terminal-the-basics/">these instructions</a>.</p>
+<h3>Install Python</h3>
+<p>You need to install Python 3.4 or higher.</p>
+<p>
+    <a target="_blank" href="https://www.python.org/downloads/">install Python 3.4 from here.</a>
+</p>
 
-<h3>Install homebrew</h3>
-<p>Install homebrew following the (very simple) instructions from <a href="http://brew.sh">brew.sh</a>.</p>
-<p>Once homebrew is installed run:</p>
+<h3>Install PyCharm</h3> 
+<p>PyCharm is an application that makes it easy to write and run Python on your computer.</p>
+<p>Download and install the Community Edition (the free version) of <a href="https://www.jetbrains.com/pycharm/download/">PyCharm from here</a>
+</p>
 
-<h3>Install Python and the botchallenge module</h3>
-<p>If you don't already have Python 3.4 installed, then run:</p>
-<pre><code>brew install python3
+<h3>Setting up a project</h3>
+<p>When PyCharm starts it will ask you to start a new Project, call it whatever you want, but make sure you select Python 3.4 from the list of interpreters.</p>
+<p>Once you have a project, create a new Python file (File &gt; New).
+
+<h3>Installing the botchallenge module</h3>
+<p>Open the main PyCharm preferences panel (PyCharm &gt; Preferences) and find the sections called 'Project Interpreter'.</p>
+<p>There should be an empty list of packages to install, hit the '+' at the bottom to add a new one. Search for 'botchallenge' then click 'Install Package', once's that's done you should be ready to go!</p>
+
+<h2>Next Steps</h2>
+<p>In your new Python file, type in (or copy-paste) the following:</p>
+
+<pre><code>from botchallenge import *
 </code></pre>
-<p>If you have already installed Python 3 but it's an older version than 3.4, upgrade it with:</p>
-<pre><code>brew upgrade python3
-</code></pre>
 
-<p>Instaling Python3 through homebrew will also install pip3, use it to install the botchallenge module like this:</p>
+<p>Right-click anywhere on the Python file and click 'Run x' but with the name of the file instead of x.</p>
+<p>If it prints "Process finished with exit code 0", congratulations! Everything is installed correctly.</p>
 
-<pre><code>pip3 install botchallenge
-</code></pre>
-
-<h2>Editing and running Python scripts</h2>
-<p>To run an interactive python interpreter, run:</p>
-<pre><code>python3
-</code></pre>
-<p>To run a python script that you've written to a file (where the file in this case is called script.py) run:</p>
-<pre><code>python3 script.py
-</code></pre>
-</p>You can use any text editor to edit the Python files, then save the file and come back to the
-terminal to run it. I recommend <a href="//www.barebones.com/products/textwrangler">TextWrangler</a>
-as a good free text editor which works well for Python.</p>
-
-<h2>Next Step</h2>
 <p>If it's working, <a href="setup.html">connect to the server and get started</a>.</p>
   </body>
 </html>
