@@ -4,15 +4,15 @@
   <artifactId>RoboMinionsPlugin</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                  <source>1.7</source>
-                  <target>1.7</target>
-              </configuration>
-          </plugin>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -29,34 +29,46 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+              <relocations>
+                <relocation>
+                  <pattern>io.netty</pattern>
+                  <shadedPattern>au.id.katharos.io.netty</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.google.protobuf</pattern>
+                  <shadedPattern>au.id.katharos.com.google.protobuf</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
           </execution>
         </executions>
       </plugin>
-    <plugin>
-      <artifactId>maven-antrun-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>generate-sources</id>
-          <phase>generate-sources</phase>
-          <configuration>
-            <tasks>
-                <!-- Ensure that the protoc executable is version 2.5.0 -->
-              <exec executable="protoc">
-                <arg value="--java_out=${project.basedir}/src/main/java" />
-                <arg value="--proto_path=${project.basedir}/proto" />
-                <arg value="${project.basedir}/proto/robotapi.proto" />
-                <arg value="${project.basedir}/proto/materials.proto" />
-                <arg value="${project.basedir}/proto/storage.proto" />
-              </exec>
-            </tasks>
-            <sourceRoot>target/generated-sources</sourceRoot>
-          </configuration>
-          <goals>
-            <goal>run</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <tasks>
+                  <!-- Ensure that the protoc executable is version 2.5.0 -->
+                <exec executable="protoc">
+                  <arg value="--java_out=${project.basedir}/src/main/java" />
+                  <arg value="--proto_path=${project.basedir}/proto" />
+                  <arg value="${project.basedir}/proto/robotapi.proto" />
+                  <arg value="${project.basedir}/proto/materials.proto" />
+                  <arg value="${project.basedir}/proto/storage.proto" />
+                </exec>
+              </tasks>
+              <sourceRoot>target/generated-sources</sourceRoot>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
       <pluginManagement>
       	<plugins>
@@ -93,31 +105,31 @@
       		</plugin>
       	</plugins>
       </pluginManagement>
-  </build>
-   <repositories>
-       <repository>
-           <id>bukkit-repo</id>
-           <url>http://repo.bukkit.org/content/groups/public/</url>
-       </repository>
-   </repositories>
-   <dependencies>
-       <dependency>
-           <groupId>org.bukkit</groupId>
-           <artifactId>bukkit</artifactId>
-           <version>1.7.9-R0.2</version>
-           <type>jar</type>
-           <scope>provided</scope>
-       </dependency>
-       <dependency>
-       	   <groupId>io.netty</groupId>
-       	   <artifactId>netty-all</artifactId>
-           <version>4.0.21.Final</version>
-       </dependency>
-	<dependency>
-	  <groupId>com.google.protobuf</groupId>
-	  <artifactId>protobuf-java</artifactId>
-	  <version>2.5.0</version>
-	  <scope>compile</scope>
-	</dependency>
-   </dependencies>
+    </build>
+    <repositories>
+      <repository>
+        <id>spigot-repo</id>
+        <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+      </repository>
+    </repositories>
+    <dependencies>
+      <dependency>
+        <groupId>org.spigotmc</groupId>
+        <artifactId>spigot-api</artifactId>
+        <version>1.8-R0.1-SNAPSHOT</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>4.0.25.Final</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>2.6.1</version>
+        <scope>compile</scope>
+      </dependency>
+    </dependencies>
 </project>
