@@ -35,9 +35,9 @@ scripting api uses protocol buffers for server/client communication so both the
 Python client and the server need the protocol buffer libraries and protoc
 compiler to generate source.)
 
-Install Maven and the protobuf compiler:
+Install Maven, the protobuf compiler and openjdk:
 ```
-sudo apt-get install maven ant protobuf-compiler
+sudo apt-get install maven ant protobuf-compiler openjdk-7-jdk
 ```
 
 
