@@ -10,6 +10,7 @@ from .client import ContextHandler
 from .api import robotapi_pb2
 from .blocktypes import BlockType
 
+
 class Robot(object):
     """Represents the robot itself, commands are sent to the server and the
          result is returned."""
@@ -21,7 +22,7 @@ class Robot(object):
         self._context_handler = context_handler
         if not context_handler:
             self._context_handler = ContextHandler(host, port)
-        self._counter = random.randint(1, 2**16)
+        self._counter = random.randint(1, 2 ** 16)
 
     def _action(self, request):
         """Send an action request to the server (via the context handler)."""
@@ -71,7 +72,8 @@ class Robot(object):
         material_id = self._action(request).material_response.type
         if material_id in BlockType.value_map:
             return BlockType.value_map[material_id]
-        logging.warn("Unrecognized block type: %d", material_id)
+        # FIXME: logging does not exists here.
+        # logging.warn("Unrecognized block type: %d", material_id)
         return None
 
     def is_block_solid(self, direction):
@@ -176,52 +178,131 @@ class Location(object):
         self.y_coord = y_coord
         self.z_coord = z_coord
 
+    def __bool__(self):
+        return (self.x_coord != 0 or self.y_coord != 0 or self.z_coord != 0)
+
     def __repr__(self):
         return "Location(x_coord={}, y_coord={}, z_coord={})".format(
             self.x_coord, self.y_coord, self.z_coord)
 
     def __eq__(self, other):
-        if not other:
-            return False
+        if not isinstance(other, Location):
+            return NotImplemented
         return (self.x_coord == other.x_coord and
                 self.y_coord == other.y_coord and
                 self.z_coord == other.z_coord)
 
+    def __ne__(self, other):
+        if not isinstance(other, Location):
+            return NotImplemented
+        return not (self == other)
+
+    def __add__(self, other):
+        if not isinstance(other, Location):
+            raise TypeError("You can only add a location to an other Location")
+        t_loc = self.clone()
+        t_loc += other
+        return t_loc
+
+    def __iadd__(self, other):
+        if not isinstance(other, Location):
+            raise TypeError("You can only add a location to an other Location")
+        self.x_coord += other.x_coord
+        self.y_coord += other.y_coord
+        self.z_coord += other.z_coord
+        return self
+
+    def __neg__(self):
+        return Location(-self.x_coord, -self.y_coord, -self.z_coord)
+
+    def __sub__(self, other):
+        if not isinstance(other, Location):
+            raise TypeError("You can only substract a location to an other Location")
+        return self.__add__(-other)
+
+    def __isub__(self, other):
+        if not isinstance(other, Location):
+            raise TypeError("You can only substract a location to an other Location")
+        return self.__iadd__(-other)
+
+    def __mul__(self, k):
+        t_loc = self.clone()
+        t_loc *= k
+        return t_loc
+
+    def __imul__(self, k):
+        if isinstance(k, int):
+            # Scalar multiplication
+            self.x_coord *= k
+            self.y_coord *= k
+            self.z_coord *= k
+        elif isinstance(k, Location):
+            # Cross product
+            u1, u2, u3 = self
+            v1, v2, v3 = k
+            self.x_coord = u2 * v3 - u3 * v2
+            self.y_coord = u3 * v1 - u1 * v3
+            self.z_coord = u1 * v2 - u2 * v1
+        else:
+            raise TypeError("Scalar multiplication or cross product, k has to be an integer or a location.")
+        return self
+
+    def __iter__(self):
+        return iter((self.x_coord, self.y_coord, self.z_coord))
+
+    def __abs__(self):
+        return Location(abs(self.x_coord), abs(self.y_coord), abs(self.z_coord))
+
+    def __round__(self, n=2):
+        return Location(round(self.x_coord, n),
+                        round(self.y_coord, n),
+                        round(self.z_coord, n))
+
+    def __getitem__(self, key):
+        if key == 0:
+            return self.x_coord
+        if key == 1:
+            return self.y_coord
+        if key == 2:
+            return self.z_coord
+        raise IndexError('The index can only be 0, 1 or 2.')
+
+    def length(self):
+        return math.sqrt(self.x_coord ** 2 +
+                         self.y_coord ** 2 +
+                         self.z_coord ** 2)
+
+    def clone(self):
+        return Location(self.x_coord, self.y_coord, self.z_coord)
+
     def distance(self, other):
         """Returns the distance between this location and the given other
         location."""
-        return math.sqrt(
-            (self.x_coord - other.x_coord) ** 2 +
-            (self.y_coord - other.y_coord) ** 2 +
-            (self.z_coord - other.z_coord) ** 2)
+        if not isinstance(other, Location):
+            raise TypeError("You can only get the distance to an other Location")
+        return (self - other).length()
 
     def direction(self, other):
         """Find the direction (North, South, East or West) of the other
         location from this one."""
-        if other == None:
-            return None
-        loc = [0, 0, 0]
-        loc[0] = other.x_coord - self.x_coord
-        loc[1] = other.y_coord - self.y_coord
-        loc[2] = other.z_coord - self.z_coord
-        max_value = max(list(map(abs, loc)))
-        max_direction = 0
-        if max_value in loc:
-            max_direction = loc.index(max_value)
-        else:
-            max_direction = loc.index(-1 * max_value)
+        if not isinstance(other, Location):
+            raise TypeError("You can only get the direction to an other Location")
+        loc = other - self
+        max_value = max(abs(loc))
+
         # check up/down first
-        if max_direction == 1:
+        if max_value == abs(loc[1]):
             if loc[1] > 0:
                 return Dir.UP
             return Dir.DOWN
-        if max_direction == 0:
+        elif max_value == abs(loc[0]):
             if loc[0] > 0:
                 return Dir.EAST
             return Dir.WEST
-        if loc[2] > 0:
-            return Dir.SOUTH
-        return Dir.NORTH
+        else:
+            if loc[2] > 0:
+                return Dir.SOUTH
+            return Dir.NORTH
 
 
 class Dir:
@@ -246,6 +327,7 @@ class Dir:
             return False
         return self.value == other.value
 
+
 def setup_dir():
     """Initalize the Dir enum with proto values."""
     value_map = {}
@@ -257,4 +339,3 @@ def setup_dir():
     Dir.value_map = value_map
 
 setup_dir()
-
