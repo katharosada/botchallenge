@@ -258,16 +258,7 @@ class Location(object):
                         round(self.y_coord, n),
                         round(self.z_coord, n))
 
-    def __getitem__(self, key):
-        if key == 0:
-            return self.x_coord
-        if key == 1:
-            return self.y_coord
-        if key == 2:
-            return self.z_coord
-        raise IndexError('The index can only be 0, 1 or 2.')
-
-    def length(self):
+    def _vector_length(self):
         return math.sqrt(self.x_coord ** 2 +
                          self.y_coord ** 2 +
                          self.z_coord ** 2)
@@ -280,7 +271,7 @@ class Location(object):
         location."""
         if not isinstance(other, Location):
             raise TypeError("You can only get the distance to an other Location")
-        return (self - other).length()
+        return (self - other)._vector_length()
 
     def direction(self, other):
         """Find the direction (North, South, East or West) of the other
@@ -291,16 +282,16 @@ class Location(object):
         max_value = max(abs(loc))
 
         # check up/down first
-        if max_value == abs(loc[1]):
-            if loc[1] > 0:
+        if max_value == abs(loc.y_coord):
+            if loc.y_coord > 0:
                 return Dir.UP
             return Dir.DOWN
-        elif max_value == abs(loc[0]):
-            if loc[0] > 0:
+        elif max_value == abs(loc.x_coord):
+            if loc.x_coord > 0:
                 return Dir.EAST
             return Dir.WEST
         else:
-            if loc[2] > 0:
+            if loc.z_coord > 0:
                 return Dir.SOUTH
             return Dir.NORTH
 
@@ -323,9 +314,14 @@ class Dir:
         return self.name
 
     def __eq__(self, other):
-        if not other:
-            return False
+        if not isinstance(other, Dir):
+            return NotImplemented
         return self.value == other.value
+
+    def __ne__(self, other):
+        if not isinstance(other, Dir):
+            return NotImplemented
+        return not (self.value == other.value)
 
 
 def setup_dir():
