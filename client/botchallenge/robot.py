@@ -278,6 +278,8 @@ class Location(object):
         location from this one."""
         if not isinstance(other, Location):
             raise TypeError("You can only get the direction to an other Location")
+        if self == other:
+            return None
         loc = other - self
         max_value = max(abs(loc))
 
