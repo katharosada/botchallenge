@@ -1,5 +1,6 @@
 
 from botchallenge import *
+import time
 
 USERNAME = "" # Put your minecraft username here
 SERVER = "" # Put the address of the minecraft server here
@@ -15,4 +16,6 @@ while True:
         d = robot.find_path(owner)
         robot.turn(d)
         robot.move(d)
+    else:
+        time.sleep(2)
 
