@@ -2503,6 +2503,15 @@ public final class RobotApi {
      * </pre>
      */
     au.id.katharos.robominions.api.RobotApi.WorldLocationOrBuilder getIsSolidOrBuilder();
+
+    /**
+     * <code>optional bool locate_player_target_block = 7;</code>
+     */
+    boolean hasLocatePlayerTargetBlock();
+    /**
+     * <code>optional bool locate_player_target_block = 7;</code>
+     */
+    boolean getLocatePlayerTargetBlock();
   }
   /**
    * Protobuf type {@code robominions.RobotReadRequest}
@@ -2614,6 +2623,11 @@ public final class RobotApi {
                 isSolid_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              locatePlayerTargetBlock_ = input.readBool();
               break;
             }
           }
@@ -2890,6 +2904,21 @@ public final class RobotApi {
       return isSolid_;
     }
 
+    public static final int LOCATE_PLAYER_TARGET_BLOCK_FIELD_NUMBER = 7;
+    private boolean locatePlayerTargetBlock_;
+    /**
+     * <code>optional bool locate_player_target_block = 7;</code>
+     */
+    public boolean hasLocatePlayerTargetBlock() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional bool locate_player_target_block = 7;</code>
+     */
+    public boolean getLocatePlayerTargetBlock() {
+      return locatePlayerTargetBlock_;
+    }
+
     private void initFields() {
       identifyMaterial_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.getDefaultInstance();
       locateMaterialNearby_ = au.id.katharos.robominions.api.Materials.Material.getDefaultInstance();
@@ -2897,6 +2926,7 @@ public final class RobotApi {
       locateEntity_ = au.id.katharos.robominions.api.RobotApi.RobotReadRequest.Entity.SELF;
       getInventory_ = false;
       isSolid_ = au.id.katharos.robominions.api.RobotApi.WorldLocation.getDefaultInstance();
+      locatePlayerTargetBlock_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2941,6 +2971,9 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(6, isSolid_);
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBool(7, locatePlayerTargetBlock_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2973,6 +3006,10 @@ public final class RobotApi {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, isSolid_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, locatePlayerTargetBlock_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3118,6 +3155,8 @@ public final class RobotApi {
           isSolidBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
+        locatePlayerTargetBlock_ = false;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -3182,6 +3221,10 @@ public final class RobotApi {
         } else {
           result.isSolid_ = isSolidBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.locatePlayerTargetBlock_ = locatePlayerTargetBlock_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3215,6 +3258,9 @@ public final class RobotApi {
         }
         if (other.hasIsSolid()) {
           mergeIsSolid(other.getIsSolid());
+        }
+        if (other.hasLocatePlayerTargetBlock()) {
+          setLocatePlayerTargetBlock(other.getLocatePlayerTargetBlock());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3824,6 +3870,38 @@ public final class RobotApi {
           isSolid_ = null;
         }
         return isSolidBuilder_;
+      }
+
+      private boolean locatePlayerTargetBlock_ ;
+      /**
+       * <code>optional bool locate_player_target_block = 7;</code>
+       */
+      public boolean hasLocatePlayerTargetBlock() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional bool locate_player_target_block = 7;</code>
+       */
+      public boolean getLocatePlayerTargetBlock() {
+        return locatePlayerTargetBlock_;
+      }
+      /**
+       * <code>optional bool locate_player_target_block = 7;</code>
+       */
+      public Builder setLocatePlayerTargetBlock(boolean value) {
+        bitField0_ |= 0x00000040;
+        locatePlayerTargetBlock_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool locate_player_target_block = 7;</code>
+       */
+      public Builder clearLocatePlayerTargetBlock() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        locatePlayerTargetBlock_ = false;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:robominions.RobotReadRequest)
@@ -8748,48 +8826,49 @@ public final class RobotApi {
       "tion.Direction\"w\n\tDirection\022\006\n\002UP\020\000\022\010\n\004D",
       "OWN\020\001\022\010\n\004LEFT\020\002\022\t\n\005RIGHT\020\003\022\013\n\007FORWARD\020\004\022" +
       "\014\n\010BACKWARD\020\005\022\010\n\004EAST\020\006\022\010\n\004WEST\020\007\022\t\n\005NOR" +
-      "TH\020\010\022\t\n\005SOUTH\020\t\"\301\002\n\020RobotReadRequest\0225\n\021" +
+      "TH\020\010\022\t\n\005SOUTH\020\t\"\345\002\n\020RobotReadRequest\0225\n\021" +
       "identify_material\030\001 \001(\0132\032.robominions.Wo" +
       "rldLocation\0225\n\026locate_material_nearby\030\002 " +
       "\001(\0132\025.robominions.Material\022\036\n\026locate_non" +
       "solid_nearby\030\004 \001(\010\022;\n\rlocate_entity\030\003 \001(" +
       "\0162$.robominions.RobotReadRequest.Entity\022" +
       "\025\n\rget_inventory\030\005 \001(\010\022,\n\010is_solid\030\006 \001(\013" +
-      "2\032.robominions.WorldLocation\"\035\n\006Entity\022\010",
-      "\n\004SELF\020\000\022\t\n\005OWNER\020\001\"\355\002\n\022RobotActionReque" +
-      "st\022<\n\016move_direction\030\002 \001(\0162$.robominions" +
-      ".WorldLocation.Direction\022<\n\016turn_directi" +
-      "on\030\003 \001(\0162$.robominions.WorldLocation.Dir" +
-      "ection\022<\n\016mine_direction\030\004 \001(\0162$.robomin" +
-      "ions.WorldLocation.Direction\022=\n\017place_di" +
-      "rection\030\005 \001(\0162$.robominions.WorldLocatio" +
-      "n.Direction\022-\n\016place_material\030\006 \001(\0132\025.ro" +
-      "bominions.Material\022\024\n\014chat_message\030\007 \001(\t" +
-      "\022\031\n\021is_public_message\030\010 \001(\010\"A\n\020LocationR",
-      "esponse\022-\n\tlocations\030\001 \003(\0132\032.robominions" +
-      ".WorldLocation\"Q\n\021InventoryResponse\022(\n\tm" +
-      "aterials\030\001 \003(\0132\025.robominions.Material\022\022\n" +
-      "\006counts\030\002 \003(\005B\002\020\001\"\241\002\n\rRobotResponse\022\013\n\003k" +
-      "ey\030\003 \001(\005\022\017\n\007success\030\001 \001(\010\0220\n\rerror_messa" +
-      "ge\030\002 \001(\0132\031.robominions.ErrorMessage\0228\n\021l" +
-      "ocation_response\030\004 \001(\0132\035.robominions.Loc" +
-      "ationResponse\0220\n\021material_response\030\005 \001(\013" +
-      "2\025.robominions.Material\022:\n\022inventory_res" +
-      "ponse\030\006 \001(\0132\036.robominions.InventoryRespo",
-      "nse\022\030\n\020boolean_response\030\007 \001(\010\"\302\003\n\014ErrorM" +
-      "essage\0220\n\006reason\030\001 \001(\0162 .robominions.Err" +
-      "orMessage.Reason\0220\n\006action\030\002 \001(\0162 .robom" +
-      "inions.ErrorMessage.Action\022\017\n\007message\030\003 " +
-      "\001(\t\"\376\001\n\006Reason\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ER" +
-      "ROR\020\001\022\026\n\022UNREADABLE_REQUEST\020\002\022\023\n\017INVALID" +
-      "_REQUEST\020\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n\020OUTSI" +
-      "DE_OF_WORLD\020\005\022\030\n\024ROBOT_DOES_NOT_EXIST\020\006\022" +
-      "\032\n\026BLOCK_IS_NOT_REACHABLE\020\007\022\030\n\024BLOCK_IS_" +
-      "NOT_VISIBLE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\022\030\n\024OW",
-      "NER_DOES_NOT_EXIST\020\n\"<\n\006Action\022\017\n\013FAIL_A" +
-      "CTION\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT" +
-      "\020\002B*\n\036au.id.katharos.robominions.apiB\010Ro" +
-      "botApi"
+      "2\032.robominions.WorldLocation\022\"\n\032locate_p",
+      "layer_target_block\030\007 \001(\010\"\035\n\006Entity\022\010\n\004SE" +
+      "LF\020\000\022\t\n\005OWNER\020\001\"\355\002\n\022RobotActionRequest\022<" +
+      "\n\016move_direction\030\002 \001(\0162$.robominions.Wor" +
+      "ldLocation.Direction\022<\n\016turn_direction\030\003" +
+      " \001(\0162$.robominions.WorldLocation.Directi" +
+      "on\022<\n\016mine_direction\030\004 \001(\0162$.robominions" +
+      ".WorldLocation.Direction\022=\n\017place_direct" +
+      "ion\030\005 \001(\0162$.robominions.WorldLocation.Di" +
+      "rection\022-\n\016place_material\030\006 \001(\0132\025.robomi" +
+      "nions.Material\022\024\n\014chat_message\030\007 \001(\t\022\031\n\021",
+      "is_public_message\030\010 \001(\010\"A\n\020LocationRespo" +
+      "nse\022-\n\tlocations\030\001 \003(\0132\032.robominions.Wor" +
+      "ldLocation\"Q\n\021InventoryResponse\022(\n\tmater" +
+      "ials\030\001 \003(\0132\025.robominions.Material\022\022\n\006cou" +
+      "nts\030\002 \003(\005B\002\020\001\"\241\002\n\rRobotResponse\022\013\n\003key\030\003" +
+      " \001(\005\022\017\n\007success\030\001 \001(\010\0220\n\rerror_message\030\002" +
+      " \001(\0132\031.robominions.ErrorMessage\0228\n\021locat" +
+      "ion_response\030\004 \001(\0132\035.robominions.Locatio" +
+      "nResponse\0220\n\021material_response\030\005 \001(\0132\025.r" +
+      "obominions.Material\022:\n\022inventory_respons",
+      "e\030\006 \001(\0132\036.robominions.InventoryResponse\022" +
+      "\030\n\020boolean_response\030\007 \001(\010\"\302\003\n\014ErrorMessa" +
+      "ge\0220\n\006reason\030\001 \001(\0162 .robominions.ErrorMe" +
+      "ssage.Reason\0220\n\006action\030\002 \001(\0162 .robominio" +
+      "ns.ErrorMessage.Action\022\017\n\007message\030\003 \001(\t\"" +
+      "\376\001\n\006Reason\022\013\n\007UNKNOWN\020\000\022\020\n\014SERVER_ERROR\020" +
+      "\001\022\026\n\022UNREADABLE_REQUEST\020\002\022\023\n\017INVALID_REQ" +
+      "UEST\020\003\022\023\n\017BLOCK_COLLISION\020\004\022\024\n\020OUTSIDE_O" +
+      "F_WORLD\020\005\022\030\n\024ROBOT_DOES_NOT_EXIST\020\006\022\032\n\026B" +
+      "LOCK_IS_NOT_REACHABLE\020\007\022\030\n\024BLOCK_IS_NOT_",
+      "VISIBLE\020\010\022\023\n\017NOT_IMPLEMENTED\020\t\022\030\n\024OWNER_" +
+      "DOES_NOT_EXIST\020\n\"<\n\006Action\022\017\n\013FAIL_ACTIO" +
+      "N\020\000\022\020\n\014RETRY_ACTION\020\001\022\017\n\013EXIT_CLIENT\020\002B*" +
+      "\n\036au.id.katharos.robominions.apiB\010RobotA" +
+      "pi"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8827,7 +8906,7 @@ public final class RobotApi {
     internal_static_robominions_RobotReadRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_robominions_RobotReadRequest_descriptor,
-        new java.lang.String[] { "IdentifyMaterial", "LocateMaterialNearby", "LocateNonsolidNearby", "LocateEntity", "GetInventory", "IsSolid", });
+        new java.lang.String[] { "IdentifyMaterial", "LocateMaterialNearby", "LocateNonsolidNearby", "LocateEntity", "GetInventory", "IsSolid", "LocatePlayerTargetBlock", });
     internal_static_robominions_RobotActionRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_robominions_RobotActionRequest_fieldAccessorTable = new

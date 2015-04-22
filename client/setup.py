@@ -21,7 +21,7 @@ place blocks.
 
 setup(
     name="botchallenge",
-    version="1.1",
+    version="1.3",
     packages=find_packages(),
     install_requires=['greenlet'],
     author="Katie Bell",
