@@ -193,7 +193,7 @@ public abstract class AbstractRobot implements InventoryHolder {
 	 */
 	public boolean mine(Direction mineDirection) {
 		Block block = getBlockFromDirection(mineDirection);
-		logger.info("Mining block: " + block + ", I'ts a: " + block.getType());
+		logger.info("Mining block: " + block + ", It's a: " + block.getType());
 		boolean success = block.breakNaturally(pickAxe);
 		
 		return success;

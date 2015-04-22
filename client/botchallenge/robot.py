@@ -161,6 +161,14 @@ class Robot(object):
         request.action_request.is_public_message = True
         return self._action(request).success
 
+    def get_owner_target_block(self):
+        """Returns the Location object for the location coordinates of the
+        block the robot's owner player is looking at."""
+        request = self._new_action()
+        request.read_request.locate_player_target_block = True
+        loc_proto = self._action(request).location_response.locations[0] # loc_proto is a WorldLocation
+        return Location.from_proto(loc_proto.absolute_location)
+
 
 class Location(object):
     """A location in the Minecraft world as a set of 3D coordinates."""

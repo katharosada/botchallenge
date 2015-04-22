@@ -62,6 +62,8 @@ message RobotReadRequest {
 
   // Returns a boolean
   optional WorldLocation is_solid = 6;
+
+  optional bool locate_player_target_block = 7;
 }
 
 message RobotActionRequest {

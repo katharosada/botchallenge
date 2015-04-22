@@ -89,6 +89,16 @@ public class ReadExecutor {
 			LocationResponse locResponse = buildLocationResponse(locations);
 			response.setSuccess(true);
 			response.setLocationResponse(locResponse);
+		} else if (readRequest.locatePlayerTargetBlock) {
+			Player player = robot.getPlayer();
+			HashSet<Byte> transparent_blocks = null;
+			int maxDistance = 100;
+			Location location = player.getTargetBlock(transparent_blocks, maxDistance).getLocation();
+			WorldLocation worldLocation = WorldLocation.newBuilder().setAbsoluteLocation(
+					Util.coordsFromLocation(location)).build();
+			
+			response.setLocationResponse(LocationResponse.newBuilder().addLocations(worldLocation).build());
+			response.setSuccess(true);
 		} else if (readRequest.hasLocateEntity()) {
 			Location location = null;
 			if (readRequest.getLocateEntity() == Entity.SELF) {
