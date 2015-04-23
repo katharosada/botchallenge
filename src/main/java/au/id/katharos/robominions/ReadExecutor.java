@@ -2,6 +2,7 @@ package au.id.katharos.robominions;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -89,6 +90,16 @@ public class ReadExecutor {
 			LocationResponse locResponse = buildLocationResponse(locations);
 			response.setSuccess(true);
 			response.setLocationResponse(locResponse);
+		} else if (readRequest.hasLocatePlayerTargetBlock()) {
+			Player player = robot.getPlayer();
+			HashSet<Byte> transparent_blocks = null;
+			int maxDistance = 100;
+			Location location = player.getTargetBlock(transparent_blocks, maxDistance).getLocation();
+			WorldLocation worldLocation = WorldLocation.newBuilder().setAbsoluteLocation(
+					Util.coordsFromLocation(location)).build();
+			
+			response.setLocationResponse(LocationResponse.newBuilder().addLocations(worldLocation).build());
+			response.setSuccess(true);
 		} else if (readRequest.hasLocateEntity()) {
 			Location location = null;
 			if (readRequest.getLocateEntity() == Entity.SELF) {

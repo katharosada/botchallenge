@@ -1,6 +1,6 @@
 name: RoboMinions
 main: au.id.katharos.robominions.RoboMinionsPlugin
-version: 0.1
+version: 0.2.0
 
 commands:
    spawnrobot:

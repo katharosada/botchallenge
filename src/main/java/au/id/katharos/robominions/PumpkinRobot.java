@@ -10,6 +10,8 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation;
+import au.id.katharos.robominions.api.RobotApi.Coordinate;
 
 /**
  * A simple robot type which uses a Pumpkin block to represent the robots location and
@@ -119,6 +121,27 @@ public class PumpkinRobot extends AbstractRobot {
 	@Override
 	public boolean move(Direction direction) {
 		boolean success = super.move(direction);
+		if (success) {
+			//Replace our old block with the stored material
+			currentBlock.setType(oldMaterial);
+			currentBlock.setData(oldMetadata);
+			currentBlock = world.getBlockAt(location);
+
+			// remember what we're stepping on so we can put it back.
+			oldMaterial = currentBlock.getType();
+			oldMetadata = currentBlock.getData();
+
+			// Create pumpkin!
+			currentBlock.setType(currentMaterial);
+			// Set the facing direction of the pumpkin
+			setDirectionOnCurrentBlock();
+		}
+		return success;
+	}
+
+	@Override
+	public boolean teleport(WorldLocation world_loc) {
+		boolean success = super.teleport(world_loc);
 		if (success) {
 			//Replace our old block with the stored material
 			currentBlock.setType(oldMaterial);
