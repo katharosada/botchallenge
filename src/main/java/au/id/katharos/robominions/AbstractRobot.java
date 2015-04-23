@@ -23,6 +23,8 @@ import org.bukkit.ChatColor;
 
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import au.id.katharos.robominions.api.RobotApi.WorldLocation.Direction;
+import au.id.katharos.robominions.api.RobotApi.WorldLocation;
+import au.id.katharos.robominions.api.RobotApi.Coordinate;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -417,5 +419,26 @@ public abstract class AbstractRobot implements InventoryHolder {
 		String prefix = ChatColor.GOLD + "<" + ownerName + "'s Robot> " + ChatColor.WHITE; 
 		Bukkit.getServer().broadcastMessage(prefix + msg);
 		return true;
+	}
+
+	/**
+	 * Teleports the robot to a location.
+	 * @param world_loc The WorldLocation coordinate to teleport to
+	 * @return True if teleporting was successful. 
+	 */
+	public boolean teleport(WorldLocation world_loc) {
+		Location loc = new Location(this.world, 
+									world_loc.getAbsoluteLocation().getX(), 
+									world_loc.getAbsoluteLocation().getY(), 
+									world_loc.getAbsoluteLocation().getZ());
+		Block block = getBlockAt(loc);
+		boolean success = !block.getType().isSolid();
+		if (success) {
+			this.location = loc;
+			logger.warning("TELEPORTING to "+world_loc.getAbsoluteLocation().getX()+", "+world_loc.getAbsoluteLocation().getY()+", "+world_loc.getAbsoluteLocation().getZ());
+		} else {
+			logger.warning("ERROR TELEPORTING to "+world_loc.getAbsoluteLocation().getX()+", "+world_loc.getAbsoluteLocation().getY()+", "+world_loc.getAbsoluteLocation().getZ());
+		}
+		return success;
 	}
 }

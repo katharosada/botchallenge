@@ -19,7 +19,7 @@ from . import materials_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='robotapi.proto',
   package='robominions',
-  serialized_pb=_b('\n\x0erobotapi.proto\x12\x0brobominions\x1a\x0fmaterials.proto\"\x97\x01\n\x0cRobotRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\x05\x12\x33\n\x0cread_request\x18\x03 \x01(\x0b\x32\x1d.robominions.RobotReadRequest\x12\x37\n\x0e\x61\x63tion_request\x18\x04 \x01(\x0b\x32\x1f.robominions.RobotActionRequest\"-\n\nCoordinate\x12\t\n\x01x\x18\x01 \x02(\x05\x12\t\n\x01y\x18\x02 \x02(\x05\x12\t\n\x01z\x18\x03 \x02(\x05\"\xf5\x01\n\rWorldLocation\x12\x32\n\x11\x61\x62solute_location\x18\x01 \x01(\x0b\x32\x17.robominions.Coordinate\x12\x37\n\tdirection\x18\x02 \x01(\x0e\x32$.robominions.WorldLocation.Direction\"w\n\tDirection\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01\x12\x08\n\x04LEFT\x10\x02\x12\t\n\x05RIGHT\x10\x03\x12\x0b\n\x07\x46ORWARD\x10\x04\x12\x0c\n\x08\x42\x41\x43KWARD\x10\x05\x12\x08\n\x04\x45\x41ST\x10\x06\x12\x08\n\x04WEST\x10\x07\x12\t\n\x05NORTH\x10\x08\x12\t\n\x05SOUTH\x10\t\"\xe5\x02\n\x10RobotReadRequest\x12\x35\n\x11identify_material\x18\x01 \x01(\x0b\x32\x1a.robominions.WorldLocation\x12\x35\n\x16locate_material_nearby\x18\x02 \x01(\x0b\x32\x15.robominions.Material\x12\x1e\n\x16locate_nonsolid_nearby\x18\x04 \x01(\x08\x12;\n\rlocate_entity\x18\x03 \x01(\x0e\x32$.robominions.RobotReadRequest.Entity\x12\x15\n\rget_inventory\x18\x05 \x01(\x08\x12,\n\x08is_solid\x18\x06 \x01(\x0b\x32\x1a.robominions.WorldLocation\x12\"\n\x1alocate_player_target_block\x18\x07 \x01(\x08\"\x1d\n\x06\x45ntity\x12\x08\n\x04SELF\x10\x00\x12\t\n\x05OWNER\x10\x01\"\xed\x02\n\x12RobotActionRequest\x12<\n\x0emove_direction\x18\x02 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12<\n\x0eturn_direction\x18\x03 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12<\n\x0emine_direction\x18\x04 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12=\n\x0fplace_direction\x18\x05 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12-\n\x0eplace_material\x18\x06 \x01(\x0b\x32\x15.robominions.Material\x12\x14\n\x0c\x63hat_message\x18\x07 \x01(\t\x12\x19\n\x11is_public_message\x18\x08 \x01(\x08\"A\n\x10LocationResponse\x12-\n\tlocations\x18\x01 \x03(\x0b\x32\x1a.robominions.WorldLocation\"Q\n\x11InventoryResponse\x12(\n\tmaterials\x18\x01 \x03(\x0b\x32\x15.robominions.Material\x12\x12\n\x06\x63ounts\x18\x02 \x03(\x05\x42\x02\x10\x01\"\xa1\x02\n\rRobotResponse\x12\x0b\n\x03key\x18\x03 \x01(\x05\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x30\n\rerror_message\x18\x02 \x01(\x0b\x32\x19.robominions.ErrorMessage\x12\x38\n\x11location_response\x18\x04 \x01(\x0b\x32\x1d.robominions.LocationResponse\x12\x30\n\x11material_response\x18\x05 \x01(\x0b\x32\x15.robominions.Material\x12:\n\x12inventory_response\x18\x06 \x01(\x0b\x32\x1e.robominions.InventoryResponse\x12\x18\n\x10\x62oolean_response\x18\x07 \x01(\x08\"\xc2\x03\n\x0c\x45rrorMessage\x12\x30\n\x06reason\x18\x01 \x01(\x0e\x32 .robominions.ErrorMessage.Reason\x12\x30\n\x06\x61\x63tion\x18\x02 \x01(\x0e\x32 .robominions.ErrorMessage.Action\x12\x0f\n\x07message\x18\x03 \x01(\t\"\xfe\x01\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0cSERVER_ERROR\x10\x01\x12\x16\n\x12UNREADABLE_REQUEST\x10\x02\x12\x13\n\x0fINVALID_REQUEST\x10\x03\x12\x13\n\x0f\x42LOCK_COLLISION\x10\x04\x12\x14\n\x10OUTSIDE_OF_WORLD\x10\x05\x12\x18\n\x14ROBOT_DOES_NOT_EXIST\x10\x06\x12\x1a\n\x16\x42LOCK_IS_NOT_REACHABLE\x10\x07\x12\x18\n\x14\x42LOCK_IS_NOT_VISIBLE\x10\x08\x12\x13\n\x0fNOT_IMPLEMENTED\x10\t\x12\x18\n\x14OWNER_DOES_NOT_EXIST\x10\n\"<\n\x06\x41\x63tion\x12\x0f\n\x0b\x46\x41IL_ACTION\x10\x00\x12\x10\n\x0cRETRY_ACTION\x10\x01\x12\x0f\n\x0b\x45XIT_CLIENT\x10\x02\x42*\n\x1e\x61u.id.katharos.robominions.apiB\x08RobotApi')
+  serialized_pb=_b('\n\x0erobotapi.proto\x12\x0brobominions\x1a\x0fmaterials.proto\"\x97\x01\n\x0cRobotRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\x05\x12\x33\n\x0cread_request\x18\x03 \x01(\x0b\x32\x1d.robominions.RobotReadRequest\x12\x37\n\x0e\x61\x63tion_request\x18\x04 \x01(\x0b\x32\x1f.robominions.RobotActionRequest\"-\n\nCoordinate\x12\t\n\x01x\x18\x01 \x02(\x05\x12\t\n\x01y\x18\x02 \x02(\x05\x12\t\n\x01z\x18\x03 \x02(\x05\"\xf5\x01\n\rWorldLocation\x12\x32\n\x11\x61\x62solute_location\x18\x01 \x01(\x0b\x32\x17.robominions.Coordinate\x12\x37\n\tdirection\x18\x02 \x01(\x0e\x32$.robominions.WorldLocation.Direction\"w\n\tDirection\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01\x12\x08\n\x04LEFT\x10\x02\x12\t\n\x05RIGHT\x10\x03\x12\x0b\n\x07\x46ORWARD\x10\x04\x12\x0c\n\x08\x42\x41\x43KWARD\x10\x05\x12\x08\n\x04\x45\x41ST\x10\x06\x12\x08\n\x04WEST\x10\x07\x12\t\n\x05NORTH\x10\x08\x12\t\n\x05SOUTH\x10\t\"\xe5\x02\n\x10RobotReadRequest\x12\x35\n\x11identify_material\x18\x01 \x01(\x0b\x32\x1a.robominions.WorldLocation\x12\x35\n\x16locate_material_nearby\x18\x02 \x01(\x0b\x32\x15.robominions.Material\x12\x1e\n\x16locate_nonsolid_nearby\x18\x04 \x01(\x08\x12;\n\rlocate_entity\x18\x03 \x01(\x0e\x32$.robominions.RobotReadRequest.Entity\x12\x15\n\rget_inventory\x18\x05 \x01(\x08\x12,\n\x08is_solid\x18\x06 \x01(\x0b\x32\x1a.robominions.WorldLocation\x12\"\n\x1alocate_player_target_block\x18\x07 \x01(\x08\"\x1d\n\x06\x45ntity\x12\x08\n\x04SELF\x10\x00\x12\t\n\x05OWNER\x10\x01\"\xa4\x03\n\x12RobotActionRequest\x12<\n\x0emove_direction\x18\x02 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12<\n\x0eturn_direction\x18\x03 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12<\n\x0emine_direction\x18\x04 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12=\n\x0fplace_direction\x18\x05 \x01(\x0e\x32$.robominions.WorldLocation.Direction\x12-\n\x0eplace_material\x18\x06 \x01(\x0b\x32\x15.robominions.Material\x12\x14\n\x0c\x63hat_message\x18\x07 \x01(\t\x12\x19\n\x11is_public_message\x18\x08 \x01(\x08\x12\x35\n\x11teleport_location\x18\t \x01(\x0b\x32\x1a.robominions.WorldLocation\"A\n\x10LocationResponse\x12-\n\tlocations\x18\x01 \x03(\x0b\x32\x1a.robominions.WorldLocation\"Q\n\x11InventoryResponse\x12(\n\tmaterials\x18\x01 \x03(\x0b\x32\x15.robominions.Material\x12\x12\n\x06\x63ounts\x18\x02 \x03(\x05\x42\x02\x10\x01\"\xa1\x02\n\rRobotResponse\x12\x0b\n\x03key\x18\x03 \x01(\x05\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x30\n\rerror_message\x18\x02 \x01(\x0b\x32\x19.robominions.ErrorMessage\x12\x38\n\x11location_response\x18\x04 \x01(\x0b\x32\x1d.robominions.LocationResponse\x12\x30\n\x11material_response\x18\x05 \x01(\x0b\x32\x15.robominions.Material\x12:\n\x12inventory_response\x18\x06 \x01(\x0b\x32\x1e.robominions.InventoryResponse\x12\x18\n\x10\x62oolean_response\x18\x07 \x01(\x08\"\xc2\x03\n\x0c\x45rrorMessage\x12\x30\n\x06reason\x18\x01 \x01(\x0e\x32 .robominions.ErrorMessage.Reason\x12\x30\n\x06\x61\x63tion\x18\x02 \x01(\x0e\x32 .robominions.ErrorMessage.Action\x12\x0f\n\x07message\x18\x03 \x01(\t\"\xfe\x01\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0cSERVER_ERROR\x10\x01\x12\x16\n\x12UNREADABLE_REQUEST\x10\x02\x12\x13\n\x0fINVALID_REQUEST\x10\x03\x12\x13\n\x0f\x42LOCK_COLLISION\x10\x04\x12\x14\n\x10OUTSIDE_OF_WORLD\x10\x05\x12\x18\n\x14ROBOT_DOES_NOT_EXIST\x10\x06\x12\x1a\n\x16\x42LOCK_IS_NOT_REACHABLE\x10\x07\x12\x18\n\x14\x42LOCK_IS_NOT_VISIBLE\x10\x08\x12\x13\n\x0fNOT_IMPLEMENTED\x10\t\x12\x18\n\x14OWNER_DOES_NOT_EXIST\x10\n\"<\n\x06\x41\x63tion\x12\x0f\n\x0b\x46\x41IL_ACTION\x10\x00\x12\x10\n\x0cRETRY_ACTION\x10\x01\x12\x0f\n\x0b\x45XIT_CLIENT\x10\x02\x42*\n\x1e\x61u.id.katharos.robominions.apiB\x08RobotApi')
   ,
   dependencies=[materials_pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -155,8 +155,8 @@ _ERRORMESSAGE_REASON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1802,
-  serialized_end=2056,
+  serialized_start=1857,
+  serialized_end=2111,
 )
 _sym_db.RegisterEnumDescriptor(_ERRORMESSAGE_REASON)
 
@@ -181,8 +181,8 @@ _ERRORMESSAGE_ACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2058,
-  serialized_end=2118,
+  serialized_start=2113,
+  serialized_end=2173,
 )
 _sym_db.RegisterEnumDescriptor(_ERRORMESSAGE_ACTION)
 
@@ -449,6 +449,13 @@ _ROBOTACTIONREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='teleport_location', full_name='robominions.RobotActionRequest.teleport_location', index=7,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -461,7 +468,7 @@ _ROBOTACTIONREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=858,
-  serialized_end=1223,
+  serialized_end=1278,
 )
 
 
@@ -490,8 +497,8 @@ _LOCATIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1225,
-  serialized_end=1290,
+  serialized_start=1280,
+  serialized_end=1345,
 )
 
 
@@ -527,8 +534,8 @@ _INVENTORYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1292,
-  serialized_end=1373,
+  serialized_start=1347,
+  serialized_end=1428,
 )
 
 
@@ -599,8 +606,8 @@ _ROBOTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1376,
-  serialized_end=1665,
+  serialized_start=1431,
+  serialized_end=1720,
 )
 
 
@@ -645,8 +652,8 @@ _ERRORMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1668,
-  serialized_end=2118,
+  serialized_start=1723,
+  serialized_end=2173,
 )
 
 _ROBOTREQUEST.fields_by_name['read_request'].message_type = _ROBOTREADREQUEST
@@ -664,6 +671,7 @@ _ROBOTACTIONREQUEST.fields_by_name['turn_direction'].enum_type = _WORLDLOCATION_
 _ROBOTACTIONREQUEST.fields_by_name['mine_direction'].enum_type = _WORLDLOCATION_DIRECTION
 _ROBOTACTIONREQUEST.fields_by_name['place_direction'].enum_type = _WORLDLOCATION_DIRECTION
 _ROBOTACTIONREQUEST.fields_by_name['place_material'].message_type = materials_pb2._MATERIAL
+_ROBOTACTIONREQUEST.fields_by_name['teleport_location'].message_type = _WORLDLOCATION
 _LOCATIONRESPONSE.fields_by_name['locations'].message_type = _WORLDLOCATION
 _INVENTORYRESPONSE.fields_by_name['materials'].message_type = materials_pb2._MATERIAL
 _ROBOTRESPONSE.fields_by_name['error_message'].message_type = _ERRORMESSAGE

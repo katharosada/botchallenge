@@ -24,3 +24,5 @@ target
 
 # Maven generated pom file
 dependency-reduced-pom.xml
+
+.DS_Store

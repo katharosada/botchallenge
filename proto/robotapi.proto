@@ -75,6 +75,8 @@ message RobotActionRequest {
   optional Material place_material = 6;
   optional string chat_message = 7;
   optional bool is_public_message = 8;
+
+  optional WorldLocation teleport_location = 9;
 }
 
 message LocationResponse {

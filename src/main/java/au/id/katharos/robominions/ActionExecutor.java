@@ -46,6 +46,8 @@ public class ActionExecutor implements Runnable {
 					} else {
 						success = robot.message_owner(actionRequest.getChatMessage());
 					}
+				} else if (actionRequest.hasTeleportLocation()) {
+					success = robot.teleport(actionRequest.getTeleportLocation());
 				}
 				event.getListener().call(new ActionQueue.ActionResult(event.getKey(), success));
 			} else {
